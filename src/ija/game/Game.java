@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import ija.game.board.*;
 import ija.game.treasure.*;
 import ija.game.player.*;
+import java.util.Random;
 
 /**
  *
@@ -25,15 +26,16 @@ public class Game {
     private final int n_players;
     private int actual_player;
     
-    public Game(int n_players, MazeBoard board){
+    public Game(int n_players, int size_of_board){
         
-        this.board = board;
+        this.board = MazeBoard.createMazeBoard(size_of_board);
         this.n_players = n_players;
         this.actual_player = 0;
         this.players = new ArrayList<Player>();
         this.r_cards = new ArrayList<TreasureCard>();
         
         Treasure.createSet();
+        this.board.newGame();
         
         int n_card;
         n_card = 12;
@@ -59,7 +61,8 @@ public class Game {
             this.players.get(2).set_card(this.pack.popCard());
             this.add_r_card();
             this.add_r_card();
-            }
+            
+        }
         
         if (n_players == 4){
             
@@ -70,12 +73,43 @@ public class Game {
                 this.add_r_card();
             }
         }
+        //Pripnuti pokladu na pole (MazeCard)
+        this.players.stream().forEach((Player object) -> {
+            stick_treasure(object.get_card().get_treasure());
+        });
+            
+        this.r_cards.stream().forEach((TreasureCard object) -> {
+            stick_treasure(object.get_treasure());
+        });
+        
     }
     
-    private void stick_card(TreasureCard card){
+    
+    private void check_position(Player player){
         
         
         
+        
+    }
+    
+    
+    private void stick_treasure(Treasure treasure){
+        
+        Random ran;
+        int tmp_x;
+        int tmp_y; 
+         
+        ran = new Random();
+         
+        while (true){
+            tmp_x = ran.nextInt(this.board.get_size()) + 1;
+            tmp_y = ran.nextInt(this.board.get_size()) + 1;
+         
+            if (this.board.get(tmp_y, tmp_x).getCard().get_treasure() == null){
+                this.board.get(tmp_y, tmp_x).getCard().set_treasure(treasure);
+                break;
+            }
+        }
     }
     
     
@@ -87,6 +121,7 @@ public class Game {
             if (this.r_cards.contains(tmp_card))
                 continue;
             this.r_cards.add(tmp_card);
+            break;
             } 
     }
     
