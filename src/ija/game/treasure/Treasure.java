@@ -58,7 +58,7 @@ public class Treasure {
     }
     
     
-    public int get_value(){
+    public int get_type(){
         return this.code;
     }
     
