@@ -57,6 +57,11 @@ public class Treasure {
         }
     }
     
+    
+    public int get_value(){
+        return this.code;
+    }
+    
     /**
      * Vrati null pokud pristupujeme mimo rozsah, nebo jsme jeste nevytvorili 
      * poklady
