@@ -138,4 +138,18 @@ public class MazeCard {
          this.direction3 = turnDirection(this.direction3);    
        
     }
+    
+    public int getDirection(){
+        
+        switch(this.direction1){
+            case UP:
+                return 90;
+            case RIGHT:
+                return 180;
+            case DOWN:
+                return 270;
+            default:
+                return 0;
+                }
+    }
 }
