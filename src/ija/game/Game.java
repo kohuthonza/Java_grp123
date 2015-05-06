@@ -93,11 +93,12 @@ public class Game {
     
     private void check_position(Player player){
        
-        Treasure tmp_treasure;
+        MazeCard tmp_MazeCard;
         
-        tmp_treasure = this.board.get(player.get_y(), player.get_x()).getCard().get_treasure();
+        tmp_MazeCard = this.board.get(player.get_y(), player.get_x()).getCard();
         
-        if (tmp_treasure == player.get_card().get_treasure()){
+        if (tmp_MazeCard.get_treasure() == player.get_card().get_treasure()){
+            tmp_MazeCard.set_treasure(null);
             player.set_picked_cards(player.get_picked_cards() + 1);
             if (player.get_picked_cards() == 6)
                 this.end_of_game = true;
