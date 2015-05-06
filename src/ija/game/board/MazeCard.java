@@ -2,8 +2,6 @@
 package ija.game.board;
 
 import java.util.Objects;
-import ija.game.player.Player;
-import ija.game.treasure.Treasure;
 
 
 
@@ -17,7 +15,6 @@ public class MazeCard {
     private CANGO direction2;
     private CANGO direction3;
     private String type;
-    private Treasure treasure;
     
 /*    
     @Override
@@ -57,7 +54,6 @@ public class MazeCard {
     private MazeCard(String type){
        
         this.type = type;
-        this.treasure = null;
         
         switch (type){
          

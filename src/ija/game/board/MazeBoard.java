@@ -37,9 +37,6 @@ public class MazeBoard {
         return new MazeBoard(n);
         }
   
-    public int get_size(){
-        return this.size;
-    }
     
     public void newGame(){
          
