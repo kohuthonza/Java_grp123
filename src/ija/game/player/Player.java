@@ -20,11 +20,13 @@ public class Player {
     private int x;
     private int y;
     private TreasureCard actual_card;
+    private int picked_cards;
     
     public Player(int x, int y){
         this.x = x;
         this.y = y;
         this.actual_card = null;
+        this.picked_cards = 0;
     }
     
     public int get_x(){
@@ -49,5 +51,13 @@ public class Player {
     
     public TreasureCard get_card(){
         return this.actual_card;
+    }
+    
+    public void set_picked_cards(int picked_cards){
+        this.picked_cards = picked_cards;  
+    }
+    
+    public int get_picked_cards(){
+        return this.picked_cards;
     }
 }

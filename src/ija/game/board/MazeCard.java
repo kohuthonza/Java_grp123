@@ -152,4 +152,13 @@ public class MazeCard {
                 return 0;
                 }
     }
+    
+    
+    public void set_treasure(Treasure treasure){
+        this.treasure = treasure;
+    }
+    
+    public Treasure get_treasure(){
+        return this.treasure;
+    }
 }

@@ -25,6 +25,7 @@ public class Game {
     private final CardPack pack;
     private final int n_players;
     private int actual_player;
+    private boolean end_of_game;
     
     public Game(int n_players, int size_of_board){
         
@@ -33,6 +34,7 @@ public class Game {
         this.actual_player = 0;
         this.players = new ArrayList<Player>();
         this.r_cards = new ArrayList<TreasureCard>();
+        this.end_of_game = false;
         
         Treasure.createSet();
         this.board.newGame();
@@ -55,6 +57,7 @@ public class Game {
         }
         
         this.pack = new CardPack(n_card,24);
+        this.pack.shuffle();
         
         if (n_players == 2){
             this.players.get(1).set_card(this.pack.popCard());
@@ -75,23 +78,42 @@ public class Game {
         }
         //Pripnuti pokladu na pole (MazeCard)
         this.players.stream().forEach((Player object) -> {
-            stick_treasure(object.get_card().get_treasure());
+            this.stick_treasure(object.get_card().get_treasure());
         });
             
         this.r_cards.stream().forEach((TreasureCard object) -> {
-            stick_treasure(object.get_treasure());
+            this.stick_treasure(object.get_treasure());
         });
         
     }
     
-    
-    private void check_position(Player player){
-        
-        
-        
-        
+    public boolean check_end_of_game(){
+        return this.end_of_game; 
     }
     
+    private void check_position(Player player){
+       
+        Treasure tmp_treasure;
+        
+        tmp_treasure = this.board.get(player.get_y(), player.get_x()).getCard().get_treasure();
+        
+        if (tmp_treasure == player.get_card().get_treasure()){
+            player.set_picked_cards(player.get_picked_cards() + 1);
+            if (player.get_picked_cards() == 6)
+                this.end_of_game = true;
+            else{
+                player.set_card(this.pack.popCard());
+                if (this.n_players == 2 && this.pack.size() < 2)
+                    return;
+                if (this.n_players == 4 && this.pack.size() < 4)
+                    return;
+                if (this.r_cards.contains(player.get_card()))
+                    this.stick_treasure(this.add_r_card().get_treasure());
+                else
+                    this.stick_treasure(player.get_card().get_treasure());  
+            }
+        }   
+    }
     
     private void stick_treasure(Treasure treasure){
         
@@ -113,15 +135,15 @@ public class Game {
     }
     
     
-    private void add_r_card(){
+    private TreasureCard add_r_card(){
         
         while (true){
             TreasureCard tmp_card = this.pack.randomCard();
             
-            if (this.r_cards.contains(tmp_card))
-                continue;
-            this.r_cards.add(tmp_card);
-            break;
+            if (!this.r_cards.contains(tmp_card)){
+                this.r_cards.add(tmp_card);
+                return tmp_card;
+                }
             } 
     }
     
@@ -239,8 +261,10 @@ public class Game {
         
         if ((tmp_x + 1) <= this.board.get_size()){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.RIGHT)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.LEFT))
+                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.LEFT)){
                     player.set_x(tmp_x + 1);
+                    this.check_position(player);
+                }
             }
         }   
     }    
@@ -255,8 +279,10 @@ public class Game {
         
         if ((tmp_x - 1) >= 1){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.LEFT)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.RIGHT))
+                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.RIGHT)){
                     player.set_x(tmp_x - 1);
+                    this.check_position(player);
+                }
             }
         }
     } 
@@ -271,8 +297,10 @@ public class Game {
         
         if ((tmp_y - 1) >= 1){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.UP)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.DOWN))
+                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.DOWN)){
                     player.set_y(tmp_y - 1);
+                    this.check_position(player);
+                }
             }
         }
     } 
@@ -287,8 +315,10 @@ public class Game {
         
         if ((tmp_y + 1) <= this.board.get_size()){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.DOWN)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.UP))
+                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.UP)){
                     player.set_y(tmp_y + 1);
+                    this.check_position(player);
+                }
             }
         }
     }    

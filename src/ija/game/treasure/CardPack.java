@@ -34,6 +34,14 @@ public class CardPack {
         return CardPack.store_card;
     }
     
+    public TreasureCard randomCard(){
+        
+        Random ran = new Random();
+        
+        return this.pack.get(ran.nextInt(this.pack.size()));
+        
+    }
+    
     public int size (){
         return this.pack.size();
     }

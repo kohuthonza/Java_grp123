@@ -30,4 +30,8 @@ public class TreasureCard {
        this.tr = tr; 
     }
     
+    public Treasure get_treasure(){
+        return this.tr;
+    }
+    
 }
