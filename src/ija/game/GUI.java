@@ -1,8 +1,8 @@
 
-
 package ija.game;
 
 import ija.game.board.*;
+import ija.game.treasure.CardPack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,12 +15,18 @@ public class GUI {
     static int size;
     static MazeBoard board;
     
-    public static GUI create(int s){
+    public static GUI create(){
+        MazeBoard board = MazeBoard.createMazeBoard(5);
+        CardPack pack = new CardPack (22, 22);
+        pack.shuffle();
+        
+        Game game = new Game(2, board, pack);
+        
         GUI graphicalInterface = new GUI();
         mainFrame = new JFrame("Labyrinth - grp123");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-        size = s;
+        size = board.get_size();
         board = MazeBoard.createMazeBoard(size);
         return graphicalInterface;
     }
