@@ -17,10 +17,16 @@ public class Main {
     
     public static void main(String argv[]) throws IOException{
         
-        MazeBoard board = MazeBoard.createMazeBoard(7);
-        TextUI textUI = new TextUI();
-        textUI.start(board);
+        
+        
+        
+        GUI frame = GUI.create();
+        frame.addContent();
+        
+        
+        //TextUI textUI = new TextUI();
+        //textUI.start(board);
     }
             
-    
+   
 }
