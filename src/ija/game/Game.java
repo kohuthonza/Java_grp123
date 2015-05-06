@@ -19,29 +19,88 @@ import ija.game.player.*;
 public class Game {
     
     private ArrayList<Player> players;
+    private ArrayList<TreasureCard> r_cards;
     private final MazeBoard board;
     private final CardPack pack;
     private final int n_players;
+    private int actual_player;
     
-    public Game(int n_players, MazeBoard board, CardPack pack){
+    public Game(int n_players, MazeBoard board){
+        
         this.board = board;
-        this.pack = pack;
         this.n_players = n_players;
-        if (n_players == 2 || n_players == 4){
-            this.players.add(new Player(1,1));
-            this.players.add(new Player(this.board.get_size(),this.board.get_size()));
+        this.actual_player = 0;
+        this.players = new ArrayList<Player>();
+        this.r_cards = new ArrayList<TreasureCard>();
+        
+        Treasure.createSet();
+        
+        int n_card;
+        n_card = 12;
+        
+        if (n_players == 2){
+            this.players.add(new Player(1, 1));
+            this.players.add(new Player(this.board.get_size(), this.board.get_size()));
         }
-        //else err
+        
+        
         if (n_players == 4){
-            this.players.add(new Player(this.board.get_size(),1));
-            this.players.add(new Player(1,this.board.get_size()));
+            this.players.add(new Player(1, 1));
+            this.players.add(new Player(1, this.board.get_size()));
+            this.players.add(new Player(this.board.get_size(), 1));
+            this.players.add(new Player(this.board.get_size(), this.board.get_size()));
+            n_card = 24;
+        }
+        
+        this.pack = new CardPack(n_card,24);
+        
+        if (n_players == 2){
+            this.players.get(1).set_card(this.pack.popCard());
+            this.players.get(2).set_card(this.pack.popCard());
+            this.add_r_card();
+            this.add_r_card();
+            }
+        
+        if (n_players == 4){
+            
+            for (int i = 1; i <= n_players; ++i){
+                this.players.get(i).set_card(this.pack.popCard());
+            }
+            for (int i = 1; i <= n_players; ++i){
+                this.add_r_card();
+            }
         }
     }
     
+    private void stick_card(TreasureCard card){
+        
+        
+        
+    }
     
     
+    private void add_r_card(){
+        
+        while (true){
+            TreasureCard tmp_card = this.pack.randomCard();
+            
+            if (this.r_cards.contains(tmp_card))
+                continue;
+            this.r_cards.add(tmp_card);
+            } 
+    }
     
-    public void shift(MazeField mf){
+    
+    public void next_player(){
+        
+        if (this.actual_player + 1 == n_players)
+            this.actual_player = 0;
+        else
+            this.actual_player = this.actual_player + 1;
+    
+    }
+    
+    public void shift_player(MazeField mf){
         
         int n;
         int r;
@@ -116,20 +175,20 @@ public class Game {
         
     } 
     
-    public void move(int player, char direction){
+    public void move_player(char direction){
         
         switch (direction){
             case 'R':
-                move_right(this.players.get(player));
+                move_right(this.players.get(this.actual_player));
                 break;
             case 'L':
-                move_left(this.players.get(player));
+                move_left(this.players.get(this.actual_player));
                 break;
             case 'U':
-                move_up(this.players.get(player));
+                move_up(this.players.get(this.actual_player));
                 break;
             case 'D':
-                move_down(this.players.get(player));
+                move_down(this.players.get(this.actual_player));
                 break;
             }
              
