@@ -32,8 +32,8 @@ public class GUI {
         
         MazeBoard board = game.getMazeBoard();
         
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
+        for(int i = 1; i <= size; i++){
+            for(int j = 1; j <= size; j++){
                 MazeField field = board.get(i,j);
                 //if (field == null) return;
                 JLabel label = new JLabel();
