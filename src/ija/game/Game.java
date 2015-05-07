@@ -26,6 +26,7 @@ public class Game {
     private final int n_players;
     private int actual_player;
     private boolean end_of_game;
+    private boolean stop_move;
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
@@ -43,6 +44,7 @@ public class Game {
         this.players = new ArrayList<Player>();
         this.r_cards = new ArrayList<TreasureCard>();
         this.end_of_game = false;
+        this.stop_move = false;
         
         Treasure.createSet();
         this.board.newGame();
@@ -105,14 +107,6 @@ public class Game {
         return this.end_of_game; 
     }
     
-    public int getSizeOfGame() {
-        return board.get_size();
-    }
-    
-    public MazeBoard getMazeBoard() {
-        return board;
-    }
-    
     private void check_position(Player player){
        
         MazeCard tmp_MazeCard;
@@ -121,6 +115,7 @@ public class Game {
         
         if (tmp_MazeCard.get_treasure() == player.get_card().get_treasure()){
             tmp_MazeCard.set_treasure(null);
+            this.stop_move = true;
             player.set_picked_cards(player.get_picked_cards() + 1);
             if (player.get_picked_cards() == 6)
                 this.end_of_game = true;
@@ -143,6 +138,8 @@ public class Game {
         Random ran;
         int tmp_x;
         int tmp_y; 
+        int i;
+        boolean player;
          
         ran = new Random();
          
@@ -151,8 +148,17 @@ public class Game {
             tmp_y = ran.nextInt(this.board.get_size()) + 1;
          
             if (this.board.get(tmp_y, tmp_x).getCard().get_treasure() == null){
-                this.board.get(tmp_y, tmp_x).getCard().set_treasure(treasure);
-                break;
+                player = false;
+                for(i = 0; i < this.n_players; ++i){
+                    if (this.players.get(i).get_x() == tmp_x &&
+                        this.players.get(i).get_y() == tmp_y) {
+                        player = true;
+                    }
+                }
+                if (!player){
+                    this.board.get(tmp_y, tmp_x).getCard().set_treasure(treasure);
+                    break;
+                }
             }
         }
     }
@@ -176,6 +182,8 @@ public class Game {
      * 
      */
     public void next_player(){
+        
+        this.stop_move = false;
         
         if (this.actual_player + 1 == n_players)
             this.actual_player = 0;
@@ -275,21 +283,23 @@ public class Game {
      */
     public void move_player(char direction){
         
-        switch (direction){
-            case 'R':
-                move_right(this.players.get(this.actual_player));
-                break;
-            case 'L':
-                move_left(this.players.get(this.actual_player));
-                break;
-            case 'U':
-                move_up(this.players.get(this.actual_player));
-                break;
-            case 'D':
-                move_down(this.players.get(this.actual_player));
-                break;
+        if (!this.stop_move){
+            
+            switch (direction){
+                case 'R':
+                    move_right(this.players.get(this.actual_player));
+                    break;
+                case 'L':
+                    move_left(this.players.get(this.actual_player));
+                    break;
+                case 'U':
+                    move_up(this.players.get(this.actual_player));
+                    break;
+                case 'D':
+                    move_down(this.players.get(this.actual_player));
+                    break;
             }
-             
+        }      
     }
     
      private void move_right(Player player){
