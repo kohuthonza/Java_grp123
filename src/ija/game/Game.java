@@ -105,6 +105,14 @@ public class Game {
         return this.end_of_game; 
     }
     
+    public int getSizeOfGame() {
+        return board.get_size();
+    }
+    
+    public MazeBoard getMazeBoard() {
+        return board;
+    }
+    
     private void check_position(Player player){
        
         MazeCard tmp_MazeCard;

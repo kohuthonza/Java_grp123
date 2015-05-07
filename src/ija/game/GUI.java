@@ -40,17 +40,17 @@ public class GUI {
                 ImageIcon icon;
                 switch (field.getCard().get_type()) {
                     case "C":
-                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\T.jpg");
+                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L.jpg");
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
                     case "F":
-                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\I.jpg");
+                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\T.jpg");
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
                     case "L":
-                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L.jpg");
+                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\I.jpg");
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
