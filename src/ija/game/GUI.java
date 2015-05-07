@@ -40,7 +40,23 @@ public class GUI {
                 ImageIcon icon;
                 switch (field.getCard().get_type()) {
                     case "C":
-                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L.jpg");
+                        switch(field.getCard().rotation) {
+                            case 0: 
+                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L0.jpg");
+                                break;
+                            case 1: 
+                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L1.jpg");
+                                break;
+                            case 2: 
+                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L2.jpg");
+                                break;
+                            case 3: 
+                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L3.jpg");
+                                break;
+                            default:
+                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L0.jpg");
+                                break;
+                        }
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
