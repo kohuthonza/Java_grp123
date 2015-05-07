@@ -17,9 +17,7 @@ public class MazeCard {
     private CANGO direction2;
     private CANGO direction3;
     private String type;
-    public int rotation;
     private Treasure treasure;
-    
     
 /*    
     @Override
@@ -60,7 +58,6 @@ public class MazeCard {
        
         this.type = type;
         this.treasure = null;
-        this.rotation = 0;
         
         switch (type){
          
@@ -88,7 +85,6 @@ public class MazeCard {
     
     public static MazeCard create(String type){ 
         return new MazeCard(type);
-        
     } 
     
     public boolean canGo(MazeCard.CANGO dir){
@@ -134,8 +130,7 @@ public class MazeCard {
     }
     
     public void turnRight(){
-       this.rotation++;
-       this.rotation = this.rotation % 4; 
+        
        this.direction1 = turnDirection(this.direction1);
        this.direction2 = turnDirection(this.direction2);
        
@@ -144,7 +139,7 @@ public class MazeCard {
        
     }
     
-    public int getDirection(){
+    public int getRotation(){
         
         switch(this.direction1){
             case UP:
