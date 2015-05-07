@@ -176,6 +176,15 @@ public class Game {
             } 
     }
     
+    public int getSizeOfGame() {
+        return this.board.get_size();
+    }
+    
+    public MazeBoard getMazeBoard() {
+        return board;
+    }
+    
+    
     /**
      * Prepina na dalsiho hrace v poradi.
      * 
