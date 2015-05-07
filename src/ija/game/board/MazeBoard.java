@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- *
+ *Trida, jejiz instanci je hraci deska.
+ * 
+ * 
  * @author Jan
  */
 public class MazeBoard {
@@ -31,16 +33,31 @@ public class MazeBoard {
         }
     }
     
-    
+    /**
+     * Vytvori hraci desku o zadanem rozmeru.
+     * 
+     * @param n Rozmer hraci desky.
+     * @return Hraci deska.
+     */
     public static MazeBoard createMazeBoard(int n){
         
         return new MazeBoard(n);
         }
-  
+    
+    /**
+     * 
+     * Vraci velikost hraci desky.
+     * 
+     * @return Velikost hraci desky.
+     */
     public int get_size(){
         return this.size;
     }
     
+    /**
+     * Vlozi kameny na hraci desku a vytvori jeden volny kamen.
+     * 
+     */
     public void newGame(){
          
         this.board.get(0).putCard(MazeCard.create("C"));
@@ -133,12 +150,26 @@ public class MazeBoard {
         }
     }
     
+    /**
+     * 
+     * Vraci pole hraci desky.
+     * 
+     * @param r Radek.
+     * @param c Sloupec.
+     * @return Pole hraci desky.
+     */
     public MazeField get(int r, int c){
         
         if (r > this.size || c > this.size)
              return null;       
         return this.board.get((r - 1)*this.size + c - 1);
     }
+    
+    /**
+     * Vraci volny kamen.
+     * 
+     * @return Volny kamen. 
+     */
     
     public MazeCard getFreeCard(){
         return this.free_card;
@@ -147,6 +178,14 @@ public class MazeBoard {
     private int get_index(int i, int j){
         return (i - 1)*this.size + j - 1;
     }
+    
+    /**
+     * Vlozi volny kamen na zadanou pozici (vklada se pouze z kraje na sude sloupce, 
+     * radky), ostatni kameny posune prislusnym smerem. Kamen ktery vypadne z
+     * desky se stava volnym kamenem.
+     * 
+     * @param mf Pole, na ktere se ma vlozit volny kamen.
+     */
     
     public void shift(MazeField mf){
         

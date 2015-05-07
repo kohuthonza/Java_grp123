@@ -57,7 +57,11 @@ public class Treasure {
         }
     }
     
-    
+    /**
+     * Funkce vrati typ pokladu
+     *
+     * @return typ pokladu
+     */
     public int get_type(){
         return this.code;
     }

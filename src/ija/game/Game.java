@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package ija.game;
 
 import java.util.ArrayList;
@@ -11,13 +8,16 @@ import ija.game.treasure.*;
 import ija.game.player.*;
 import java.util.Random;
 
+
+
 /**
- *
+ * Hlavni trida, jejiz instanci je hra
+ * 
+ * 
  * @author Jan
  */
-
-
 public class Game {
+    
     
     private ArrayList<Player> players;
     private ArrayList<TreasureCard> r_cards;
@@ -27,6 +27,14 @@ public class Game {
     private int actual_player;
     private boolean end_of_game;
     
+    /**
+     * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
+     * provadi se take inicializace tzn. pocatecni rozlozeni hracu a pocatecni
+     * rozlozeni hledanych pokladu. 
+     * 
+     * @param n_players Pocet hracu (2 nebo 4)
+     * @param size_of_board Rozloha hraci desky (nejmene 3)
+     */
     public Game(int n_players, int size_of_board){
         
         this.board = MazeBoard.createMazeBoard(size_of_board);
@@ -60,8 +68,8 @@ public class Game {
         this.pack.shuffle();
         
         if (n_players == 2){
+            this.players.get(0).set_card(this.pack.popCard());
             this.players.get(1).set_card(this.pack.popCard());
-            this.players.get(2).set_card(this.pack.popCard());
             this.add_r_card();
             this.add_r_card();
             
@@ -69,10 +77,10 @@ public class Game {
         
         if (n_players == 4){
             
-            for (int i = 1; i <= n_players; ++i){
+            for (int i = 0; i < n_players; ++i){
                 this.players.get(i).set_card(this.pack.popCard());
             }
-            for (int i = 1; i <= n_players; ++i){
+            for (int i = 1; i < n_players; ++i){
                 this.add_r_card();
             }
         }
@@ -87,13 +95,11 @@ public class Game {
         
     }
     
-    public MazeBoard getMazeBoard(){
-        return board;
-    }
-    
-    public int getSizeOfGame(){
-        return board.get_size();
-    }
+    /**
+     * Kontroluje stav hry.
+     * 
+     * @return True pokud nastal konec hry, jinak false 
+     */
     
     public boolean check_end_of_game(){
         return this.end_of_game; 
@@ -156,7 +162,11 @@ public class Game {
             } 
     }
     
-    
+    /**
+     * Prepina na dalsiho hrace v poradi.
+     * 
+     * 
+     */
     public void next_player(){
         
         if (this.actual_player + 1 == n_players)
@@ -166,6 +176,13 @@ public class Game {
     
     }
     
+    /**
+     * Provede posun vsech hracu, kteri stoji na posouvanem radku, sloupci 
+     * (prave posouvany radek se urci pomoci pole, na ktere se vklada volny
+     * kamen).
+     * 
+     * @param mf Pole, na ktere se vklada volny kamen
+     */
     public void shift_player(MazeField mf){
         
         int n;
@@ -241,6 +258,13 @@ public class Game {
         
     } 
     
+    /**
+     * Posuna hrace zadanym smerem. Pokud timto smerem nelze provest posun, 
+     * nic se nestane.
+     * 
+     * @param direction Smer, kterym se ma hrac posunout: R (vpravo), L (vlevo), 
+     * U (nahoru), D (doprava) 
+     */
     public void move_player(char direction){
         
         switch (direction){
