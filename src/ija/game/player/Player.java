@@ -5,13 +5,15 @@
  */
 package ija.game.player;
 
-import java.util.ArrayList;
+
 import ija.game.treasure.*;
+import java.io.Serializable;
+
 /**
  *
  * @author Jan
  */
-public class Player {
+public class Player implements Serializable{
     
     //Pole hracu
     

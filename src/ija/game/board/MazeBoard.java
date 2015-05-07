@@ -4,6 +4,7 @@ package ija.game.board;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.io.Serializable;
 
 /**
  *Trida, jejiz instanci je hraci deska.
@@ -11,7 +12,7 @@ import java.util.Random;
  * 
  * @author Jan
  */
-public class MazeBoard {
+public class MazeBoard implements Serializable {
     
     private final ArrayList<MazeField> board;
     private final int size;

@@ -2,13 +2,14 @@
 
 package ija.game.treasure;
 
+import java.io.Serializable;
 
 /**
  * 13. 3. 2015
  * xkohut08 
  * @author Jan Kohut
  */
-public class Treasure {
+public class Treasure implements Serializable{
     
     private static final int  n_treasure = 24;
     private static Treasure[] treasure;

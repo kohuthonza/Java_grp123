@@ -1,11 +1,13 @@
 
 package ija.game.board;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jan
  */
-public class MazeField {
+public class MazeField implements Serializable{
     
     private final int row;
     private final int col;

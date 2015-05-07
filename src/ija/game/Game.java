@@ -7,7 +7,7 @@ import ija.game.board.*;
 import ija.game.treasure.*;
 import ija.game.player.*;
 import java.util.Random;
-
+import java.io.Serializable;
 
 
 /**
@@ -16,7 +16,7 @@ import java.util.Random;
  * 
  * @author Jan
  */
-public class Game {
+public class Game implements Serializable {
     
     
     private ArrayList<Player> players;

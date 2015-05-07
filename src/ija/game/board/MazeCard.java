@@ -1,17 +1,16 @@
 
 package ija.game.board;
 
-import java.util.Objects;
-import ija.game.player.Player;
-import ija.game.treasure.Treasure;
 
+import ija.game.treasure.Treasure;
+import java.io.Serializable;
 
 
 /**
  *
  * @author Jan
  */
-public class MazeCard {
+public class MazeCard implements Serializable{
     
     private CANGO direction1;
     private CANGO direction2;

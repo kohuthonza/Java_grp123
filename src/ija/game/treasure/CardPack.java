@@ -4,13 +4,14 @@ package ija.game.treasure;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 
 /**
  * 13. 3. 2015
  * xkohut08
  * @author Jan Kohut
  */
-public class CardPack {
+public class CardPack implements Serializable{
     
     private final int maxSize;
     private final int initSize;

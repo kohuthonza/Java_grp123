@@ -2,12 +2,14 @@
 
 package ija.game.treasure;
 
+import java.io.Serializable;
+
 /**
  * 13. 3. 2015
  * xkohut08
  * @author Jan Kohut
  */
-public class TreasureCard {
+public class TreasureCard implements Serializable{
     
     private final Treasure tr;
     
