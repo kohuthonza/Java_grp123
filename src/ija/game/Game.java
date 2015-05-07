@@ -87,6 +87,14 @@ public class Game {
         
     }
     
+    public MazeBoard getMazeBoard(){
+        return board;
+    }
+    
+    public int getSizeOfGame(){
+        return board.get_size();
+    }
+    
     public boolean check_end_of_game(){
         return this.end_of_game; 
     }

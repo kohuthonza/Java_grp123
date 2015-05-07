@@ -1,0 +1,10 @@
+/src/ija/nbproject/private/
+/nbproject/private/
+/src/ija/game/nbproject/private/
+/build/
+nbproject/project.properties
+*.properties
+nbproject/build-impl.xml
+manifest.mf
+build.xml
+nbproject/project.xml

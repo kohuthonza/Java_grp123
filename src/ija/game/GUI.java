@@ -12,37 +12,49 @@ import java.awt.Image;
 
 public class GUI {
     private static JFrame mainFrame;
-    static int size;
-    static MazeBoard board;
+    static Game game;
     
     public static GUI create(){
-        MazeBoard board = MazeBoard.createMazeBoard(5);
-        CardPack pack = new CardPack (22, 22);
-        pack.shuffle();
-        
-        Game game = new Game(2, board, pack);
+       
+        game = new Game(2, 5);
         
         GUI graphicalInterface = new GUI();
         mainFrame = new JFrame("Labyrinth - grp123");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-        size = board.get_size();
-        board = MazeBoard.createMazeBoard(size);
+
         return graphicalInterface;
     }
     
     public void addContent(){
+        int size = game.getSizeOfGame();
         JPanel GamePanel = new JPanel(new GridLayout(size, size));
         
-        for(int i = 1; i <= size; i++){
-            for(int j = 1; j <= size; j++){
+        MazeBoard board = game.getMazeBoard();
+        
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
                 MazeField field = board.get(i,j);
+                //if (field == null) return;
                 JLabel label = new JLabel();
-                //switch field.getCard().get_type()
-                ImageIcon icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\T.jpg");
-                label.setIcon(icon);
-                //JButton button1 = new JButton("tlacitko");
-                GamePanel.add(label);
+                ImageIcon icon;
+                switch (field.getCard().get_type()) {
+                    case "C":
+                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\T.jpg");
+                        label.setIcon(icon);
+                        GamePanel.add(label);
+                        break;
+                    case "F":
+                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\I.jpg");
+                        label.setIcon(icon);
+                        GamePanel.add(label);
+                        break;
+                    case "L":
+                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L.jpg");
+                        label.setIcon(icon);
+                        GamePanel.add(label);
+                        break;
+                }
             }
             
         }
