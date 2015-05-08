@@ -235,8 +235,8 @@ public class GUImenu extends javax.swing.JFrame {
         }        
             
         
-        GUI frame = GUI.create(numPlayers, numFields);
-        frame.addContent();        // TODO add your handling code here:
+        GUI frame = new GUI(numPlayers, numFields);
+        //frame.addContent();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
