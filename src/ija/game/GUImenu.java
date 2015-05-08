@@ -62,9 +62,19 @@ public class GUImenu extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("3 hráči");
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton2MouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("4 hráči");
+        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton3MouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Počet hráčů:");
 
@@ -83,22 +93,47 @@ public class GUImenu extends javax.swing.JFrame {
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("7x7");
         jRadioButton4.setEnabled(false);
+        jRadioButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton4MouseClicked(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton5);
         jRadioButton5.setText("5x5");
         jRadioButton5.setEnabled(false);
+        jRadioButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton5MouseClicked(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton6);
         jRadioButton6.setText("3x3");
         jRadioButton6.setEnabled(false);
+        jRadioButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton6MouseClicked(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton7);
         jRadioButton7.setText("9x9");
         jRadioButton7.setEnabled(false);
+        jRadioButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton7MouseClicked(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton8);
         jRadioButton8.setText("11x11");
         jRadioButton8.setEnabled(false);
+        jRadioButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,8 +213,51 @@ public class GUImenu extends javax.swing.JFrame {
         jRadioButton5.setEnabled(true);
         jRadioButton4.setEnabled(true);
         jRadioButton7.setEnabled(true);
-        jRadioButton8.setEnabled(true); 
+        jRadioButton8.setEnabled(true);
+        
+        if(jRadioButton6.isSelected()){
+            jRadioButton6.setSelected(false);
+            jRadioButton6.setEnabled(false);
+            jButton1.setEnabled(false);           
+        }
+        jRadioButton6.setEnabled(false);
     }//GEN-LAST:event_jRadioButton1MouseClicked
+
+    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+        jRadioButton5.setEnabled(true);
+        jRadioButton6.setEnabled(true);
+        jRadioButton4.setEnabled(true);
+        jRadioButton7.setEnabled(true);
+        jRadioButton8.setEnabled(true); 
+    }//GEN-LAST:event_jRadioButton2MouseClicked
+
+    private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
+        jRadioButton5.setEnabled(true);
+        jRadioButton6.setEnabled(true);
+        jRadioButton4.setEnabled(true);
+        jRadioButton7.setEnabled(true);
+        jRadioButton8.setEnabled(true); 
+    }//GEN-LAST:event_jRadioButton3MouseClicked
+
+    private void jRadioButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton8MouseClicked
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton8MouseClicked
+
+    private void jRadioButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton7MouseClicked
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton7MouseClicked
+
+    private void jRadioButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton4MouseClicked
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton4MouseClicked
+
+    private void jRadioButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton5MouseClicked
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton5MouseClicked
+
+    private void jRadioButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton6MouseClicked
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton6MouseClicked
 
     /**
      * @param args the command line arguments
