@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class Game implements Serializable {
     
     
-    private ArrayList<Player> players;
+    public ArrayList<Player> players;
     private ArrayList<TreasureCard> r_cards;
     private final MazeBoard board;
     private final CardPack pack;

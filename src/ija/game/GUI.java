@@ -104,16 +104,44 @@ public class GUI {
                 
                 layerCard.setIcon(icon);
                 layerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
-                policko.add(layerCard, new Integer(2));
+                policko.add(layerCard, new Integer(1));
                 
+                //poklady
                 if(field.getCard().get_treasure() != null){
                     JLabel treasureCard = new JLabel();
                     icon = new ImageIcon(this.getClass().getResource("images/bone.png"));
                     treasureCard.setIcon(icon);
                     treasureCard.setSize(icon.getIconHeight(),icon.getIconWidth());
                     
-                    policko.add(treasureCard, new Integer(3));
+                    policko.add(treasureCard, new Integer(2));
                 }
+                
+                //hraci
+                for (int s = 0; s < game.players.size(); s++) {
+                    if(game.players.get(s).get_x() == i && game.players.get(s).get_y() == j){
+                        JLabel playerCard = new JLabel();
+                        if(game.players.size() == 2 && s==1){
+                            s = 3;
+                        }
+                        switch (s){
+                            case 0:
+                                icon = new ImageIcon(this.getClass().getResource("images/Player1.png"));
+                                break;
+                            case 1:
+                                icon = new ImageIcon(this.getClass().getResource("images/Player2.png"));
+                                break;
+                            case 2:
+                                icon = new ImageIcon(this.getClass().getResource("images/Player3.png"));
+                                break;
+                            case 3:
+                                icon = new ImageIcon(this.getClass().getResource("images/Player4.png"));
+                                break;                                                               
+                        }
+                        playerCard.setIcon(icon);
+                        playerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
+                        policko.add(playerCard, new Integer(3));
+                    }
+		}
                 GamePanel.add(policko);
                 
             }
