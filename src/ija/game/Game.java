@@ -82,7 +82,7 @@ public class Game implements Serializable {
             for (int i = 0; i < n_players; ++i){
                 this.players.get(i).set_card(this.pack.popCard());
             }
-            for (int i = 1; i < n_players; ++i){
+            for (int i = 0; i < n_players; ++i){
                 this.add_r_card();
             }
         }
