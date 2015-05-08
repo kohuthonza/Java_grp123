@@ -205,7 +205,37 @@ public class GUImenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        GUI frame = GUI.create();
+        int numPlayers = 0;
+        int numFields = 0;
+        
+        if(jRadioButton1.isSelected()){
+            numPlayers = 2;
+        }
+        else if(jRadioButton2.isSelected()){
+            numPlayers = 3;    
+        }
+        else if(jRadioButton3.isSelected()){
+            numPlayers = 4;    
+        }
+        
+        if(jRadioButton6.isSelected()){
+            numFields = 3;
+        }
+        else if(jRadioButton5.isSelected()){
+            numFields = 5;    
+        }
+        else if(jRadioButton4.isSelected()){
+            numFields = 7;    
+        }
+        else if(jRadioButton7.isSelected()){
+            numFields = 9;    
+        }
+        else if(jRadioButton8.isSelected()){
+            numFields = 11;    
+        }        
+            
+        
+        GUI frame = GUI.create(numPlayers, numFields);
         frame.addContent();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

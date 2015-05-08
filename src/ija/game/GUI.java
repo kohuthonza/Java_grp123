@@ -14,9 +14,9 @@ public class GUI {
     private static JFrame mainFrame;
     static Game game;
     
-    public static GUI create(){
+    public static GUI create(int numPlayers, int gameSize){
        
-        game = new Game(2, 5);
+        game = new Game(numPlayers, gameSize);
         
         GUI graphicalInterface = new GUI();
         
