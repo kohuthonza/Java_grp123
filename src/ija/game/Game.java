@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class Game implements Serializable {
     
     
-    public ArrayList<Player> players;
+    private ArrayList<Player> players;
     private ArrayList<TreasureCard> r_cards;
     private final MazeBoard board;
     private final CardPack pack;
@@ -57,6 +57,12 @@ public class Game implements Serializable {
             this.players.add(new Player(this.board.get_size(), this.board.get_size()));
         }
         
+        if (n_players == 3){
+            this.players.add(new Player(1, 1));
+            this.players.add(new Player(1, this.board.get_size()));
+            this.players.add(new Player(this.board.get_size(), 1));
+            n_card = 18;
+        }
         
         if (n_players == 4){
             this.players.add(new Player(1, 1));
@@ -69,23 +75,13 @@ public class Game implements Serializable {
         this.pack = new CardPack(n_card,24);
         this.pack.shuffle();
         
-        if (n_players == 2){
-            this.players.get(0).set_card(this.pack.popCard());
-            this.players.get(1).set_card(this.pack.popCard());
+        for (int i = 0; i < n_players; ++i){
+            this.players.get(i).set_card(this.pack.popCard());
+        }
+        for (int i = 0; i < n_players; ++i){
             this.add_r_card();
-            this.add_r_card();
-            
         }
         
-        if (n_players == 4){
-            
-            for (int i = 0; i < n_players; ++i){
-                this.players.get(i).set_card(this.pack.popCard());
-            }
-            for (int i = 0; i < n_players; ++i){
-                this.add_r_card();
-            }
-        }
         //Pripnuti pokladu na pole (MazeCard)
         this.players.stream().forEach((Player object) -> {
             this.stick_treasure(object.get_card().get_treasure());
@@ -122,6 +118,8 @@ public class Game implements Serializable {
             else{
                 player.set_card(this.pack.popCard());
                 if (this.n_players == 2 && this.pack.size() < 2)
+                    return;
+                if (this.n_players == 3 && this.pack.size() < 3)
                     return;
                 if (this.n_players == 4 && this.pack.size() < 4)
                     return;
