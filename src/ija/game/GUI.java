@@ -19,6 +19,7 @@ public class GUI {
         game = new Game(2, 5);
         
         GUI graphicalInterface = new GUI();
+        
         mainFrame = new JFrame("Labyrinth - grp123");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
@@ -42,31 +43,31 @@ public class GUI {
                     case "C":
                         switch(field.getCard().rotation) {
                             case 0: 
-                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L0.jpg");
+                                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
                                 break;
                             case 1: 
-                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L1.jpg");
+                                icon = new ImageIcon(this.getClass().getResource("images/L1.jpg"));
                                 break;
                             case 2: 
-                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L2.jpg");
+                                icon = new ImageIcon(this.getClass().getResource("images/L2.jpg"));
                                 break;
                             case 3: 
-                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L3.jpg");
+                                icon = new ImageIcon(this.getClass().getResource("images/L3.jpg"));
                                 break;
                             default:
-                                icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\L0.jpg");
+                                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
                                 break;
                         }
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
                     case "F":
-                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\T.jpg");
+                        icon = new ImageIcon(this.getClass().getResource("images/T.jpg"));
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
                     case "L":
-                        icon = new ImageIcon("C:\\VUT FIT\\2015 L\\IJA\\Java_grp123\\src\\ija\\game\\I.jpg");
+                        icon = new ImageIcon(this.getClass().getResource("images/I.jpg"));;
                         label.setIcon(icon);
                         GamePanel.add(label);
                         break;
