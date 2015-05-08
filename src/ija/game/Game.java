@@ -210,43 +210,49 @@ public class Game implements Serializable {
      */
     public void shift_player(MazeField mf){
         
-        int n;
-        int r;
-        int c;
         
-        r = mf.row();
-        c = mf.col();
-        
-        if (((c % 2) == 0) && (r == 1 || r == this.board.get_size())){
+        if (!this.board.get_previous_field().equals(mf)){    
             
-            for (n = 0; n < this.n_players; ++n){
-                if (this.players.get(n).get_x() == c){
-                    if (r == 1){
-                        this.shift_down(this.players.get(n));
-                    }
-                    if (r == this.board.get_size()){
-                        this.shift_up(this.players.get(n));
+            
+            
+            int n;
+            int r;
+            int c;
+        
+            r = mf.row();
+            c = mf.col();
+        
+            if (((c % 2) == 0) && (r == 1 || r == this.board.get_size())){
+            
+                for (n = 0; n < this.n_players; ++n){
+                    if (this.players.get(n).get_x() == c){
+                        if (r == 1){
+                            this.shift_down(this.players.get(n));
+                        }
+                        if (r == this.board.get_size()){
+                            this.shift_up(this.players.get(n));
+                        }
                     }
                 }
-            }
-        }    
+            }    
         
         
-        if (((r % 2) == 0)&&(c == 1 || c == this.board.get_size())){
+            if (((r % 2) == 0)&&(c == 1 || c == this.board.get_size())){
             
-            for (n = 0; n < this.n_players; ++n){
-                if (this.players.get(n).get_y() == r){
-                    if (c == 1){
-                        this.shift_right(this.players.get(n));
-                    }
-                    if (c == this.board.get_size()){
-                        this.shift_left(this.players.get(n));
+                for (n = 0; n < this.n_players; ++n){
+                    if (this.players.get(n).get_y() == r){
+                        if (c == 1){
+                            this.shift_right(this.players.get(n));
+                        }
+                        if (c == this.board.get_size()){
+                            this.shift_left(this.players.get(n));
+                        }
                     }
                 }
             }
         }
     }
-        
+    
     private void shift_right(Player player){
         
         if ((player.get_x() + 1) > this.board.get_size())

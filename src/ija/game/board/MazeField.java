@@ -14,6 +14,31 @@ public class MazeField implements Serializable{
     private MazeCard mc;
     
     
+ 
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.row;
+        hash = 73 * hash + this.col;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MazeField other = (MazeField) obj;
+        if (this.row != other.row) {
+            return false;
+        }
+        return this.col == other.col;
+    }
+    
     public MazeField(int row, int col){
         
         this.row = row;

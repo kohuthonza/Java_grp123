@@ -20,12 +20,14 @@ public class MazeBoard implements Serializable {
     private static final ArrayList<String> type_card = new ArrayList<String>(Arrays.asList("C", "L", "F"));
     private static MazeField tmp_mf;
     private static int index, i, j;
+    private MazeField previous_field;
    
     
     private MazeBoard(int n){
         
         this.size = n;
         this.free_card = null;
+        this.previous_field = null;
         this.board = new ArrayList<MazeField>();
         for (i = 1; i <= n; i++){
             for(j = 1; j <= n; j++){
@@ -180,6 +182,11 @@ public class MazeBoard implements Serializable {
         return (i - 1)*this.size + j - 1;
     }
     
+    
+     public MazeField get_previous_field(){
+        return this.previous_field;
+    }
+    
     /**
      * Vlozi volny kamen na zadanou pozici (vklada se pouze z kraje na sude sloupce, 
      * radky), ostatni kameny posune prislusnym smerem. Kamen ktery vypadne z
@@ -190,47 +197,51 @@ public class MazeBoard implements Serializable {
     
     public void shift(MazeField mf){
         
-        MazeCard tmp_free_card = this.free_card;
-        int x, y;
+        if(!this.previous_field.equals(mf)){
+            
+            this.previous_field = mf;
         
-        i = mf.row();
-        j = mf.col();
+            MazeCard tmp_free_card = this.free_card;
+            int x, y;
         
-        if ((j % 2) == 0){
-            if (i == 1){
-                this.free_card = this.board.get(get_index(this.size, j)).getCard();
-                for(y = this.size; y >= 2; --y){  
-                    this.board.get(get_index(y, j)).putCard(this.board.get(get_index(y - 1, j)).getCard());
+            i = mf.row();
+            j = mf.col();
+        
+            if ((j % 2) == 0){
+                if (i == 1){
+                    this.free_card = this.board.get(get_index(this.size, j)).getCard();
+                    for(y = this.size; y >= 2; --y){  
+                        this.board.get(get_index(y, j)).putCard(this.board.get(get_index(y - 1, j)).getCard());
+                    }
+                    this.board.get(j - 1).putCard(tmp_free_card);
+                    return;  
                 }
-                this.board.get(j - 1).putCard(tmp_free_card);
-                return;  
+                if (i == this.size){
+                    this.free_card = this.board.get(j - 1).getCard();
+                    for(y = 1; y <= this.size - 1; ++y){
+                        this.board.get(get_index(y, j)).putCard(this.board.get(get_index(y + 1, j)).getCard());
+                    }
+                    this.board.get(get_index(i, j)).putCard(tmp_free_card);
+                    return;
+                } 
             }
-            if (i == this.size){
-                this.free_card = this.board.get(j - 1).getCard();
-                for(y = 1; y <= this.size - 1; ++y){
-                    this.board.get(get_index(y, j)).putCard(this.board.get(get_index(y + 1, j)).getCard());
+            if ((i % 2) == 0){
+                if (j == 1){
+                    this.free_card = this.board.get(get_index(i, this.size)).getCard();
+                    for(x = this.size; x >= 2; --x){  
+                        this.board.get(get_index(i, x)).putCard(this.board.get(get_index(i, x - 1)).getCard());
+                    }
+                    this.board.get(get_index(i, j)).putCard(tmp_free_card);
+                    return;  
                 }
-                this.board.get(get_index(i, j)).putCard(tmp_free_card);
-                return;
-            } 
-        }
-        if ((i % 2) == 0){
-            if (j == 1){
-                this.free_card = this.board.get(get_index(i, this.size)).getCard();
-                for(x = this.size; x >= 2; --x){  
-                    this.board.get(get_index(i, x)).putCard(this.board.get(get_index(i, x - 1)).getCard());
-                }
-                this.board.get(get_index(i, j)).putCard(tmp_free_card);
-                return;  
+                if (j == this.size){
+                    this.free_card = this.board.get(get_index(i, 1)).getCard();
+                    for(x = 1; x <= this.size - 1; ++x){
+                        this.board.get(get_index(i, x)).putCard(this.board.get(get_index(i, x + 1)).getCard());
+                    }
+                    this.board.get(get_index(i, j)).putCard(tmp_free_card);
+                } 
             }
-            if (j == this.size){
-                this.free_card = this.board.get(get_index(i, 1)).getCard();
-                for(x = 1; x <= this.size - 1; ++x){
-                    this.board.get(get_index(i, x)).putCard(this.board.get(get_index(i, x + 1)).getCard());
-                }
-                this.board.get(get_index(i, j)).putCard(tmp_free_card);
-            } 
         }
     }
-    
 }
