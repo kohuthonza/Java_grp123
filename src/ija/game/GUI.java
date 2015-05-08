@@ -36,9 +36,12 @@ public class GUI {
         for(int i = 1; i <= size; i++){
             for(int j = 1; j <= size; j++){
                 MazeField field = board.get(i,j);
-                //if (field == null) return;
-                JLabel label = new JLabel();
-                ImageIcon icon;
+
+                JLayeredPane policko = new JLayeredPane();
+                
+                JLabel layerCard = new JLabel();
+                ImageIcon icon = null;
+
                 switch (field.getCard().get_type()) {
                     case "C":
                         switch(field.getCard().getRotation()) {
@@ -58,8 +61,6 @@ public class GUI {
                                 icon = new ImageIcon(this.getClass().getResource("images/C0.jpg"));
                                 break;
                         }
-                        label.setIcon(icon);
-                        GamePanel.add(label);
                         break;
                     case "F":
                         switch(field.getCard().getRotation()) {
@@ -79,8 +80,6 @@ public class GUI {
                                 icon = new ImageIcon(this.getClass().getResource("images/T0.jpg"));
                                 break;
                         }
-                        label.setIcon(icon);
-                        GamePanel.add(label);
                         break;
                     case "L":
                         switch(field.getCard().getRotation()) {
@@ -100,14 +99,26 @@ public class GUI {
                                 icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
                                 break;
                         }
-                        label.setIcon(icon);
-                        GamePanel.add(label);
                         break;
                 }
+                
+                layerCard.setIcon(icon);
+                layerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
+                policko.add(layerCard, new Integer(2));
+                
+                if(i==1){
+                JLabel treasureCard = new JLabel();
+                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
+                treasureCard.setIcon(icon);
+                treasureCard.setSize(50,50);
+                policko.add(treasureCard, new Integer(3));
+                }
+                GamePanel.add(policko);
+                
             }
             
         }
-     
+        //mainFrame.setSize(size*50, size*50 + 100);
         mainFrame.getContentPane().add(GamePanel);
         mainFrame.pack();
     }
