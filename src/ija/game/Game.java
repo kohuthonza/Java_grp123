@@ -103,6 +103,10 @@ public class Game implements Serializable {
         return this.end_of_game; 
     }
     
+    public ArrayList get_players(){
+        return this.players;
+    }
+    
     private void check_position(Player player){
        
         MazeCard tmp_MazeCard;
