@@ -18,11 +18,9 @@ public class Main {
     public static void main(String argv[]) throws IOException{
         
         
-        
-        
-        GUI frame = GUI.create();
-        frame.addContent();
-        
+        GUImenu menu = new GUImenu();
+        menu.setVisible(true);
+               
         
         //TextUI textUI = new TextUI();
         //textUI.start(board);

@@ -8,3 +8,4 @@ nbproject/build-impl.xml
 manifest.mf
 build.xml
 nbproject/project.xml
+src/ija/game/Game.java
