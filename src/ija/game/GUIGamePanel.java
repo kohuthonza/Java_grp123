@@ -12,6 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import java.util.ArrayList;
+
+import ija.game.player.*;
 
 /**
  *
@@ -102,7 +105,7 @@ public class GUIGamePanel extends JPanel {
                 //vrstva 2 - poklady
                 if(field.getCard().get_treasure() != null){
                     JLabel treasureCard = new JLabel();
-                    icon = new ImageIcon(this.getClass().getResource("images/bone.png"));
+                    icon = new ImageIcon(this.getClass().getResource("images/"+Integer.toString(field.getCard().get_treasure().get_type())+".png"));
                     treasureCard.setIcon(icon);
                     treasureCard.setSize(icon.getIconHeight(),icon.getIconWidth());
                     
@@ -110,10 +113,11 @@ public class GUIGamePanel extends JPanel {
                 }
                 
                 //vrstva 3 - hraci
-                for (int s = 0; s < game.players.size(); s++) {
-                    if(game.players.get(s).get_x() == i && game.players.get(s).get_y() == j){
+                ArrayList<Player> playerArray = game.get_players();
+                for (int s = 0; s < game.get_players().size(); s++) {
+                    if(playerArray.get(s).get_x() == i && playerArray.get(s).get_y() == j){
                         JLabel playerCard = new JLabel();
-                        if(game.players.size() == 2 && s==1){
+                        if(game.get_players().size() == 2 && s==1){
                             s = 3;
                         }
                         switch (s){
