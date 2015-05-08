@@ -46,57 +46,57 @@ public class GUI {
                     case "C":
                         switch(field.getCard().getRotation()) {
                             case 0: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/C0.png"));
                                 break;
                             case 90: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C90.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/C90.png"));
                                 break;
                             case 180: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C180.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/C180.png"));
                                 break;
                             case 270: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C270.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/C270.png"));
                                 break;
                             default:
-                                icon = new ImageIcon(this.getClass().getResource("images/C0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/C0.png"));
                                 break;
                         }
                         break;
                     case "F":
                         switch(field.getCard().getRotation()) {
                             case 0: 
-                                icon = new ImageIcon(this.getClass().getResource("images/T0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/F0.png"));
                                 break;
                             case 90: 
-                                icon = new ImageIcon(this.getClass().getResource("images/T90.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/F90.png"));
                                 break;
                             case 180: 
-                                icon = new ImageIcon(this.getClass().getResource("images/T180.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/F180.png"));
                                 break;
                             case 270: 
-                                icon = new ImageIcon(this.getClass().getResource("images/T270.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/F270.png"));
                                 break;
                             default:
-                                icon = new ImageIcon(this.getClass().getResource("images/T0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/F0.png"));
                                 break;
                         }
                         break;
                     case "L":
                         switch(field.getCard().getRotation()) {
                             case 0: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/L0.png"));
                                 break;
                             case 90: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L90.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/L90.png"));
                                 break;
                             case 180: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/L0.png"));
                                 break;
                             case 270: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L90.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/L90.png"));
                                 break;
                             default:
-                                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
+                                icon = new ImageIcon(this.getClass().getResource("images/L0.png"));
                                 break;
                         }
                         break;
@@ -106,21 +106,24 @@ public class GUI {
                 layerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
                 policko.add(layerCard, new Integer(2));
                 
-                if(i==1){
-                JLabel treasureCard = new JLabel();
-                icon = new ImageIcon(this.getClass().getResource("images/L0.jpg"));
-                treasureCard.setIcon(icon);
-                treasureCard.setSize(50,50);
-                policko.add(treasureCard, new Integer(3));
+                if(field.getCard().get_treasure() != null){
+                    JLabel treasureCard = new JLabel();
+                    icon = new ImageIcon(this.getClass().getResource("images/bone.png"));
+                    treasureCard.setIcon(icon);
+                    treasureCard.setSize(icon.getIconHeight(),icon.getIconWidth());
+                    
+                    policko.add(treasureCard, new Integer(3));
                 }
                 GamePanel.add(policko);
                 
             }
             
         }
-        //mainFrame.setSize(size*50, size*50 + 100);
+        
+        
         mainFrame.getContentPane().add(GamePanel);
-        mainFrame.pack();
+        mainFrame.getContentPane().setSize(size*90, size*90 + 100);
+        //mainFrame.pack();
     }
     
 }
