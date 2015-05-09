@@ -58,11 +58,6 @@ public class GUImenu extends javax.swing.JFrame {
                 jRadioButton1MouseClicked(evt);
             }
         });
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("3 hráči");
@@ -93,11 +88,6 @@ public class GUImenu extends javax.swing.JFrame {
         });
 
         jButton2.setText("Load Game");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("7x7");
@@ -208,10 +198,6 @@ public class GUImenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
         int numPlayers = 0;
@@ -249,22 +235,16 @@ public class GUImenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+        jRadioButton6.setEnabled(true);
         jRadioButton5.setEnabled(true);
         jRadioButton4.setEnabled(true);
         jRadioButton7.setEnabled(true);
         jRadioButton8.setEnabled(true);
-        
-        if(jRadioButton6.isSelected()){
-            jRadioButton6.setSelected(false);
-            jRadioButton6.setEnabled(false);
-            jButton1.setEnabled(false);           
-        }
-        jRadioButton6.setEnabled(false);
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
-        jRadioButton5.setEnabled(true);
         jRadioButton6.setEnabled(true);
+        jRadioButton5.setEnabled(true);
         jRadioButton4.setEnabled(true);
         jRadioButton7.setEnabled(true);
         jRadioButton8.setEnabled(true); 
@@ -272,10 +252,15 @@ public class GUImenu extends javax.swing.JFrame {
 
     private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
         jRadioButton5.setEnabled(true);
-        jRadioButton6.setEnabled(true);
         jRadioButton4.setEnabled(true);
         jRadioButton7.setEnabled(true);
-        jRadioButton8.setEnabled(true); 
+        jRadioButton8.setEnabled(true);
+        
+        if(jRadioButton6.isSelected()){
+            jRadioButton6.setSelected(false);
+            jButton1.setEnabled(false);           
+        }
+        jRadioButton6.setEnabled(false);
     }//GEN-LAST:event_jRadioButton3MouseClicked
 
     private void jRadioButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton8MouseClicked

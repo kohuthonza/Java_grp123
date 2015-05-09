@@ -67,7 +67,6 @@ public class GUI extends JFrame implements KeyListener{
             try{
                 game.next_player();
                 System.out.printf("hrac: %d\n",game.get_actual_figurine());
-                game.move_player('R');
             } catch (IOException except){
                 System.out.printf("next player exception");
                 System.exit(1);
@@ -78,22 +77,22 @@ public class GUI extends JFrame implements KeyListener{
     
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN) {   
-            System.out.printf("player %s moves DOWN from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            System.out.printf("figurka %s moves DOWN from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
             game.move_player('D');
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.printf("player %s moves UP from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            System.out.printf("figurka %s moves UP from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
             game.move_player('U');
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.printf("player %s moves LEFT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            System.out.printf("figurka %s moves LEFT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
             game.move_player('L');
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.printf("player %s moves RIGHT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            System.out.printf("figurka %s moves RIGHT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_x());
             game.move_player('R');
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
