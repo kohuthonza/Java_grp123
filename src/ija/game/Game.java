@@ -127,7 +127,7 @@ public class Game implements Serializable {
         this.n_move = this.n_move + 1;
         SaveLoad.serialize(this, "undo"+Integer.toString(this.n_move));
     }
-    
+    /*
     public Game undo_game() throws IOException, ClassNotFoundException{
         
         if (!(this.n_move < 1)){
@@ -141,7 +141,7 @@ public class Game implements Serializable {
         }
         return null;
     }
-    
+    */
     public ArrayList get_players(){
         return this.players;
     }
