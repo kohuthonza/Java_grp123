@@ -5,6 +5,7 @@
  */
 package ija.game;
 
+import static ija.game.GUI.game;
 import javax.swing.ImageIcon;
 
 /**
@@ -29,6 +30,13 @@ public class TopPanel extends javax.swing.JPanel {
         jLabel1.setIcon(icon);
     }
 
+    public void updatePanel(){
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.get_actual_figurine())+".png"));
+        jLabel2.setIcon(icon);
+        
+        icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.get_actual_player().get_card().get_treasure().get_type()+1)+".png"));
+        jLabel1.setIcon(icon);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +64,11 @@ public class TopPanel extends javax.swing.JPanel {
         jLabel2.setText("hrac");
         jLabel2.setMinimumSize(new java.awt.Dimension(75, 75));
         jLabel2.setPreferredSize(new java.awt.Dimension(75, 75));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("Aktualni hrac:");
 
@@ -94,6 +107,10 @@ public class TopPanel extends javax.swing.JPanel {
                         .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
