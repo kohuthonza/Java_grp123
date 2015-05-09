@@ -68,15 +68,15 @@ public class Game implements Serializable {
         
         if (n_players == 3){
             this.players.add(new Player(1, 1));
-            this.players.add(new Player(1, this.board.get_size()));
             this.players.add(new Player(this.board.get_size(), 1));
+            this.players.add(new Player(1, this.board.get_size()));
             n_card = 18;
         }
         
         if (n_players == 4){
-            this.players.add(new Player(1, 1));
-            this.players.add(new Player(1, this.board.get_size()));
+             this.players.add(new Player(1, 1));
             this.players.add(new Player(this.board.get_size(), 1));
+            this.players.add(new Player(1, this.board.get_size()));
             this.players.add(new Player(this.board.get_size(), this.board.get_size()));
             n_card = 24;
         }
@@ -389,7 +389,7 @@ public class Game implements Serializable {
         
         if ((tmp_x - 1) >= 1){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.LEFT)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.RIGHT)){
+                if (this.board.get(tmp_y, tmp_x - 1).getCard().canGo(MazeCard.CANGO.RIGHT)){
                     player.set_x(tmp_x - 1);
                     this.check_position(player);
                 }
@@ -407,7 +407,7 @@ public class Game implements Serializable {
         
         if ((tmp_y - 1) >= 1){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.UP)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.DOWN)){
+                if (this.board.get(tmp_y - 1, tmp_x).getCard().canGo(MazeCard.CANGO.DOWN)){
                     player.set_y(tmp_y - 1);
                     this.check_position(player);
                 }
@@ -425,7 +425,7 @@ public class Game implements Serializable {
         
         if ((tmp_y + 1) <= this.board.get_size()){
             if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.DOWN)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.UP)){
+                if (this.board.get(tmp_y + 1, tmp_x).getCard().canGo(MazeCard.CANGO.UP)){
                     player.set_y(tmp_y + 1);
                     this.check_position(player);
                 }
