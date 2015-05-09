@@ -77,17 +77,25 @@ public class GUI extends JFrame implements KeyListener{
             System.out.println("Next player");  
     
         }
-        else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-            System.out.println("player moves downn");
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN) {   
+            System.out.printf("player moves DOWN from %d %d ", game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            game.move_player('D');
+            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.println("player moves up");           
+            System.out.printf("player moves UP from %d %d ", game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            game.move_player('U');
+            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.println("player moves left");            
+            System.out.printf("player moves LEFT from %d %d ", game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            game.move_player('L');
+            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.println("player moves right");            
+            System.out.printf("player moves RIGHT from %d %d ", game.get_actual_player().get_x(), game.get_actual_player().get_x());
+            game.move_player('R');
+            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_x());
         }
     }
     
