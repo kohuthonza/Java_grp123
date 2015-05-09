@@ -18,7 +18,7 @@ public class GUI extends JFrame{
         game = new Game(numPlayers, gameSize);
         
         
-        getContentPane().setLayout(new BorderLayout());
+        getContentPane().setLayout(new FlowLayout());
         add(new JButton("tlacitko"));              
         add(new GUIGamePanel(game));
         

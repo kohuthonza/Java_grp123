@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import ija.game.player.Player;
 
-import ija.game.player.*;
 
 /**
  *
@@ -35,67 +35,11 @@ public class GUIGamePanel extends JPanel {
                 JLayeredPane policko = new JLayeredPane();
                 
                 JLabel layerCard = new JLabel();
-                ImageIcon icon = null;
-
-                switch (field.getCard().get_type()) {
-                    case "C":
-                        switch(field.getCard().getRotation()) {
-                            case 0: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C0.png"));
-                                break;
-                            case 90: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C90.png"));
-                                break;
-                            case 180: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C180.png"));
-                                break;
-                            case 270: 
-                                icon = new ImageIcon(this.getClass().getResource("images/C270.png"));
-                                break;
-                            default:
-                                icon = new ImageIcon(this.getClass().getResource("images/C0.png"));
-                                break;
-                        }
-                        break;
-                    case "F":
-                        switch(field.getCard().getRotation()) {
-                            case 0: 
-                                icon = new ImageIcon(this.getClass().getResource("images/F0.png"));
-                                break;
-                            case 90: 
-                                icon = new ImageIcon(this.getClass().getResource("images/F90.png"));
-                                break;
-                            case 180: 
-                                icon = new ImageIcon(this.getClass().getResource("images/F180.png"));
-                                break;
-                            case 270: 
-                                icon = new ImageIcon(this.getClass().getResource("images/F270.png"));
-                                break;
-                            default:
-                                icon = new ImageIcon(this.getClass().getResource("images/F0.png"));
-                                break;
-                        }
-                        break;
-                    case "L":
-                        switch(field.getCard().getRotation()) {
-                            case 0: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L0.png"));
-                                break;
-                            case 90: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L90.png"));
-                                break;
-                            case 180: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L0.png"));
-                                break;
-                            case 270: 
-                                icon = new ImageIcon(this.getClass().getResource("images/L90.png"));
-                                break;
-                            default:
-                                icon = new ImageIcon(this.getClass().getResource("images/L0.png"));
-                                break;
-                        }
-                        break;
-                }
+                ImageIcon icon;
+                
+                icon = new ImageIcon(this.getClass().getResource("images/mazes/"+field.getCard().get_type()+"/"+Integer.toString(field.getCard().getRotation())+".png"));
+                
+                
                 
                 //vvrstva 1 - herni pole
                 layerCard.setIcon(icon);
@@ -105,35 +49,25 @@ public class GUIGamePanel extends JPanel {
                 //vrstva 2 - poklady
                 if(field.getCard().get_treasure() != null){
                     JLabel treasureCard = new JLabel();
-                    icon = new ImageIcon(this.getClass().getResource("images/"+Integer.toString(field.getCard().get_treasure().get_type())+".png"));
+                    icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(field.getCard().get_treasure().get_type()+1)+".png"));
                     treasureCard.setIcon(icon);
                     treasureCard.setSize(icon.getIconHeight(),icon.getIconWidth());
                     
                     policko.add(treasureCard, new Integer(2));
                 }
                 
+     
+                
                 //vrstva 3 - hraci
-                ArrayList<Player> playerArray = game.get_players();
-                for (int s = 0; s < game.get_players().size(); s++) {
-                    if(playerArray.get(s).get_x() == i && playerArray.get(s).get_y() == j){
+                ArrayList<Player> players = game.get_players();
+                
+                for (int s = 0; s < players.size(); s++) {
+                    if(players.get(s).get_x() == i && players.get(s).get_y() == j){
                         JLabel playerCard = new JLabel();
                         if(game.get_players().size() == 2 && s==1){
                             s = 3;
                         }
-                        switch (s){
-                            case 0:
-                                icon = new ImageIcon(this.getClass().getResource("images/Player1.png"));
-                                break;
-                            case 1:
-                                icon = new ImageIcon(this.getClass().getResource("images/Player2.png"));
-                                break;
-                            case 2:
-                                icon = new ImageIcon(this.getClass().getResource("images/Player3.png"));
-                                break;
-                            case 3:
-                                icon = new ImageIcon(this.getClass().getResource("images/Player4.png"));
-                                break;                                                               
-                        }
+                        icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(s+1)+".png"));
                         playerCard.setIcon(icon);
                         playerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
                         policko.add(playerCard, new Integer(3));
