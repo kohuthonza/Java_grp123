@@ -5,6 +5,10 @@
  */
 package ija.game;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Tomáš
@@ -89,6 +93,11 @@ public class GUImenu extends javax.swing.JFrame {
         });
 
         jButton2.setText("Load Game");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("7x7");
@@ -235,7 +244,7 @@ public class GUImenu extends javax.swing.JFrame {
         }        
             
         
-        GUI frame = new GUI(numPlayers, numFields);
+        GUI frame = new GUI(numPlayers, numFields, null);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -288,6 +297,14 @@ public class GUImenu extends javax.swing.JFrame {
     private void jRadioButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton6MouseClicked
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton6MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            GUI frame = new GUI(0,0,(Game)SaveLoad.deserialize(Load.choose_file()));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(GUImenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

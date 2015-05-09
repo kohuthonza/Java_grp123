@@ -41,27 +41,20 @@ public class SaveLoad {
     }
     
     
-    public static Object deserialize(String fileName) throws IOException,
+    public static Object deserialize(File file) throws IOException,
             ClassNotFoundException {
         SaveLoad.dir.mkdirs();
-        FileInputStream fis = new FileInputStream(System.getProperty("user.home")+"/labyrint/save_games/"+fileName);
+        FileInputStream fis = new FileInputStream(file.getAbsolutePath());
         ObjectInputStream ois = new ObjectInputStream(fis);
         Object obj = ois.readObject();
         ois.close();
         return obj;
     }
 
-    public static void delete_game(String fileName){
-        
-        SaveLoad.reload_game_list();
-        
-        if (SaveLoad.game_list.contains(fileName)){
-            File delete_file = new File(System.getProperty("user.home")+"/labyrint/save_games/"+fileName);
-            delete_file.delete();
-            SaveLoad.game_list.remove(fileName);
-        }
+    public static void delete_game(File file){
+        file.delete();
     }
-    
+   
     public static void reload_game_list(){
         
         File[] files = new File(System.getProperty("user.home")+"/labyrint/save_games/").listFiles(); 
@@ -74,11 +67,11 @@ public class SaveLoad {
         }
         
     }
-    
+    /*
     public static ArrayList get_game_list(){
        
         SaveLoad.reload_game_list(); 
         return SaveLoad.game_list;
     }
-    
+    */
 }

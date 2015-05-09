@@ -20,16 +20,20 @@ public class GUI extends JFrame implements KeyListener{
     static JButton button;
 
     
-    public GUI(int numPlayers, int gameSize){
+    public GUI(int numPlayers, int gameSize, Game load_game){
        
-        
-        try{
-            game = new Game(numPlayers, gameSize);
-            game.next_player();
-        } catch(IOException e){
-           System.out.printf("hra nebyla vytvorena");
-           System.exit(1);
+        if (load_game != null){
+            game = load_game;
         }
+        else{
+            try{
+                game = new Game(numPlayers, gameSize);
+                game.next_player();
+            } catch(IOException e){
+                System.out.printf("hra nebyla vytvorena");
+                System.exit(1);
+            }
+        }    
         
         
         getContentPane().setLayout(new BoxLayout(getContentPane(),BoxLayout.PAGE_AXIS));
