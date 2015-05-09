@@ -63,7 +63,7 @@ public class GUIGamePanel extends JPanel {
                 ArrayList<Integer> figurine = game.get_players_figurine();
                 
                 for (int s = 0; s < players.size(); s++) {
-                    if(players.get(s).get_x() == i && players.get(s).get_y() == j){
+                    if(players.get(s).get_y() == i && players.get(s).get_x() == j){
                         JLabel playerCard = new JLabel();
                         icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(figurine.get(s))+".png"));
                         playerCard.setIcon(icon);
