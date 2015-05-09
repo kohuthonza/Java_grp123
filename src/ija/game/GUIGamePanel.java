@@ -60,14 +60,12 @@ public class GUIGamePanel extends JPanel {
                 
                 //vrstva 3 - hraci
                 ArrayList<Player> players = game.get_players();
+                ArrayList<Integer> figurine = game.get_players_figurine();
                 
                 for (int s = 0; s < players.size(); s++) {
                     if(players.get(s).get_x() == i && players.get(s).get_y() == j){
                         JLabel playerCard = new JLabel();
-                        if(game.get_players().size() == 2 && s==1){
-                            s = 3;
-                        }
-                        icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(s+1)+".png"));
+                        icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(figurine.get(s))+".png"));
                         playerCard.setIcon(icon);
                         playerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
                         policko.add(playerCard, new Integer(3));
