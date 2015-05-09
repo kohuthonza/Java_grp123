@@ -20,10 +20,12 @@ public class GUI extends JFrame implements KeyListener{
     static JButton button;
 
     
-    public GUI(int numPlayers, int gameSize, Game load_game){
+    public GUI(int numPlayers, int gameSize, Game load_game) throws IOException{
        
         if (load_game != null){
             game = load_game;
+            if (game.get_actual_player_n() == -1)
+                game.next_player();
         }
         else{
             try{
@@ -48,7 +50,7 @@ public class GUI extends JFrame implements KeyListener{
         setFocusTraversalKeysEnabled(false);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize((gameSize * 75 > 400)? gameSize * 75 : 400, gameSize * 75 + 146);
+        setSize((game.getSizeOfGame() * 75 > 400)? game.getSizeOfGame() * 75 : 400, game.getSizeOfGame() * 75 + 146);
         //pack();
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");

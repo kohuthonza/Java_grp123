@@ -23,17 +23,13 @@ public class SaveLoad {
     private static ArrayList<String> game_list = new ArrayList<String>();
     
     
-    public static void serialize(Object obj, String fileName)
+    public static void serialize(Object obj, File file)
             throws IOException {
         
-        SaveLoad.reload_game_list();
-        
-        if (!SaveLoad.game_list.contains(fileName))
-            SaveLoad.game_list.add(fileName);
         
         SaveLoad.dir.mkdirs();
         
-        FileOutputStream fos = new FileOutputStream(System.getProperty("user.home")+"/labyrint/save_games/"+fileName);
+        FileOutputStream fos = new FileOutputStream(file.getAbsolutePath());
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(obj);
  

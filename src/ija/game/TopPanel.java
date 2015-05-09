@@ -6,6 +6,9 @@
 package ija.game;
 
 import static ija.game.GUI.game;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -64,6 +67,16 @@ public class TopPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(400, 106));
 
         jButton1.setText("Save");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("treasure");
         jLabel1.setMinimumSize(new java.awt.Dimension(75, 75));
@@ -133,6 +146,23 @@ public class TopPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try {
+            SaveLoad.serialize(game, Save.create_file());
+        } catch (IOException ex) {
+            Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+	
+        
+         
+        
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

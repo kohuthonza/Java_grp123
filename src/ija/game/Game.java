@@ -119,15 +119,19 @@ public class Game implements Serializable {
         return this.players.get(this.actual_player);
     }
     
+    public int get_actual_player_n(){
+        return this.actual_player;
+    }
+    
     public int get_actual_figurine(){
         return this.players_figurine.get(this.actual_player);
     }
-    
+    /*
     public void save_game() throws IOException{
         this.n_move = this.n_move + 1;
         SaveLoad.serialize(this, "undo"+Integer.toString(this.n_move));
     }
-    /*
+    
     public Game undo_game() throws IOException, ClassNotFoundException{
         
         if (!(this.n_move < 1)){

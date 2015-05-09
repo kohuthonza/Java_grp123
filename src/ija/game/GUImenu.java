@@ -88,6 +88,16 @@ public class GUImenu extends javax.swing.JFrame {
         });
 
         jButton2.setText("Load Game");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("7x7");
@@ -230,7 +240,13 @@ public class GUImenu extends javax.swing.JFrame {
         }        
             
         
-        GUI frame = new GUI(numPlayers, numFields, null);
+        
+        try {
+            GUI frame = new GUI(numPlayers, numFields, null);
+        } catch (IOException ex) {
+            Logger.getLogger(GUImenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -284,12 +300,16 @@ public class GUImenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton6MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         try {
             GUI frame = new GUI(0,0,(Game)SaveLoad.deserialize(Load.choose_file()));
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(GUImenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
