@@ -43,10 +43,6 @@ public class GUI extends JFrame implements KeyListener{
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         
-               
-        
- 
-        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize((gameSize * 75 > 400)? gameSize * 75 : 400, gameSize * 75 + 146);
         //pack();
