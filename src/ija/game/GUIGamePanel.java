@@ -103,9 +103,9 @@ public class GUIGamePanel extends JPanel {
                return;
             }
             System.out.printf("kliknuto na pole: %d %d\n", ptr.x, ptr.y);
-            System.out.printf("proveden posun\n");
             MazeField ptrField = game.getMazeBoard().get(ptr.x, ptr.y);
             game.getMazeBoard().shift(ptrField);
+            game.shift_player(ptrField);
             
             update(game);
          }
