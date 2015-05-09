@@ -21,6 +21,7 @@ public class MazeBoard implements Serializable {
     private static MazeField tmp_mf;
     private static int index, i, j;
     private MazeField previous_field;
+    private boolean is_shift;
    
     
     private MazeBoard(int n){
@@ -29,6 +30,7 @@ public class MazeBoard implements Serializable {
         this.free_card = null;
         this.previous_field = null;
         this.board = new ArrayList<MazeField>();
+        this.is_shift = false;
         for (i = 1; i <= n; i++){
             for(j = 1; j <= n; j++){
                 this.board.add(new MazeField(i, j)); 
@@ -187,6 +189,14 @@ public class MazeBoard implements Serializable {
         return this.previous_field;
     }
     
+    public void set_is_shift(boolean is_shift){
+        this.is_shift = is_shift;
+    }  
+    
+    public boolean get_is_shift(){
+        return this.is_shift;
+    }
+     
     /**
      * Vlozi volny kamen na zadanou pozici (vklada se pouze z kraje na sude sloupce, 
      * radky), ostatni kameny posune prislusnym smerem. Kamen ktery vypadne z
@@ -194,11 +204,12 @@ public class MazeBoard implements Serializable {
      * 
      * @param mf Pole, na ktere se ma vlozit volny kamen.
      */
-    
+     
     public void shift(MazeField mf){
         
-        if(!mf.equals(this.previous_field)){
+        if(!mf.equals(this.previous_field) && !this.is_shift){
             
+            this.is_shift = true;
             this.previous_field = mf;
         
             MazeCard tmp_free_card = this.free_card;
