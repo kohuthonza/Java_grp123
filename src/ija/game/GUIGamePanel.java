@@ -74,8 +74,7 @@ public class GUIGamePanel extends JPanel {
                     policko.add(treasureCard, new Integer(2));
                 }
                 
-     
-                
+
                 //vrstva 3 - hraci
                 ArrayList<Player> players = game.get_players();
                 ArrayList<Integer> figurine = game.get_players_figurine();
@@ -95,11 +94,20 @@ public class GUIGamePanel extends JPanel {
         addMouseListener(new MouseAdapter() {
          @Override
          public void mousePressed(MouseEvent e) {
+            if (!getComponentAt(e.getPoint()).getClass().equals( JLayeredPaneEdited.class)){
+               System.out.println(String.valueOf(getComponentAt(e.getPoint()).getClass()));
+                return;
+            }
             JLayeredPaneEdited ptr = (JLayeredPaneEdited) getComponentAt(e.getPoint());
             if (ptr == null) {
                return;
             }
             System.out.printf("kliknuto na pole: %d %d\n", ptr.x, ptr.y);
+            System.out.printf("proveden posun\n");
+            MazeField ptrField = game.getMazeBoard().get(ptr.x, ptr.y);
+            game.getMazeBoard().shift(ptrField);
+            
+            update(game);
          }
       });
     }
