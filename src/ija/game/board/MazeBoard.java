@@ -209,8 +209,7 @@ public class MazeBoard implements Serializable {
         
         if(!mf.equals(this.previous_field) && !this.is_shift){
             
-            this.is_shift = true;
-            this.previous_field = mf;
+            
         
             MazeCard tmp_free_card = this.free_card;
             int x, y;
@@ -225,6 +224,8 @@ public class MazeBoard implements Serializable {
                         this.board.get(get_index(y, j)).putCard(this.board.get(get_index(y - 1, j)).getCard());
                     }
                     this.board.get(j - 1).putCard(tmp_free_card);
+                    this.is_shift = true;
+                    this.previous_field = mf;
                     return;  
                 }
                 if (i == this.size){
@@ -233,6 +234,8 @@ public class MazeBoard implements Serializable {
                         this.board.get(get_index(y, j)).putCard(this.board.get(get_index(y + 1, j)).getCard());
                     }
                     this.board.get(get_index(i, j)).putCard(tmp_free_card);
+                    this.is_shift = true;
+                    this.previous_field = mf;
                     return;
                 } 
             }
@@ -243,6 +246,8 @@ public class MazeBoard implements Serializable {
                         this.board.get(get_index(i, x)).putCard(this.board.get(get_index(i, x - 1)).getCard());
                     }
                     this.board.get(get_index(i, j)).putCard(tmp_free_card);
+                    this.is_shift = true;
+                    this.previous_field = mf;
                     return;  
                 }
                 if (j == this.size){
@@ -251,6 +256,8 @@ public class MazeBoard implements Serializable {
                         this.board.get(get_index(i, x)).putCard(this.board.get(get_index(i, x + 1)).getCard());
                     }
                     this.board.get(get_index(i, j)).putCard(tmp_free_card);
+                    this.is_shift = true;
+                    this.previous_field = mf;
                 } 
             }
         }

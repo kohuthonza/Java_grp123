@@ -8,7 +8,7 @@ import ija.game.treasure.*;
 import ija.game.player.*;
 import java.io.IOException;
 import java.util.Random;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Collections;
 
 
@@ -31,6 +31,8 @@ public class Game implements Serializable {
     private boolean end_of_game;
     private boolean stop_move;
     private int n_move;
+    private MazeField previous_field;
+    private boolean is_shift;
     
     
     /**
@@ -52,6 +54,8 @@ public class Game implements Serializable {
         this.end_of_game = false;
         this.stop_move = false;
         this.n_move = 0;
+        this.previous_field = null;
+        this.is_shift = false;
         
         int i;
         
@@ -126,10 +130,15 @@ public class Game implements Serializable {
     public int get_actual_figurine(){
         return this.players_figurine.get(this.actual_player);
     }
-    /*
-    public void save_game() throws IOException{
+    
+    public void undo_save() throws IOException{
         this.n_move = this.n_move + 1;
-        SaveLoad.serialize(this, "undo"+Integer.toString(this.n_move));
+        File file;
+        File dir;
+        dir = new File(System.getProperty("user.home")+"/labyrint/undo");
+        dir.mkdirs();
+        file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.n_move));
+        SaveLoad.serialize(this, file);
     }
     
     public Game undo_game() throws IOException, ClassNotFoundException{
@@ -137,15 +146,15 @@ public class Game implements Serializable {
         if (!(this.n_move < 1)){
             
             Game undo; 
-        
-            undo = (Game)SaveLoad.deserialize("undo"+Integer.toString(this.n_move));
-            SaveLoad.delete_game("undo"+Integer.toString(this.n_move));
+            File file;
+            file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.n_move));
+            undo = (Game)SaveLoad.deserialize(file);
+            SaveLoad.delete_game(file);
             this.n_move = this.n_move - 1;
             return undo;
         }
         return null;
     }
-    */
     public ArrayList get_players(){
         return this.players;
     }
@@ -243,12 +252,14 @@ public class Game implements Serializable {
         
         this.stop_move = false;
         this.board.set_is_shift(false);
+        this.is_shift = false;
         
         if (this.actual_player + 1 == n_players)
             this.actual_player = 0;
         else
             this.actual_player = this.actual_player + 1;
     
+        this.undo_save();
     }
     
     /**
@@ -261,7 +272,8 @@ public class Game implements Serializable {
     public void shift_player(MazeField mf){
         
         
-        if (!mf.equals(this.board.get_previous_field()) && !this.board.get_is_shift()){    
+        if (!mf.equals(this.previous_field) && !this.is_shift){    
+       
             
             int n;
             int r;
@@ -276,9 +288,13 @@ public class Game implements Serializable {
                     if (this.players.get(n).get_x() == c){
                         if (r == 1){
                             this.shift_down(this.players.get(n));
+                            this.previous_field = mf;
+                            this.is_shift = true;
                         }
                         if (r == this.board.get_size()){
                             this.shift_up(this.players.get(n));
+                            this.previous_field = mf;
+                            this.is_shift = true;
                         }
                     }
                 }
@@ -291,9 +307,13 @@ public class Game implements Serializable {
                     if (this.players.get(n).get_y() == r){
                         if (c == 1){
                             this.shift_right(this.players.get(n));
+                            this.previous_field = mf;
+                            this.is_shift = true;
                         }
                         if (c == this.board.get_size()){
                             this.shift_left(this.players.get(n));
+                            this.previous_field = mf;
+                            this.is_shift = true;
                         }
                     }
                 }
