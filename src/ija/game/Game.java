@@ -248,7 +248,7 @@ public class Game implements Serializable {
     public void shift_player(MazeField mf){
         
         
-        if (!this.board.get_previous_field().equals(mf)){    
+        if (!mf.equals(this.board.get_previous_field())){    
             
             
             
