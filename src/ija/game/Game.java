@@ -115,6 +115,14 @@ public class Game implements Serializable {
         return this.end_of_game; 
     }
     
+    public Player get_actual_player(){
+        return this.players.get(this.actual_player);
+    }
+    
+    public int get_actual_figurine(){
+        return this.players_figurine.get(this.actual_player);
+    }
+    
     public void save_game() throws IOException{
         this.n_move = this.n_move + 1;
         SaveLoad.serialize(this, "undo"+Integer.toString(this.n_move));
@@ -230,6 +238,7 @@ public class Game implements Serializable {
     public void next_player() throws IOException{
         
         this.stop_move = false;
+        this.board.set_is_shift(false);
         
         if (this.actual_player + 1 == n_players)
             this.actual_player = 0;
@@ -248,9 +257,7 @@ public class Game implements Serializable {
     public void shift_player(MazeField mf){
         
         
-        if (!mf.equals(this.board.get_previous_field())){    
-            
-            
+        if (!mf.equals(this.board.get_previous_field()) && !this.board.get_is_shift()){    
             
             int n;
             int r;
