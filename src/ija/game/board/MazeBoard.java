@@ -197,7 +197,7 @@ public class MazeBoard implements Serializable {
     
     public void shift(MazeField mf){
         
-        if(!this.previous_field.equals(mf)){
+        if(!mf.equals(this.previous_field)){
             
             this.previous_field = mf;
         

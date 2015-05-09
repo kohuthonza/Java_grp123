@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import ija.game.board.*;
 import ija.game.treasure.*;
 import ija.game.player.*;
+import java.io.IOException;
 import java.util.Random;
 import java.io.Serializable;
+import java.util.Collections;
 
 
 /**
@@ -21,12 +23,15 @@ public class Game implements Serializable {
     
     private ArrayList<Player> players;
     private ArrayList<TreasureCard> r_cards;
+    private ArrayList<Integer> players_figurine;
     private final MazeBoard board;
     private final CardPack pack;
     private final int n_players;
     private int actual_player;
     private boolean end_of_game;
     private boolean stop_move;
+    private int n_move;
+    
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
@@ -36,15 +41,19 @@ public class Game implements Serializable {
      * @param n_players Pocet hracu (2 nebo 4)
      * @param size_of_board Rozloha hraci desky (nejmene 3)
      */
-    public Game(int n_players, int size_of_board){
+    public Game(int n_players, int size_of_board) throws IOException{
         
         this.board = MazeBoard.createMazeBoard(size_of_board);
         this.n_players = n_players;
-        this.actual_player = 0;
+        this.actual_player = -1;
         this.players = new ArrayList<Player>();
         this.r_cards = new ArrayList<TreasureCard>();
+        this.players_figurine = new ArrayList<Integer>();
         this.end_of_game = false;
         this.stop_move = false;
+        this.n_move = 0;
+        
+        int i;
         
         Treasure.createSet();
         this.board.newGame();
@@ -75,12 +84,16 @@ public class Game implements Serializable {
         this.pack = new CardPack(n_card,24);
         this.pack.shuffle();
         
-        for (int i = 0; i < n_players; ++i){
+        for (i = 0; i < n_players; ++i){
             this.players.get(i).set_card(this.pack.popCard());
         }
-        for (int i = 0; i < n_players; ++i){
+        for (i = 0; i < n_players; ++i){
             this.add_r_card();
         }
+        for (i = 1; i <= n_players; ++i){
+            this.players_figurine.add(i);
+        }
+        Collections.shuffle(this.players_figurine);
         
         //Pripnuti pokladu na pole (MazeCard)
         this.players.stream().forEach((Player object) -> {
@@ -90,7 +103,6 @@ public class Game implements Serializable {
         this.r_cards.stream().forEach((TreasureCard object) -> {
             this.stick_treasure(object.get_treasure());
         });
-        
     }
     
     /**
@@ -103,8 +115,31 @@ public class Game implements Serializable {
         return this.end_of_game; 
     }
     
+    public void save_game() throws IOException{
+        this.n_move = this.n_move + 1;
+        SaveLoad.serialize(this, "undo"+Integer.toString(this.n_move));
+    }
+    
+    public Game undo_game() throws IOException, ClassNotFoundException{
+        
+        if (!(this.n_move < 1)){
+            
+            Game undo; 
+        
+            undo = (Game)SaveLoad.deserialize("undo"+Integer.toString(this.n_move));
+            SaveLoad.delete_game("undo"+Integer.toString(this.n_move));
+            this.n_move = this.n_move - 1;
+            return undo;
+        }
+        return null;
+    }
+    
     public ArrayList get_players(){
         return this.players;
+    }
+    
+    public ArrayList get_players_figurine(){
+        return this.players_figurine;
     }
     
     private void check_position(Player player){
@@ -192,7 +227,7 @@ public class Game implements Serializable {
      * 
      * 
      */
-    public void next_player(){
+    public void next_player() throws IOException{
         
         this.stop_move = false;
         
