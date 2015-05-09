@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import java.util.ArrayList;
 import ija.game.player.Player;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -48,15 +50,15 @@ public class GUIGamePanel extends JPanel {
             for(int j = 1; j <= size; j++){
                 MazeField field = game.getMazeBoard().get(i,j);
 
-                JLayeredPane policko = new JLayeredPane();
-                
+                JLayeredPaneEdited policko = new JLayeredPaneEdited();
+                policko.x = i;
+                policko.y = j;
+                              
                 JLabel layerCard = new JLabel();
                 ImageIcon icon;
                 
                 icon = new ImageIcon(this.getClass().getResource("images/mazes/"+field.getCard().get_type()+"/"+Integer.toString(field.getCard().getRotation())+".png"));
-                
-                
-                
+
                 //vvrstva 1 - herni pole
                 layerCard.setIcon(icon);
                 layerCard.setSize(icon.getIconHeight(),icon.getIconWidth());
@@ -90,6 +92,16 @@ public class GUIGamePanel extends JPanel {
                 add(policko);
             }            
         }
+        addMouseListener(new MouseAdapter() {
+         @Override
+         public void mousePressed(MouseEvent e) {
+            JLayeredPaneEdited ptr = (JLayeredPaneEdited) getComponentAt(e.getPoint());
+            if (ptr == null) {
+               return;
+            }
+            System.out.printf("kliknuto na pole: %d %d\n", ptr.x, ptr.y);
+         }
+      });
     }
     
 }
