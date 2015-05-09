@@ -32,8 +32,8 @@ public class GUI extends JFrame{
  
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(gameSize * 75 + 50, gameSize * 75 + 150);
-        pack();
+        setSize((gameSize * 75 > 400)? gameSize * 75 : 400, gameSize * 75 + 146);
+        //pack();
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");
         setResizable(true);

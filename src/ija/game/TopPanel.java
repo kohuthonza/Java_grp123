@@ -21,8 +21,9 @@ public class TopPanel extends javax.swing.JPanel {
         
         ImageIcon icon;
          
-        //game.get_players_figurine(game.);
-        //icon = new ImageIcon(this.getClass().getResource("images/mazes/"+field.getCard().get_type()+"/"+Integer.toString(field.getCard().getRotation())+".png"));
+        System.out.print(game.get_actual_figurine());
+        icon = new ImageIcon(this.getClass().getResource("images/players/"+ new Integer(1) +".png"));
+        jLabel2.setIcon(icon);
     }
 
     /**
