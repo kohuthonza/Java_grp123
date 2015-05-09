@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.ImageIcon;
 
+import java.io.IOException;
+
 
 public class GUI extends JFrame{
     static Game game;
@@ -15,17 +17,23 @@ public class GUI extends JFrame{
     
     public GUI(int numPlayers, int gameSize){
        
-        game = new Game(numPlayers, gameSize);
+        try{
+            game = new Game(numPlayers, gameSize);
+        } catch(IOException e){
+           System.out.printf("hra nebyla vytvorena");
+           System.exit(1);
+        }
         
+        getContentPane().setLayout(new BoxLayout(getContentPane(),BoxLayout.PAGE_AXIS));
         
-        getContentPane().setLayout(new FlowLayout());
-        add(new JButton("tlacitko"));              
+        add(new TopPanel(game));              
         add(new GUIGamePanel(game));
         
  
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(gameSize * 75, gameSize * 75+10);
+        setSize(gameSize * 75 + 50, gameSize * 75 + 150);
+        pack();
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");
         setResizable(true);
