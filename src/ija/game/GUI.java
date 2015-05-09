@@ -7,12 +7,15 @@ import ija.game.treasure.CardPack;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.ImageIcon;
-
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 
 public class GUI extends JFrame{
     static Game game;
+    static TopPanel topPanel;
+    static GUIGamePanel gamePanel;
+    static JButton button;
 
     
     public GUI(int numPlayers, int gameSize){
@@ -28,8 +31,13 @@ public class GUI extends JFrame{
         
         getContentPane().setLayout(new BoxLayout(getContentPane(),BoxLayout.PAGE_AXIS));
         
-        add(new TopPanel(game));              
-        add(new GUIGamePanel(game));
+        topPanel = new TopPanel(game);
+        add(topPanel);              
+        gamePanel = new GUIGamePanel(game);
+        add(gamePanel);
+                button = new JButton();
+        add(button);
+        
         
  
         
@@ -41,6 +49,17 @@ public class GUI extends JFrame{
         setResizable(true);
         setVisible(true);
 
+    }
+    
+    public void keyPressed(KeyEvent e){
+        try{
+            game.next_player();
+        } catch (IOException except){
+           System.out.printf("hra nebyla vytvorena");
+           System.exit(1);
+        }
+        topPanel.repaint();
+        button.setText("zmacknuto");
     }
     
 }
