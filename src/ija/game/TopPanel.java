@@ -22,7 +22,7 @@ public class TopPanel extends javax.swing.JPanel {
         ImageIcon icon;
          
         System.out.print(game.get_actual_figurine());
-        icon = new ImageIcon(this.getClass().getResource("images/players/"+ new Integer(1) +".png"));
+        icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.get_actual_figurine())+".png"));
         jLabel2.setIcon(icon);
     }
 

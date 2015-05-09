@@ -19,10 +19,12 @@ public class GUI extends JFrame{
        
         try{
             game = new Game(numPlayers, gameSize);
+            game.next_player();
         } catch(IOException e){
            System.out.printf("hra nebyla vytvorena");
            System.exit(1);
         }
+        
         
         getContentPane().setLayout(new BoxLayout(getContentPane(),BoxLayout.PAGE_AXIS));
         
