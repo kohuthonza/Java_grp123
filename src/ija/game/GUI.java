@@ -64,7 +64,7 @@ public class GUI extends JFrame implements KeyListener{
     public void keyPressed(KeyEvent e){
 
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            try{
+            try{             
                 game.next_player();
                 System.out.printf("hrac: %d\n",game.get_actual_figurine());
             } catch (IOException except){
@@ -73,27 +73,31 @@ public class GUI extends JFrame implements KeyListener{
             }
             
             topPanel.updatePanel();
-            System.out.println("Next player");  
-    
+            System.out.println("Next player");          
+                
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN) {   
             System.out.printf("figurka %s moves DOWN from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('D');
+            gamePanel.update(game);
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP) {
             System.out.printf("figurka %s moves UP from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('U');
+            gamePanel.update(game);
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
             System.out.printf("figurka %s moves LEFT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('L');
+            gamePanel.update(game);            
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
             System.out.printf("figurka %s moves RIGHT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('R');
+            gamePanel.update(game);            
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
     }

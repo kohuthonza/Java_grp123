@@ -27,7 +27,23 @@ public class GUIGamePanel extends JPanel {
     public GUIGamePanel(Game game) {
         int size = game.getSizeOfGame();
         setLayout(new GridLayout(size, size));
-         
+        setSize(size*75,size*75);
+        initialize(game); 
+
+    }
+    public void clear(){
+        removeAll();
+        revalidate();
+        repaint();    
+    }
+    
+    public void update(Game game){
+        clear();
+        initialize(game);        
+    }
+    
+    public void initialize(Game game){
+        int size = game.getSizeOfGame();
         for(int i = 1; i <= size; i++){
             for(int j = 1; j <= size; j++){
                 MazeField field = game.getMazeBoard().get(i,j);
@@ -74,7 +90,8 @@ public class GUIGamePanel extends JPanel {
                 add(policko);
             }            
         }
-    }    
+    }
+    
 }
 
 
