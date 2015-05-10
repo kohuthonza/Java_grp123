@@ -98,6 +98,11 @@ public class TopPanel extends javax.swing.JPanel {
         jLabel4.setText("Free mazeCard");
         jLabel4.setMinimumSize(new java.awt.Dimension(75, 75));
         jLabel4.setPreferredSize(new java.awt.Dimension(75, 75));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,6 +162,11 @@ public class TopPanel extends javax.swing.JPanel {
             Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        game.getMazeBoard().getFreeCard().turnRight();
+        updatePanel();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
 	
         
