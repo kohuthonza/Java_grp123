@@ -32,7 +32,7 @@ public class GUI extends JFrame implements KeyListener{
                 game = new Game(numPlayers, gameSize);
                 game.next_player();
             } catch(IOException e){
-                System.out.printf("hra nebyla vytvorena");
+                System.out.printf("hra nebyla vytvorena v GUI");
                 System.exit(1);
             }
         }    
