@@ -44,7 +44,7 @@ public class GUIGamePanel extends JPanel {
         initialize(game);        
     }
     
-    public void initialize(Game game){
+    public void initialize(final Game game){
         int size = game.getSizeOfGame();
         for(int i = 1; i <= size; i++){
             for(int j = 1; j <= size; j++){
