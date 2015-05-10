@@ -70,7 +70,7 @@ public class EndGameFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Hrac 2 nehral");
 
         jLabel2.setText("Hrac 2 nehral");
 
@@ -102,9 +102,9 @@ public class EndGameFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)

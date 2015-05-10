@@ -74,6 +74,10 @@ public class GUI extends JFrame implements KeyListener{
                 System.exit(1);
             }
             
+            if(game.check_end_of_game()){
+                EndGameFrame EGF = new EndGameFrame(game);
+                EGF.setVisible(true);
+            }
             topPanel.updatePanel();
             System.out.println("Next player");          
                 
