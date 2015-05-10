@@ -6,7 +6,7 @@
 package ija.game;
 
 import static ija.game.GUI.game;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -151,7 +151,10 @@ public class TopPanel extends javax.swing.JPanel {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            SaveLoad.serialize(game, Save.create_file());
+            File file = Save.create_file();
+            if (file != null){
+                SaveLoad.serialize(game, file);
+            }
         } catch (IOException ex) {
             Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
