@@ -141,6 +141,10 @@ public class Game implements Serializable {
         SaveLoad.serialize(this, file);
     }
     
+    public void set_n_move(int n_move){
+        this.n_move = n_move;
+    }
+    
     public Game undo_game() throws IOException, ClassNotFoundException{
         
         if (!(this.n_move < 1)){
@@ -149,8 +153,10 @@ public class Game implements Serializable {
             File file;
             file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.n_move));
             undo = (Game)SaveLoad.deserialize(file);
-            SaveLoad.delete_game(file);
-            this.n_move = this.n_move - 1;
+            if (this.n_move > 1){
+                SaveLoad.delete_game(file);
+                undo.set_n_move(this.n_move - 1);
+            }
             return undo;
         }
         return null;

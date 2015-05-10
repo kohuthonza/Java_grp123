@@ -24,6 +24,8 @@ public class TopPanel extends javax.swing.JPanel {
         initComponents();
         
         ImageIcon icon;
+        jButton1.setFocusable(false);
+        jButton2.setFocusable(false);
          
         updatePanel();
     }
@@ -86,6 +88,11 @@ public class TopPanel extends javax.swing.JPanel {
         });
 
         jButton2.setText("Undo");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Free mazeCard");
         jLabel4.setMinimumSize(new java.awt.Dimension(75, 75));
@@ -160,6 +167,17 @@ public class TopPanel extends javax.swing.JPanel {
         game.getMazeBoard().getFreeCard().turnRight();
         updatePanel();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        try {
+            Game undo_game = game.undo_game();
+            if (undo_game != null){
+                game = undo_game;
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
 	
         
