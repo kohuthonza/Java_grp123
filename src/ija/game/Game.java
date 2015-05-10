@@ -31,8 +31,6 @@ public class Game implements Serializable {
     private boolean end_of_game;
     private boolean stop_move;
     private int n_move;
-    private MazeField previous_field;
-    private boolean is_shift;
     
     
     /**
@@ -54,8 +52,6 @@ public class Game implements Serializable {
         this.end_of_game = false;
         this.stop_move = false;
         this.n_move = 0;
-        this.previous_field = null;
-        this.is_shift = false;
         
         int i;
         
@@ -258,7 +254,6 @@ public class Game implements Serializable {
         
         this.stop_move = false;
         this.board.set_is_shift(false);
-        this.is_shift = false;
         
         if (this.actual_player + 1 == n_players)
             this.actual_player = 0;
@@ -278,7 +273,7 @@ public class Game implements Serializable {
     public void shift_player(MazeField mf){
         
         
-        if (!mf.equals(this.previous_field) && !this.is_shift){    
+        if (this.board.get_is_shift()){    
        
             
             int n;
@@ -294,13 +289,9 @@ public class Game implements Serializable {
                     if (this.players.get(n).get_x() == c){
                         if (r == 1){
                             this.shift_down(this.players.get(n));
-                            this.previous_field = mf;
-                            this.is_shift = true;
                         }
                         if (r == this.board.get_size()){
                             this.shift_up(this.players.get(n));
-                            this.previous_field = mf;
-                            this.is_shift = true;
                         }
                     }
                 }
@@ -313,13 +304,9 @@ public class Game implements Serializable {
                     if (this.players.get(n).get_y() == r){
                         if (c == 1){
                             this.shift_right(this.players.get(n));
-                            this.previous_field = mf;
-                            this.is_shift = true;
                         }
                         if (c == this.board.get_size()){
                             this.shift_left(this.players.get(n));
-                            this.previous_field = mf;
-                            this.is_shift = true;
                         }
                     }
                 }
@@ -364,7 +351,7 @@ public class Game implements Serializable {
     } 
     
     /**
-     * Posuna hrace zadanym smerem. Pokud timto smerem nelze provest posun, 
+     * Posune hrace zadanym smerem. Pokud timto smerem nelze provest posun, 
      * nic se nestane.
      * 
      * @param direction Smer, kterym se ma hrac posunout: R (vpravo), L (vlevo), 
@@ -372,7 +359,7 @@ public class Game implements Serializable {
      */
     public void move_player(char direction){
         
-        if (!this.stop_move){
+        if (this.board.get_is_shift() && !this.stop_move){
             
             switch (direction){
                 case 'R':

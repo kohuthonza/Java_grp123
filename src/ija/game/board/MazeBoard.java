@@ -225,7 +225,7 @@ public class MazeBoard implements Serializable {
                     }
                     this.board.get(j - 1).putCard(tmp_free_card);
                     this.is_shift = true;
-                    this.previous_field = mf;
+                    this.previous_field = new MazeField(this.size,mf.col());
                     return;  
                 }
                 if (i == this.size){
@@ -235,7 +235,7 @@ public class MazeBoard implements Serializable {
                     }
                     this.board.get(get_index(i, j)).putCard(tmp_free_card);
                     this.is_shift = true;
-                    this.previous_field = mf;
+                    this.previous_field = new MazeField(1,mf.col());
                     return;
                 } 
             }
@@ -247,7 +247,7 @@ public class MazeBoard implements Serializable {
                     }
                     this.board.get(get_index(i, j)).putCard(tmp_free_card);
                     this.is_shift = true;
-                    this.previous_field = mf;
+                    this.previous_field = new MazeField(mf.row(),this.size);
                     return;  
                 }
                 if (j == this.size){
@@ -257,7 +257,7 @@ public class MazeBoard implements Serializable {
                     }
                     this.board.get(get_index(i, j)).putCard(tmp_free_card);
                     this.is_shift = true;
-                    this.previous_field = mf;
+                    this.previous_field = new MazeField(mf.row(), 1);
                 } 
             }
         }
