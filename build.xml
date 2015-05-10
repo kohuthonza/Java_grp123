@@ -1,0 +1,18 @@
+<project name="Labyrinth" basedir="." default="">
+<target name="compile">
+<copy todir="build/ija/game">
+<fileset dir="lib"/>
+</copy>
+<javac srcdir="src" destdir="build" includeantruntime="false"/>
+<javadoc sourcepath="src" destdir="doc"/>
+<jar destfile="dest-client/ija2015-client.jar" basedir="build">
+<manifest>
+<attribute name ="Main-Class" value="ija.game.Main"/>
+</manifest>
+</jar>
+</target>
+
+<target name="run">
+<java jar="dest-client/ija2015-client.jar" fork="true"/>
+</target>
+</project>
