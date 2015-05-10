@@ -5,7 +5,7 @@
  */
 package ija.game;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -305,7 +305,10 @@ public class GUImenu extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         try {
-            GUI frame = new GUI(0,0,(Game)SaveLoad.deserialize(Load.choose_file()));
+            File file = Load.choose_file();
+            if (file != null){
+                GUI frame = new GUI(0,0,(Game)SaveLoad.deserialize(file));
+            }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(GUImenu.class.getName()).log(Level.SEVERE, null, ex);
         }
