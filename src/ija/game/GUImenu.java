@@ -49,7 +49,7 @@ public class GUImenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Projekt IJA 2015 - xkohut08, xjuric22");
+        jLabel1.setText("Projekt IJA 2015");
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("2 hráči");
