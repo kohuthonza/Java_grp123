@@ -8,7 +8,7 @@ import ija.game.player.Player;
 
 /**
  *
- * @author Tomáš
+ * @author Tomï¿½
  */
 public class EndGameFrame extends javax.swing.JFrame {
 
@@ -19,6 +19,7 @@ public class EndGameFrame extends javax.swing.JFrame {
         initComponents();
         int size = game.get_players().size();
         
+
         if (size>=1){
             Player P1 = (Player) game.get_players().get(0);
             jLabel1.setText("Skore hrace 1:  " + Integer.toString(P1.get_picked_cards()));
@@ -71,11 +72,11 @@ public class EndGameFrame extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("Hrac 2 nehral");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("Hrac 3 nehral");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Hrac 4 nehral");
 
         jLabel5.setText("Konec hry");
 
