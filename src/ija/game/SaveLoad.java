@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class SaveLoad {
     
-    private static final File dir = new File(System.getProperty("user.home")+"/labyrint/save_games");
+    private static final File dir = new File(System.getProperty("user.home")+"/labyrint/undo");
     private static ArrayList<String> game_list = new ArrayList<String>();
     
     

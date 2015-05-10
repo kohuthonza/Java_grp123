@@ -27,9 +27,9 @@ public class TextUI {
         switch(str){
             case "p":
                 System.out.print("Hraci deska:\n");
-                for (int i = 1; i <= 3; i++){
+                for (int i = 1; i <= 9; i++){
                     System.out.print("\n");
-                    for(int j = 1; j <= 3; j++){
+                    for(int j = 1; j <= 9; j++){
                         System.out.print(board.get(i, j).getCard().get_type()); 
                     }
                 }

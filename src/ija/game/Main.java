@@ -7,6 +7,7 @@ package ija.game;
 
 import java.io.IOException;
 import ija.game.board.MazeBoard;
+import java.io.File;
 /**
  *
  * @author Jan
@@ -23,15 +24,13 @@ public class Main {
           
         //Game new_game = new Game(4,7);
         
-        
-        
         //SaveLoad.serialize(new_game, Save.create_file());
         
         GUImenu menu = new GUImenu();
         menu.setVisible(true);
         
         //TextUI textUI = new TextUI();
-        //textUI.start(new_game.getMazeBoard());
+        //textUI.start(undo.getMazeBoard());
     }
             
    
