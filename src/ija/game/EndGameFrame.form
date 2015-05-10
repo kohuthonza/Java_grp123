@@ -61,7 +61,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hrac 2 nehral"/>
+        <Property name="text" type="java.lang.String" value="Hrac 1 nehral"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

@@ -70,7 +70,7 @@ public class EndGameFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Hrac 2 nehral");
+        jLabel1.setText("Hrac 1 nehral");
 
         jLabel2.setText("Hrac 2 nehral");
 
