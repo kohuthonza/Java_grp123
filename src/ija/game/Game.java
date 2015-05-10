@@ -96,13 +96,13 @@ public class Game implements Serializable {
         Collections.shuffle(this.players_figurine);
         
         //Pripnuti pokladu na pole (MazeCard)
-        this.players.stream().forEach((Player object) -> {
-            this.stick_treasure(object.get_card().get_treasure());
-        });
-            
-        this.r_cards.stream().forEach((TreasureCard object) -> {
-            this.stick_treasure(object.get_treasure());
-        });
+        for (Player tmp: this.players){
+            this.stick_treasure(tmp.get_card().get_treasure());
+        }
+        for (TreasureCard tmp: this.r_cards){
+            this.stick_treasure(tmp.get_treasure());
+        }
+        
     }
     
     /**
