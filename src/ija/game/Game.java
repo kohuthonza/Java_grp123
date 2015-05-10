@@ -31,7 +31,7 @@ public class Game implements Serializable {
     private boolean end_of_game;
     private boolean stop_move;
     private int n_move;
-    
+    private boolean is_shift;
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
@@ -52,6 +52,7 @@ public class Game implements Serializable {
         this.end_of_game = false;
         this.stop_move = false;
         this.n_move = 0;
+        this.is_shift = false;
         
         int i;
         
@@ -253,6 +254,7 @@ public class Game implements Serializable {
     public void next_player() throws IOException{
         
         this.stop_move = false;
+        this.is_shift = false;
         this.board.set_is_shift(false);
         
         if (this.actual_player + 1 == n_players)
@@ -273,8 +275,9 @@ public class Game implements Serializable {
     public void shift_player(MazeField mf){
         
         
-        if (this.board.get_is_shift()){    
-       
+        if (this.board.get_is_shift() && !this.is_shift){    
+        
+            this.is_shift = true;
             
             int n;
             int r;
