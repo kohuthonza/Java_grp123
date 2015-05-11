@@ -32,6 +32,7 @@ public class Game implements Serializable {
     private boolean stop_move;
     private int n_move;
     private boolean is_shift;
+    private int n_cards;
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
@@ -40,28 +41,46 @@ public class Game implements Serializable {
      * 
      * @param n_players Pocet hracu (2 nebo 4)
      * @param size_of_board Rozloha hraci desky (nejmene 3)
+     * @param n_cards Pocet karet v balicku
+     * @throws java.io.IOException
+     * 
      */
-    public Game(int n_players, int size_of_board) throws IOException{
+    public Game(int n_players, int size_of_board, int n_cards) throws IOException{
         
+        //Vytvorime hraci desku
         this.board = MazeBoard.createMazeBoard(size_of_board);
+        //Pocet hracu
         this.n_players = n_players;
+        //Hrac na tahu
         this.actual_player = -1;
+        //List hracu
         this.players = new ArrayList<Player>();
+        //List nahodne vybranych karet
         this.r_cards = new ArrayList<TreasureCard>();
+        //List figurek
         this.players_figurine = new ArrayList<Integer>();
-        this.end_of_game = false;
-        this.stop_move = false;
+        //Pocet tahu, ktere byli provedeny
         this.n_move = 0;
+        //Pocet karet v balicku jednoho hrace
+        this.n_cards = n_cards;
+        //Indikator konce hry
+        this.end_of_game = false;
+        //Indikator zastaveni pohybu
+        this.stop_move = false;
+        //Indikator posunu hracu (nezavisle na ceste)
         this.is_shift = false;
+        
         
         int i;
         
         Treasure.createSet();
+        
+        //Nastavime rozlozeni kamenu na desce
         this.board.newGame();
         
-        int n_card;
-        n_card = 12;
         
+        
+        //Pocatecni inicializace hracu (postaveni na desce)
         if (n_players == 2){
             this.players.add(new Player(1, 1));
             this.players.add(new Player(this.board.get_size(), this.board.get_size()));
@@ -71,7 +90,6 @@ public class Game implements Serializable {
             this.players.add(new Player(1, 1));
             this.players.add(new Player(this.board.get_size(), 1));
             this.players.add(new Player(1, this.board.get_size()));
-            n_card = 18;
         }
         
         if (n_players == 4){
@@ -79,18 +97,21 @@ public class Game implements Serializable {
             this.players.add(new Player(this.board.get_size(), 1));
             this.players.add(new Player(1, this.board.get_size()));
             this.players.add(new Player(this.board.get_size(), this.board.get_size()));
-            n_card = 24;
         }
         
-        this.pack = new CardPack(n_card,24);
+        //Vytvoreni a zamichani balicku
+        this.pack = new CardPack(this.n_cards,24);
         this.pack.shuffle();
         
+        //Kazdy hrac si vytahne jednu kartu s balicku
         for (i = 0; i < n_players; ++i){
             this.players.get(i).set_card(this.pack.popCard());
         }
+        //Projdeme zbytek balicku a nahodne vybereme poklady, ktere umistime navic na desku
         for (i = 0; i < n_players; ++i){
             this.add_r_card();
         }
+        //Nahodne rideli hracum figurky
         for (i = 1; i <= n_players; ++i){
             this.players_figurine.add(i);
         }
@@ -115,18 +136,40 @@ public class Game implements Serializable {
     public boolean check_end_of_game(){
         return this.end_of_game; 
     }
+    /**
+     * Vraci hrace na tahu
+     * 
+     * @return Hrac na tahu
+     */
     
     public Player get_actual_player(){
         return this.players.get(this.actual_player);
     }
+    /**
+     * Kontroluje pocatecni stav hry 
+     * 
+     * @return True pokud je hra v pocatecnim stavu, jinak false
+     */
     
-    public int get_actual_player_n(){
-        return this.actual_player;
+    public boolean get_initial_condition(){
+        return this.actual_player == -1;
     }
+    
+    /**
+     * Vraci cislo figurky pro ahrace na tahu
+     * 
+     * @return Cislo figurky pro hrace na tahu
+     */
     
     public int get_actual_figurine(){
         return this.players_figurine.get(this.actual_player);
     }
+    
+    /**
+     * Ulozi aktualni stav hry do slozky: labyrint/undo v uzivatelske slozce
+     * 
+     * @throws IOException 
+     */
     
     public void undo_save() throws IOException{
         this.n_move = this.n_move + 1;
@@ -138,9 +181,24 @@ public class Game implements Serializable {
         SaveLoad.serialize(this, file);
     }
     
+    /**
+     * Nastavi pocet tahu hry
+     * 
+     * @param n_move Pocet tahu hry
+     */
+    
     public void set_n_move(int n_move){
         this.n_move = n_move;
     }
+    
+    /**
+     * 
+     * Vraci hru o jeden tah zpet
+     * 
+     * @return Hra o jeden tah zpet
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     
     public Game undo_game() throws IOException, ClassNotFoundException{
         
@@ -150,6 +208,7 @@ public class Game implements Serializable {
             File file;
             file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.n_move));
             undo = (Game)SaveLoad.deserialize(file);
+            //Pocatecni stav hry zustane uchovan po dobu behu cele hry
             if (this.n_move > 1){
                 SaveLoad.delete_game(file);
                 undo.set_n_move(this.n_move - 1);
@@ -158,14 +217,35 @@ public class Game implements Serializable {
         }
         return null;
     }
+    
+    /**
+     * Vraci list hracu
+     * 
+     * @return List hracu
+     */
+    
     public ArrayList get_players(){
         return this.players;
     }
+    
+    /**
+     * 
+     * Vraci list figurek
+     * 
+     * @return List figurek
+     */
     
     public ArrayList get_players_figurine(){
         return this.players_figurine;
     }
     
+    /**
+     * Zkontroluje pozici zadaneho hrace. Kontroluje se, jestli hrac sebral
+     * poklad a zaroven, jestli uz to neni jeho posledni (konec hry). Pokud
+     * hrac vezme poklad, vygeneruje se novy (pokud je jeste nejaky k dispozici)
+     * 
+     * @param player Hrac
+     */
     private void check_position(Player player){
        
         MazeCard tmp_MazeCard;
@@ -174,9 +254,10 @@ public class Game implements Serializable {
         
         if (tmp_MazeCard.get_treasure() == player.get_card().get_treasure()){
             tmp_MazeCard.set_treasure(null);
+            //Pokud hrac vezme poklad, zastavi se mu pohyb
             this.stop_move = true;
             player.set_picked_cards(player.get_picked_cards() + 1);
-            if (player.get_picked_cards() == 6)
+            if (player.get_picked_cards() == this.n_cards)
                 this.end_of_game = true;
             else{
                 player.set_card(this.pack.popCard());
@@ -193,6 +274,12 @@ public class Game implements Serializable {
             }
         }   
     }
+    
+    /**
+     * Prilepi, navaze zadany poklad na nahodny kamen
+     * 
+     * @param treasure Poklad
+     */
     
     private void stick_treasure(Treasure treasure){
         
@@ -224,7 +311,11 @@ public class Game implements Serializable {
         }
     }
     
-    
+    /**
+     * Vraci nahodnou kartu s balicku karet
+     * 
+     * @return Karta
+     */
     private TreasureCard add_r_card(){
         
         while (true){
@@ -237,18 +328,17 @@ public class Game implements Serializable {
             } 
     }
     
-    public int getSizeOfGame() {
-        return this.board.get_size();
-    }
-    
+    /**
+     * Vraci hraci desku
+     * 
+     * @return Hraci deska
+     */
     public MazeBoard getMazeBoard() {
         return board;
     }
     
-    
     /**
      * Prepina na dalsiho hrace v poradi.
-     * 
      * 
      */
     public void next_player() throws IOException{
@@ -257,6 +347,7 @@ public class Game implements Serializable {
         this.is_shift = false;
         this.board.set_is_shift(false);
         
+        //Cykleni hracu
         if (this.actual_player + 1 == n_players)
             this.actual_player = 0;
         else
@@ -266,15 +357,17 @@ public class Game implements Serializable {
     }
     
     /**
-     * Provede posun vsech hracu, kteri stoji na posouvanem radku, sloupci 
+     * Provede posun vsech hracu (nezavisle na ceste), kteri stoji na posouvanem radku, sloupci 
      * (prave posouvany radek se urci pomoci pole, na ktere se vklada volny
-     * kamen).
+     * kamen). Pokud je hrac vysunut z desky, objevi se na druhe strane desky 
+     * (na nove vlozenem kamenu).
      * 
      * @param mf Pole, na ktere se vklada volny kamen
      */
     public void shift_player(MazeField mf){
         
-        
+        //Posun se provede pouze tehdy, byla-li posunuta hraci deska (pokud 
+        //uz se posun hracu v danem tahu provedl, tak se podruhe neprovede)
         if (this.board.get_is_shift() && !this.is_shift){    
         
             this.is_shift = true;
@@ -317,6 +410,12 @@ public class Game implements Serializable {
         }
     }
     
+    //Metody pro posuny hracu danym smerem (nezavisle na ceste). 
+    
+    /**
+     * Posune hrace doprava
+     * @param player 
+     */
     private void shift_right(Player player){
         
         if ((player.get_x() + 1) > this.board.get_size())
@@ -325,7 +424,10 @@ public class Game implements Serializable {
             player.set_x(player.get_x() + 1);
         
     }    
-    
+    /**
+     * Posune hrace doleva
+     * @param player 
+     */
     private void shift_left(Player player){
         
         if ((player.get_x() - 1) < 1)
@@ -334,7 +436,10 @@ public class Game implements Serializable {
             player.set_x(player.get_x() - 1);
         
     } 
-    
+    /**
+     * Posune hrace nahoru
+     * @param player 
+     */
     private void shift_up(Player player){
         
         if ((player.get_y() - 1) < 1)
@@ -343,7 +448,10 @@ public class Game implements Serializable {
             player.set_y(player.get_y() - 1);
         
     } 
-    
+    /**
+     * Posune hrace dolu
+     * @param player 
+     */
     private void shift_down(Player player){
         
         if ((player.get_y() + 1) > this.board.get_size())
@@ -380,8 +488,13 @@ public class Game implements Serializable {
             }
         }      
     }
+    //Metody pro posun hrace danym smerem
     
-     private void move_right(Player player){
+    /**
+     * Posune hrace doprava
+     * @param player 
+     */
+    private void move_right(Player player){
          
         int tmp_x;
         int tmp_y;
@@ -398,7 +511,10 @@ public class Game implements Serializable {
             }
         }   
     }    
-    
+    /**
+     * Posune hrace doleva
+     * @param player 
+     */
     private void move_left(Player player){
         
         int tmp_x;
@@ -416,7 +532,10 @@ public class Game implements Serializable {
             }
         }
     } 
-    
+    /**
+     * Posune hrace nahoru
+     * @param player 
+     */
     private void move_up(Player player){
         
         int tmp_x;
@@ -434,7 +553,10 @@ public class Game implements Serializable {
             }
         }
     } 
-    
+    /**
+     * Posune hrace dolu
+     * @param player 
+     */
     private void move_down(Player player){
         
         int tmp_x;
