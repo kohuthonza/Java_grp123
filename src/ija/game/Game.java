@@ -238,6 +238,13 @@ public class Game implements Serializable {
     public ArrayList get_players_figurine(){
         return this.players_figurine;
     }
+    /**
+     * Vraci poradove cislo hrace na tahu 
+     * @return Poradove cislo
+     */
+    public int get_actual_player_n(){
+        return this.actual_player + 1;
+    }
     
     /**
      * Zkontroluje pozici zadaneho hrace. Kontroluje se, jestli hrac sebral
