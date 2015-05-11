@@ -67,6 +67,12 @@ public class GUI extends JFrame implements KeyListener{
     public void keyPressed(KeyEvent e){
 
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            
+            if(game.check_end_of_game()){
+                EndGameFrame EGF = new EndGameFrame(game);
+                EGF.setVisible(true);
+                setVisible(false);
+            }
             try{             
                 game.next_player();
                 System.out.printf("hrac: %d\n",game.get_actual_figurine());
@@ -75,11 +81,7 @@ public class GUI extends JFrame implements KeyListener{
                 System.exit(1);
             }
             
-            if(game.check_end_of_game()){
-                EndGameFrame EGF = new EndGameFrame(game);
-                EGF.setVisible(true);
-                setVisible(false);
-            }
+
             topPanel.updatePanel();
             gamePanel.update(game);
             System.out.println("Next player");          
