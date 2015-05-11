@@ -19,7 +19,8 @@ public class EndGameFrame extends javax.swing.JFrame {
         initComponents();
         int size = game.get_players().size();
         
-        jLabel5.setText("Hrac cislo"+ Integer.toString(game.get_actual_player_n()) +"zvitezil!");
+        jLabel5.setText("Hrac cislo "+ Integer.toString(game.get_actual_player_n()) +" zvitezil!");
+        
         if (size>=1){
             Player P1 = (Player) game.get_players().get(0);
             jLabel1.setText("Skore hrace 1:  " + Integer.toString(P1.get_picked_cards()));

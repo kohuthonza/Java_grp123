@@ -45,7 +45,8 @@ public class GUI extends JFrame implements KeyListener{
         add(topPanel);              
         gamePanel = new GUIGamePanel(game);
         add(gamePanel);
-        
+                  
+           
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
