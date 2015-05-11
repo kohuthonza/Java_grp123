@@ -25,7 +25,7 @@ public class EndGameFrame extends javax.swing.JFrame {
             jLabel1.setText("Skore hrace 1:  " + Integer.toString(P1.get_picked_cards()));
         }
         else{
-            jLabel1.setText("Hrac 1 nehral");
+            jLabel1.setText("");
         }
         
         if (size>=2){
@@ -33,7 +33,7 @@ public class EndGameFrame extends javax.swing.JFrame {
             jLabel2.setText("Skore hrace 2:  " + Integer.toString(P2.get_picked_cards()));
         }
         else{
-            jLabel2.setText("Hrac 2 nehral");
+            jLabel2.setText("");
         }
 
         if (size>=3){
@@ -41,7 +41,7 @@ public class EndGameFrame extends javax.swing.JFrame {
             jLabel3.setText("Skore hrace 3:  " + Integer.toString(P3.get_picked_cards()));
         }
         else{
-            jLabel3.setText("Hrac 3 nehral");
+            jLabel3.setText("");
         }
         
         if (size>=4){
@@ -49,7 +49,7 @@ public class EndGameFrame extends javax.swing.JFrame {
             jLabel4.setText("Skore hrace 4:  " + Integer.toString(P4.get_picked_cards()));
         }
         else{
-            jLabel4.setText("Hrac 4 nehral");
+            jLabel4.setText("");
         }
     }
 
