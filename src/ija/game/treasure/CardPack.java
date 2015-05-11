@@ -5,36 +5,50 @@ package ija.game.treasure;
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.Serializable;
+import java.util.Collections;
 
 /**
- * 13. 3. 2015
- * xkohut08
- * @author Jan Kohut
+ * Implementuje balicek karet a operace nad nim
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class CardPack implements Serializable{
     
-    private final int maxSize;
-    private final int initSize;
+    private final int size;
     private final ArrayList<TreasureCard> pack;
-    private static TreasureCard store_card;
+    private static TreasureCard storeCard;
     
-    public CardPack (int maxSize, int initSize){
+    /**
+     * Vytvori balicek karet o zadanem poctu
+     * 
+     * @param size pocet karet
+     */
+    public CardPack (int size){
         
-        this.maxSize = maxSize;
-        this.initSize = initSize; 
+        this.size = size;
         
         this.pack = new ArrayList<TreasureCard>();
-        for (int i = 0; i < this.initSize; i++){
+        for (int i = 0; i < this.size; i++){
             this.pack.add(new TreasureCard(Treasure.getTreasure(i)));
         }   
     }
-    
+    /**
+     * Vytahne kartu z balicku 
+     * 
+     * @return Karta
+     */
     public TreasureCard popCard (){
-        CardPack.store_card = this.pack.get(0);
+        CardPack.storeCard = this.pack.get(0);
         this.pack.remove(0);
-        return CardPack.store_card;
+        return CardPack.storeCard;
     }
     
+    /**
+     * Vrati nahodnou kartu z balicku
+     * 
+     * @return Karta
+     */
     public TreasureCard randomCard(){
         
         Random ran = new Random();
@@ -42,28 +56,22 @@ public class CardPack implements Serializable{
         return this.pack.get(ran.nextInt(this.pack.size()));
         
     }
-    
+    /**
+     * Vrati velikost balicku
+     * 
+     * @return Velikost balicku
+     */
     public int size (){
         return this.pack.size();
     }
     
     
     /**
-     * Generuji se dve nahodna cisla podle velikosti balicku, karty na techto 
-     * pozicich se prohodi, toto se provede dvacetkrat
+     * Provede zamichani balicku
      */
     public void shuffle (){
         
-        Random ran = new Random();
-        int index_1;
-        int index_2;
-        
-        for (int i = 0; i < 20; i++){
-            index_1 = ran.nextInt(this.pack.size());
-            index_2 = ran.nextInt(this.pack.size());
-            CardPack.store_card = this.pack.get(index_1);
-            this.pack.set(index_1, this.pack.get(index_2));
-            this.pack.set(index_2, CardPack.store_card);
-        }
+        Collections.shuffle(this.pack); 
+    
     }
 }

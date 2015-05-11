@@ -5,19 +5,32 @@ package ija.game.treasure;
 import java.io.Serializable;
 
 /**
- * 13. 3. 2015
- * xkohut08
- * @author Jan Kohut
+ * Implementuje kartu a operace nad ni
+ * 
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class TreasureCard implements Serializable{
     
     private final Treasure tr;
     
+    /**
+     * Hash code je hodnota pokladu na karte
+     * 
+     * @return Hash code
+     */
     @Override
     public int hashCode(){
         return tr.code;
     }
  
+    /**
+     * Karty se srovnavaji na zaklade hodnoty pokladu na karte
+     * 
+     * @param obj
+     * @return True, pokud jsou shodne, jinak false
+     */
     @Override
     public boolean equals(Object obj){
         if (obj instanceof TreasureCard) {
@@ -27,12 +40,21 @@ public class TreasureCard implements Serializable{
         else
             return false;
     }
-    
+    /**
+     * Vytvori kartu reprezentujici dany poklad
+     * 
+     * @param tr Poklad
+     */
     public TreasureCard (Treasure tr){
        this.tr = tr; 
     }
     
-    public Treasure get_treasure(){
+    /**
+     * Vrati poklad na karte
+     * 
+     * @return Poklad
+     */
+    public Treasure getTreasure(){
         return this.tr;
     }
     

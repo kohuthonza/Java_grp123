@@ -7,8 +7,12 @@ import java.io.Serializable;
 
 
 /**
- *
- * @author Jan
+ * 
+ * Implementuje kamen a operace nad nim
+ * 
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class MazeCard implements Serializable{
     
@@ -18,41 +22,28 @@ public class MazeCard implements Serializable{
     private String type;
     private Treasure treasure;
     
-/*    
-    @Override
-    public int hashCode(){
-        return this.type.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final MazeCard other = (MazeCard) obj;
-        if (this.direction1 != other.direction1) {
-            return false;
-        }
-        if (this.direction2 != other.direction2) {
-            return false;
-        }
-        if (this.direction3 != other.direction3) {
-            return false;
-        }
-        return Objects.equals(this.type, other.type);
-    }
-  */  
+    /**
+     *Seznam smeru
+     */
     public static enum CANGO{
        LEFT, UP, RIGHT, DOWN; 
     }
     
-    public String get_type(){
+    /**
+     * Vrati typ kamene
+     * 
+     * @return Typ kamene
+     */
+    
+    public String getType(){
         return this.type;
     }
     
+    /**
+     * Vytvori typ kamene
+     * 
+     * @param type Typ kamene
+     */
     private MazeCard(String type){
        
         this.type = type;
@@ -80,12 +71,23 @@ public class MazeCard implements Serializable{
                 throw new IllegalArgumentException(type);
             }   
     }
-    
+    /**
+     * Vytvori kamen
+     * 
+     * @param type Typ kamene
+     * @return Kamen
+     */
     
     public static MazeCard create(String type){ 
         return new MazeCard(type);
     } 
     
+    /**
+     * Kontroluje, zda jde jit danym smerem z kamene
+     * 
+     * @param dir Smer, kterym chceme jit
+     * @return True pokud jde jit zadanym smerem, jinak false
+     */
     public boolean canGo(MazeCard.CANGO dir){
         
         if (dir.equals(this.direction1)||
@@ -98,7 +100,12 @@ public class MazeCard implements Serializable{
         }
         return false;
     }
-    
+    /**
+     * Otoci dany smer o devadesat stupnu doprava
+     * 
+     * @param dir Smer
+     * @return 
+     */
     private MazeCard.CANGO turnDirection(MazeCard.CANGO dir){
         
         switch (dir){
@@ -128,6 +135,9 @@ public class MazeCard implements Serializable{
         
     }
     
+    /**
+     * Otoci kamen doprava o devadesat stupnu
+     */
     public void turnRight(){
         
        this.direction1 = turnDirection(this.direction1);
@@ -137,7 +147,12 @@ public class MazeCard implements Serializable{
          this.direction3 = turnDirection(this.direction3);    
        
     }
-    
+    /**
+     * Vraci rotaci kamene
+     * 
+     * @return Rotace kamene sda
+     * 
+     */
     public int getRotation(){
         
         switch(this.direction1){
@@ -152,12 +167,20 @@ public class MazeCard implements Serializable{
                 }
     }
     
-    
-    public void set_treasure(Treasure treasure){
+    /**
+     * Provede nastaveni, prilepeni pokladu ke kamenu
+     * 
+     * @param treasure Poklad
+     */
+    public void setTreasure(Treasure treasure){
         this.treasure = treasure;
     }
-    
-    public Treasure get_treasure(){
+    /**
+     * Vrati poklad na danem kamenu, pokud zadny polad na kamenu neni vraci null
+     * 
+     * @return Poklad
+     */
+    public Treasure getTreasure(){
         return this.treasure;
     }
 }

@@ -11,55 +11,102 @@ import java.io.Serializable;
 
 /**
  *
- * @author Jan
+ * Implementuje hrace a operace nad nim
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class Player implements Serializable{
     
-    //Pole hracu
-    
-    /*Promenne pro hrace*/
-    //Poloha
+    //Souradnice hrace (osa x a prevracena osa y)
     private int x;
     private int y;
-    private TreasureCard actual_card;
-    private int picked_cards;
+    //Karta, kterou ma hrac vytazenou
+    private TreasureCard actualCard;
+    //Pocet posbiranych, splnenych karet
+    private int pickedCards;
     
+    /**
+     * Vytvori hrace na pozicich x, y
+     * 
+     * @param x Pozice na ose x
+     * @param y Pozice na obracene ose y
+     */
     public Player(int x, int y){
         this.x = x;
         this.y = y;
-        this.actual_card = null;
-        this.picked_cards = 0;
+        this.actualCard = null;
+        this.pickedCards = 0;
     }
     
-    public int get_x(){
+    /**
+     * Vraci x-ovou pozici hrace
+     * 
+     * @return X-ova pozice 
+     * 
+     */
+    public int getX(){
         return this.x;
     }
     
-    public int get_y(){
+    /**
+     * Vraci y-ovou pozici hrace
+     * 
+     * @return Y-ova pozice hrace
+     */
+    public int getY(){
         return this.y;
     }
-    
-    public void set_x(int x){
+    /**
+     * Nastavi x-ovou pozici hrace
+     * 
+     * @param x X-ova pozice hrace 
+     * 
+     */
+    public void setX(int x){
         this.x = x;
     }
     
-    public void set_y(int y){
+    /**
+     * Nastavi y-ovou pozici hrace
+     * 
+     * @param y Y-ova pozice hrace
+     */
+    public void setY(int y){
         this.y = y;
     }
     
-    public void set_card(TreasureCard card){
-        this.actual_card = card;
+    /**
+     * Nastavi vytazenou kartu
+     * 
+     * @param card Karta
+     */
+    public void setCard(TreasureCard card){
+        this.actualCard = card;
+    }
+    /**
+     * Vrati kartu, kterou ma hrac vytazenou
+     * 
+     * @return Karta
+     */
+    public TreasureCard getCard(){
+        return this.actualCard;
     }
     
-    public TreasureCard get_card(){
-        return this.actual_card;
+    /**
+     * Nastavi pocet posbiranych, splnenych karet
+     * 
+     * @param pickedCards Pocet
+     */
+    public void setPickedCards(int pickedCards){
+        this.pickedCards = pickedCards;  
     }
-    
-    public void set_picked_cards(int picked_cards){
-        this.picked_cards = picked_cards;  
-    }
-    
-    public int get_picked_cards(){
-        return this.picked_cards;
+    /**
+     * Vrati pocet posbiranych, splnenych karet
+     * 
+     * @return Pocet
+     */
+    public int getPickedCards(){
+        return this.pickedCards;
     }
 }

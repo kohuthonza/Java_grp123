@@ -15,19 +15,25 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jan
+ * Zajistuje serializaci a deserializaci souboru
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class SaveLoad {
     
-    private static final File dir = new File(System.getProperty("user.home")+"/labyrint/undo");
-    private static ArrayList<String> game_list = new ArrayList<String>();
-    
-    
+    /**
+     * 
+     * Provede serializaci objektu do daneho souboru
+     * 
+     * @param obj Objekt, ktery ma byt serializovan
+     * @param file Objekt souboru do ktereho se ma serializace ulozit
+     * @throws IOException 
+     */
     public static void serialize(Object obj, File file)
             throws IOException {
         
         
-        SaveLoad.dir.mkdirs();
         
         FileOutputStream fos = new FileOutputStream(file.getAbsolutePath());
         ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -36,10 +42,18 @@ public class SaveLoad {
         fos.close();
     }
     
-    
+    /**
+     * 
+     * Provede deserializaci zadaneho souboru
+     * 
+     * @param file Soubor, ktery se ma deserializovat
+     * @return Deserializovany objekt
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public static Object deserialize(File file) throws IOException,
             ClassNotFoundException {
-        SaveLoad.dir.mkdirs();
+ 
         FileInputStream fis = new FileInputStream(file.getAbsolutePath());
         ObjectInputStream ois = new ObjectInputStream(fis);
         Object obj = ois.readObject();
@@ -47,27 +61,13 @@ public class SaveLoad {
         return obj;
     }
 
-    public static void delete_game(File file){
+    /**
+     * Provede odstraneni zadaneho souboru
+     * 
+     * @param file Soubor
+     */
+    public static void deleteGame(File file){
         file.delete();
     }
-   
-    public static void reload_game_list(){
-        
-        File[] files = new File(System.getProperty("user.home")+"/labyrint/save_games/").listFiles(); 
-        SaveLoad.game_list.clear();
-        
-        for (File file : files) {
-            if (file.isFile()) {
-                SaveLoad.game_list.add(file.getName());
-            }
-        }
-        
-    }
-    /*
-    public static ArrayList get_game_list(){
-       
-        SaveLoad.reload_game_list(); 
-        return SaveLoad.game_list;
-    }
-    */
+    
 }

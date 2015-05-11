@@ -30,11 +30,11 @@ public class TextUI {
                 for (int i = 1; i <= 9; i++){
                     System.out.print("\n");
                     for(int j = 1; j <= 9; j++){
-                        System.out.print(board.get(i, j).getCard().get_type()); 
+                        System.out.print(board.getMazeField(i, j).getCard().getType()); 
                     }
                 }
                 System.out.print("\n\nVolny kamen:");
-                System.out.print(board.getFreeCard().get_type());
+                System.out.print(board.getFreeCard().getType());
                 System.out.print("\n");
                 break;
             case "n":

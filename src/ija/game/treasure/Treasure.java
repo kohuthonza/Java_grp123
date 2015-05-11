@@ -5,9 +5,11 @@ package ija.game.treasure;
 import java.io.Serializable;
 
 /**
- * 13. 3. 2015
- * xkohut08 
- * @author Jan Kohut
+ * Implementuje poklad a operace nad nim
+ * 
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class Treasure implements Serializable{
     
@@ -17,15 +19,18 @@ public class Treasure implements Serializable{
     int code;
     
     /**
-     * Konstruktor, nastavi hodnotu daneho pokladu
-     * @param code 
+     * Vytvori poklad o zadane hodnote
+     * @param code Hodnota
      */
     private Treasure (int code){
         this.code = code;
     }
     
-    
-   
+    /**
+     *Hash code je hodnota pokladu
+     * 
+     * @return Hash code
+     */
     @Override
     public int hashCode(){
         return this.code;
@@ -33,10 +38,10 @@ public class Treasure implements Serializable{
     
     
     /**
-     * Pokud je objekt srovnavanym objektem objek typu Treasure, srovnaji 
-     * se jejich hodnoty
-     * @param obj
-     * @return 
+     * Pro srovnavani se pouzije hodnota pokladu
+     * 
+     * @param obj 
+     * @return True, rovnaji se, jinak false
      */
     @Override
     public boolean equals(Object obj){
@@ -49,7 +54,7 @@ public class Treasure implements Serializable{
     }
     
     /**
-     * Vytvori pole objektu
+     * Vytvori pole pokladu o velikosti 24
      */
     public static void createSet (){
         Treasure.treasure = new Treasure[Treasure.n_treasure];
@@ -70,8 +75,10 @@ public class Treasure implements Serializable{
     /**
      * Vrati null pokud pristupujeme mimo rozsah, nebo jsme jeste nevytvorili 
      * poklady
-     * @param code
-     * @return 
+     * 
+     * @param code Hodnota pokladu
+     * @return null pokud pristupujeme mimo rozsah, nebo jsme jeste nevytvorili 
+     * poklady
      */
     
     public static Treasure getTreasure (int code){

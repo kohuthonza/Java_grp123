@@ -4,18 +4,22 @@ package ija.game.board;
 import java.io.Serializable;
 
 /**
- *
- * @author Jan
+ * Implemetuje policko na hraci desce a operace nad nim
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class MazeField implements Serializable{
     
     private final int row;
     private final int col;
-    private MazeCard mc;
+    private MazeCard mC;
     
-    
- 
-
+    /**
+     * Hash code se spocita na zaklada pozice policka 
+     * 
+     * @return Hash code
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -23,7 +27,12 @@ public class MazeField implements Serializable{
         hash = 73 * hash + this.col;
         return hash;
     }
-
+    /**
+     * Policko se porovnava na zaklade pozice
+     * 
+     * @param obj
+     * @return True, pokud se rovnaji, jinak false
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -39,29 +48,53 @@ public class MazeField implements Serializable{
         return this.col == other.col;
     }
     
+    /**
+     * Vytvori policko o zadanem radku a sloupci
+     * 
+     * @param row Radek
+     * @param col Sloupec
+     */
     public MazeField(int row, int col){
         
         this.row = row;
         this.col = col;
-        this.mc = null;
+        this.mC = null;
     
     }
     
-    public int row(){
+    /**
+     * Vrati radek pole
+     * 
+     * @return Radek pole
+     */
+    public int getRow(){
         return this.row; 
     }
-    
-    public int col(){
+    /**
+     * Vrati sloupec pole
+     * 
+     * @return Sloupec pole 
+     */
+    public int getCol(){
         return this.col; 
     }
-    
+    /**
+     * Vrati kamen na danem poli
+     * 
+     * @return Kamen
+     */
     public MazeCard getCard(){
         
-        return this.mc;
+        return this.mC;
     }
     
+    /**
+     * Nastavi kamen na dane pole 
+     * 
+     * @param c Kamen
+     */
     public void putCard(MazeCard c){
-        this.mc = c;
+        this.mC = c;
     }
     
 }

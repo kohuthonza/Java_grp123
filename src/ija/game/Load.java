@@ -10,15 +10,27 @@ import java.io.*;
 
 
 /**
- *
- * @author Jan
+ * Implementuje JFileChooser pro vyber hry, ktera se ma nahrat
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class Load extends JFrame{
     
-    public static File choose_file(){
+    private static final File dir = new File(System.getProperty("user.home")+"/labyrint/saved_games");
+    
+    /**
+     * 
+     * Spusti okno pro vyber souboru
+     * 
+     * @return Vybrany soubor
+     */
+    public static File chooseFile(){
+        
+        Load.dir.mkdirs();
         
         JFileChooser chooser = new JFileChooser();
-        
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")+"/labyrint/saved_games"));
         
         
         int filename = chooser.showOpenDialog(null);

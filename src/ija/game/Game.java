@@ -1,5 +1,4 @@
 
-
 package ija.game;
 
 import java.util.ArrayList;
@@ -13,62 +12,65 @@ import java.util.Collections;
 
 
 /**
- * Hlavni trida, jejiz instanci je hra
+ * Hlavni trida
  * 
+ * Implementuje metody pro operace s hraci na zaklade balicku karet 
+ * a hraci desky
  * 
- * @author Jan
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class Game implements Serializable {
     
     
     private ArrayList<Player> players;
-    private ArrayList<TreasureCard> r_cards;
-    private ArrayList<Integer> players_figurine;
+    private ArrayList<TreasureCard> rCards;
+    private ArrayList<Integer> playersFigurine;
     private final MazeBoard board;
     private final CardPack pack;
-    private final int n_players;
-    private int actual_player;
-    private boolean end_of_game;
-    private boolean stop_move;
-    private int n_move;
-    private boolean is_shift;
-    private int n_cards;
+    private final int nPlayers;
+    private int actualPlayer;
+    private boolean endOfGame;
+    private boolean stopMove;
+    private int nMove;
+    private boolean isShift;
+    private int nCards;
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
      * provadi se take inicializace tzn. pocatecni rozlozeni hracu a pocatecni
      * rozlozeni hledanych pokladu. 
      * 
-     * @param n_players Pocet hracu (2 nebo 4)
-     * @param size_of_board Rozloha hraci desky (nejmene 3)
-     * @param n_cards Pocet karet v balicku
+     * @param nPlayers Pocet hracu (2 nebo 4)
+     * @param sizeOfBoard Rozloha hraci desky (nejmene 3)
+     * @param nCards Pocet karet v balicku
      * @throws java.io.IOException
      * 
      */
-    public Game(int n_players, int size_of_board, int n_cards) throws IOException{
+    public Game(int nPlayers, int sizeOfBoard, int nCards) throws IOException{
         
         //Vytvorime hraci desku
-        this.board = MazeBoard.createMazeBoard(size_of_board);
+        this.board = MazeBoard.createMazeBoard(sizeOfBoard);
         //Pocet hracu
-        this.n_players = n_players;
+        this.nPlayers = nPlayers;
         //Hrac na tahu
-        this.actual_player = -1;
+        this.actualPlayer = -1;
         //List hracu
         this.players = new ArrayList<Player>();
         //List nahodne vybranych karet
-        this.r_cards = new ArrayList<TreasureCard>();
+        this.rCards = new ArrayList<TreasureCard>();
         //List figurek
-        this.players_figurine = new ArrayList<Integer>();
+        this.playersFigurine = new ArrayList<Integer>();
         //Pocet tahu, ktere byli provedeny
-        this.n_move = 0;
+        this.nMove = 0;
         //Pocet karet v balicku jednoho hrace
-        this.n_cards = n_cards;
+        this.nCards = nCards;
         //Indikator konce hry
-        this.end_of_game = false;
+        this.endOfGame = false;
         //Indikator zastaveni pohybu
-        this.stop_move = false;
+        this.stopMove = false;
         //Indikator posunu hracu (nezavisle na ceste)
-        this.is_shift = false;
+        this.isShift = false;
         
         
         int i;
@@ -81,48 +83,48 @@ public class Game implements Serializable {
         
         
         //Pocatecni inicializace hracu (postaveni na desce)
-        if (n_players == 2){
+        if (nPlayers == 2){
             this.players.add(new Player(1, 1));
-            this.players.add(new Player(this.board.get_size(), this.board.get_size()));
+            this.players.add(new Player(this.board.getSize(), this.board.getSize()));
         }
         
-        if (n_players == 3){
+        if (nPlayers == 3){
             this.players.add(new Player(1, 1));
-            this.players.add(new Player(this.board.get_size(), 1));
-            this.players.add(new Player(1, this.board.get_size()));
+            this.players.add(new Player(this.board.getSize(), 1));
+            this.players.add(new Player(1, this.board.getSize()));
         }
         
-        if (n_players == 4){
+        if (nPlayers == 4){
              this.players.add(new Player(1, 1));
-            this.players.add(new Player(this.board.get_size(), 1));
-            this.players.add(new Player(1, this.board.get_size()));
-            this.players.add(new Player(this.board.get_size(), this.board.get_size()));
+            this.players.add(new Player(this.board.getSize(), 1));
+            this.players.add(new Player(1, this.board.getSize()));
+            this.players.add(new Player(this.board.getSize(), this.board.getSize()));
         }
         
         //Vytvoreni a zamichani balicku
-        this.pack = new CardPack(this.n_cards,24);
+        this.pack = new CardPack(this.nCards);
         this.pack.shuffle();
         
         //Kazdy hrac si vytahne jednu kartu s balicku
-        for (i = 0; i < n_players; ++i){
-            this.players.get(i).set_card(this.pack.popCard());
+        for (i = 0; i < nPlayers; ++i){
+            this.players.get(i).setCard(this.pack.popCard());
         }
         //Projdeme zbytek balicku a nahodne vybereme poklady, ktere umistime navic na desku
-        for (i = 0; i < n_players; ++i){
-            this.add_r_card();
+        for (i = 0; i < nPlayers; ++i){
+            this.addRandomCard();
         }
         //Nahodne rideli hracum figurky
-        for (i = 1; i <= n_players; ++i){
-            this.players_figurine.add(i);
+        for (i = 1; i <= nPlayers; ++i){
+            this.playersFigurine.add(i);
         }
-        Collections.shuffle(this.players_figurine);
+        Collections.shuffle(this.playersFigurine);
         
         //Pripnuti pokladu na pole (MazeCard)
         for (Player tmp: this.players){
-            this.stick_treasure(tmp.get_card().get_treasure());
+            this.stickTreasure(tmp.getCard().getTreasure());
         }
-        for (TreasureCard tmp: this.r_cards){
-            this.stick_treasure(tmp.get_treasure());
+        for (TreasureCard tmp: this.rCards){
+            this.stickTreasure(tmp.getTreasure());
         }
         
     }
@@ -133,8 +135,8 @@ public class Game implements Serializable {
      * @return True pokud nastal konec hry, jinak false 
      */
     
-    public boolean check_end_of_game(){
-        return this.end_of_game; 
+    public boolean checkEndOfGame(){
+        return this.endOfGame; 
     }
     /**
      * Vraci hrace na tahu
@@ -142,8 +144,8 @@ public class Game implements Serializable {
      * @return Hrac na tahu
      */
     
-    public Player get_actual_player(){
-        return this.players.get(this.actual_player);
+    public Player getActualPlayer(){
+        return this.players.get(this.actualPlayer);
     }
     /**
      * Kontroluje pocatecni stav hry 
@@ -151,8 +153,8 @@ public class Game implements Serializable {
      * @return True pokud je hra v pocatecnim stavu, jinak false
      */
     
-    public boolean get_initial_condition(){
-        return this.actual_player == -1;
+    public boolean getInitialCondition(){
+        return this.actualPlayer == -1;
     }
     
     /**
@@ -161,8 +163,8 @@ public class Game implements Serializable {
      * @return Cislo figurky pro hrace na tahu
      */
     
-    public int get_actual_figurine(){
-        return this.players_figurine.get(this.actual_player);
+    public int getActualFigurine(){
+        return this.playersFigurine.get(this.actualPlayer);
     }
     
     /**
@@ -171,24 +173,24 @@ public class Game implements Serializable {
      * @throws IOException 
      */
     
-    public void undo_save() throws IOException{
-        this.n_move = this.n_move + 1;
+    public void undoSave() throws IOException{
+        this.nMove = this.nMove + 1;
         File file;
         File dir;
         dir = new File(System.getProperty("user.home")+"/labyrint/undo");
         dir.mkdirs();
-        file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.n_move));
+        file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.nMove));
         SaveLoad.serialize(this, file);
     }
     
     /**
      * Nastavi pocet tahu hry
      * 
-     * @param n_move Pocet tahu hry
+     * @param nMove Pocet tahu hry
      */
     
-    public void set_n_move(int n_move){
-        this.n_move = n_move;
+    public void setNMove(int nMove){
+        this.nMove = nMove;
     }
     
     /**
@@ -200,18 +202,18 @@ public class Game implements Serializable {
      * @throws ClassNotFoundException 
      */
     
-    public Game undo_game() throws IOException, ClassNotFoundException{
+    public Game undoGame() throws IOException, ClassNotFoundException{
         
-        if (!(this.n_move < 1)){
+        if (!(this.nMove < 1)){
             
             Game undo; 
             File file;
-            file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.n_move));
+            file = new File(System.getProperty("user.home")+"/labyrint/undo/undo"+Integer.toString(this.nMove));
             undo = (Game)SaveLoad.deserialize(file);
             //Pocatecni stav hry zustane uchovan po dobu behu cele hry
-            if (this.n_move > 1){
-                SaveLoad.delete_game(file);
-                undo.set_n_move(this.n_move - 1);
+            if (this.nMove > 1){
+                SaveLoad.deleteGame(file);
+                undo.setNMove(this.nMove - 1);
             }
             return undo;
         }
@@ -224,7 +226,7 @@ public class Game implements Serializable {
      * @return List hracu
      */
     
-    public ArrayList get_players(){
+    public ArrayList getPlayers(){
         return this.players;
     }
     
@@ -235,15 +237,15 @@ public class Game implements Serializable {
      * @return List figurek
      */
     
-    public ArrayList get_players_figurine(){
-        return this.players_figurine;
+    public ArrayList getPlayersFigurine(){
+        return this.playersFigurine;
     }
     /**
      * Vraci poradove cislo hrace na tahu 
      * @return Poradove cislo
      */
-    public int get_actual_player_n(){
-        return this.actual_player + 1;
+    public int getActualPlayerN(){
+        return this.actualPlayer + 1;
     }
     
     /**
@@ -253,31 +255,31 @@ public class Game implements Serializable {
      * 
      * @param player Hrac
      */
-    private void check_position(Player player){
+    private void checkPosition(Player player){
        
-        MazeCard tmp_MazeCard;
+        MazeCard tmpMazeCard;
         
-        tmp_MazeCard = this.board.get(player.get_y(), player.get_x()).getCard();
+        tmpMazeCard = this.board.getMazeField(player.getY(), player.getX()).getCard();
         
-        if (tmp_MazeCard.get_treasure() == player.get_card().get_treasure()){
-            tmp_MazeCard.set_treasure(null);
+        if (tmpMazeCard.getTreasure() == player.getCard().getTreasure()){
+            tmpMazeCard.setTreasure(null);
             //Pokud hrac vezme poklad, zastavi se mu pohyb
-            this.stop_move = true;
-            player.set_picked_cards(player.get_picked_cards() + 1);
-            if (player.get_picked_cards() == this.n_cards)
-                this.end_of_game = true;
+            this.stopMove = true;
+            player.setPickedCards(player.getPickedCards() + 1);
+            if (player.getPickedCards() == this.nCards)
+                this.endOfGame = true;
             else{
-                player.set_card(this.pack.popCard());
-                if (this.n_players == 2 && this.pack.size() < 2)
+                player.setCard(this.pack.popCard());
+                if (this.nPlayers == 2 && this.pack.size() < 2)
                     return;
-                if (this.n_players == 3 && this.pack.size() < 3)
+                if (this.nPlayers == 3 && this.pack.size() < 3)
                     return;
-                if (this.n_players == 4 && this.pack.size() < 4)
+                if (this.nPlayers == 4 && this.pack.size() < 4)
                     return;
-                if (this.r_cards.contains(player.get_card()))
-                    this.stick_treasure(this.add_r_card().get_treasure());
+                if (this.rCards.contains(player.getCard()))
+                    this.stickTreasure(this.addRandomCard().getTreasure());
                 else
-                    this.stick_treasure(player.get_card().get_treasure());  
+                    this.stickTreasure(player.getCard().getTreasure());  
             }
         }   
     }
@@ -288,30 +290,30 @@ public class Game implements Serializable {
      * @param treasure Poklad
      */
     
-    private void stick_treasure(Treasure treasure){
+    private void stickTreasure(Treasure treasure){
         
         Random ran;
-        int tmp_x;
-        int tmp_y; 
+        int tmpX;
+        int tmpY; 
         int i;
         boolean player;
          
         ran = new Random();
          
         while (true){
-            tmp_x = ran.nextInt(this.board.get_size()) + 1;
-            tmp_y = ran.nextInt(this.board.get_size()) + 1;
+            tmpX = ran.nextInt(this.board.getSize()) + 1;
+            tmpY = ran.nextInt(this.board.getSize()) + 1;
          
-            if (this.board.get(tmp_y, tmp_x).getCard().get_treasure() == null){
+            if (this.board.getMazeField(tmpY, tmpX).getCard().getTreasure() == null){
                 player = false;
-                for(i = 0; i < this.n_players; ++i){
-                    if (this.players.get(i).get_x() == tmp_x &&
-                        this.players.get(i).get_y() == tmp_y) {
+                for(i = 0; i < this.nPlayers; ++i){
+                    if (this.players.get(i).getX() == tmpX &&
+                        this.players.get(i).getY() == tmpY) {
                         player = true;
                     }
                 }
                 if (!player){
-                    this.board.get(tmp_y, tmp_x).getCard().set_treasure(treasure);
+                    this.board.getMazeField(tmpY, tmpX).getCard().setTreasure(treasure);
                     break;
                 }
             }
@@ -323,14 +325,14 @@ public class Game implements Serializable {
      * 
      * @return Karta
      */
-    private TreasureCard add_r_card(){
+    private TreasureCard addRandomCard(){
         
         while (true){
-            TreasureCard tmp_card = this.pack.randomCard();
+            TreasureCard tmpCard = this.pack.randomCard();
             
-            if (!this.r_cards.contains(tmp_card)){
-                this.r_cards.add(tmp_card);
-                return tmp_card;
+            if (!this.rCards.contains(tmpCard)){
+                this.rCards.add(tmpCard);
+                return tmpCard;
                 }
             } 
     }
@@ -348,19 +350,19 @@ public class Game implements Serializable {
      * Prepina na dalsiho hrace v poradi.
      * 
      */
-    public void next_player() throws IOException{
+    public void nextPlayer() throws IOException{
         
-        this.stop_move = false;
-        this.is_shift = false;
-        this.board.set_is_shift(false);
+        this.stopMove = false;
+        this.isShift = false;
+        this.board.setIsShift(false);
         
         //Cykleni hracu
-        if (this.actual_player + 1 == n_players)
-            this.actual_player = 0;
+        if (this.actualPlayer + 1 == nPlayers)
+            this.actualPlayer = 0;
         else
-            this.actual_player = this.actual_player + 1;
+            this.actualPlayer = this.actualPlayer + 1;
     
-        this.undo_save();
+        this.undoSave();
     }
     
     /**
@@ -371,45 +373,45 @@ public class Game implements Serializable {
      * 
      * @param mf Pole, na ktere se vklada volny kamen
      */
-    public void shift_player(MazeField mf){
+    public void shiftPlayer(MazeField mf){
         
         //Posun se provede pouze tehdy, byla-li posunuta hraci deska (pokud 
         //uz se posun hracu v danem tahu provedl, tak se podruhe neprovede)
-        if (this.board.get_is_shift() && !this.is_shift){    
+        if (this.board.getIsShift() && !this.isShift){    
         
-            this.is_shift = true;
+            this.isShift = true;
             
             int n;
             int r;
             int c;
         
-            r = mf.row();
-            c = mf.col();
+            r = mf.getRow();
+            c = mf.getCol();
         
-            if (((c % 2) == 0) && (r == 1 || r == this.board.get_size())){
+            if (((c % 2) == 0) && (r == 1 || r == this.board.getSize())){
             
-                for (n = 0; n < this.n_players; ++n){
-                    if (this.players.get(n).get_x() == c){
+                for (n = 0; n < this.nPlayers; ++n){
+                    if (this.players.get(n).getX() == c){
                         if (r == 1){
-                            this.shift_down(this.players.get(n));
+                            this.shiftDown(this.players.get(n));
                         }
-                        if (r == this.board.get_size()){
-                            this.shift_up(this.players.get(n));
+                        if (r == this.board.getSize()){
+                            this.shiftUp(this.players.get(n));
                         }
                     }
                 }
             }    
         
         
-            if (((r % 2) == 0)&&(c == 1 || c == this.board.get_size())){
+            if (((r % 2) == 0)&&(c == 1 || c == this.board.getSize())){
             
-                for (n = 0; n < this.n_players; ++n){
-                    if (this.players.get(n).get_y() == r){
+                for (n = 0; n < this.nPlayers; ++n){
+                    if (this.players.get(n).getY() == r){
                         if (c == 1){
-                            this.shift_right(this.players.get(n));
+                            this.shiftRight(this.players.get(n));
                         }
-                        if (c == this.board.get_size()){
-                            this.shift_left(this.players.get(n));
+                        if (c == this.board.getSize()){
+                            this.shiftLeft(this.players.get(n));
                         }
                     }
                 }
@@ -423,48 +425,48 @@ public class Game implements Serializable {
      * Posune hrace doprava
      * @param player 
      */
-    private void shift_right(Player player){
+    private void shiftRight(Player player){
         
-        if ((player.get_x() + 1) > this.board.get_size())
-            player.set_x(1);
+        if ((player.getX() + 1) > this.board.getSize())
+            player.setX(1);
         else
-            player.set_x(player.get_x() + 1);
+            player.setX(player.getX() + 1);
         
     }    
     /**
      * Posune hrace doleva
      * @param player 
      */
-    private void shift_left(Player player){
+    private void shiftLeft(Player player){
         
-        if ((player.get_x() - 1) < 1)
-            player.set_x(this.board.get_size());
+        if ((player.getX() - 1) < 1)
+            player.setX(this.board.getSize());
         else
-            player.set_x(player.get_x() - 1);
+            player.setX(player.getX() - 1);
         
     } 
     /**
      * Posune hrace nahoru
      * @param player 
      */
-    private void shift_up(Player player){
+    private void shiftUp(Player player){
         
-        if ((player.get_y() - 1) < 1)
-            player.set_y(this.board.get_size());
+        if ((player.getY() - 1) < 1)
+            player.setY(this.board.getSize());
         else
-            player.set_y(player.get_y() - 1);
+            player.setY(player.getY() - 1);
         
     } 
     /**
      * Posune hrace dolu
      * @param player 
      */
-    private void shift_down(Player player){
+    private void shiftDown(Player player){
         
-        if ((player.get_y() + 1) > this.board.get_size())
-            player.set_y(1);
+        if ((player.getY() + 1) > this.board.getSize())
+            player.setY(1);
         else
-            player.set_y(player.get_y() + 1);
+            player.setY(player.getY() + 1);
         
     } 
     
@@ -477,20 +479,20 @@ public class Game implements Serializable {
      */
     public void move_player(char direction){
         
-        if (this.board.get_is_shift() && !this.stop_move){
+        if (this.board.getIsShift() && !this.stopMove){
             
             switch (direction){
                 case 'R':
-                    move_right(this.players.get(this.actual_player));
+                    moveRight(this.players.get(this.actualPlayer));
                     break;
                 case 'L':
-                    move_left(this.players.get(this.actual_player));
+                    moveLeft(this.players.get(this.actualPlayer));
                     break;
                 case 'U':
-                    move_up(this.players.get(this.actual_player));
+                    moveUp(this.players.get(this.actualPlayer));
                     break;
                 case 'D':
-                    move_down(this.players.get(this.actual_player));
+                    moveDown(this.players.get(this.actualPlayer));
                     break;
             }
         }      
@@ -501,19 +503,19 @@ public class Game implements Serializable {
      * Posune hrace doprava
      * @param player 
      */
-    private void move_right(Player player){
+    private void moveRight(Player player){
          
-        int tmp_x;
-        int tmp_y;
+        int tmpX;
+        int tmpY;
         
-        tmp_x = player.get_x();
-        tmp_y = player.get_y(); 
+        tmpX = player.getX();
+        tmpY = player.getY(); 
         
-        if ((tmp_x + 1) <= this.board.get_size()){
-            if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.RIGHT)){
-                if (this.board.get(tmp_y, tmp_x + 1).getCard().canGo(MazeCard.CANGO.LEFT)){
-                    player.set_x(tmp_x + 1);
-                    this.check_position(player);
+        if ((tmpX + 1) <= this.board.getSize()){
+            if (this.board.getMazeField(tmpY, tmpX).getCard().canGo(MazeCard.CANGO.RIGHT)){
+                if (this.board.getMazeField(tmpY, tmpX + 1).getCard().canGo(MazeCard.CANGO.LEFT)){
+                    player.setX(tmpX + 1);
+                    this.checkPosition(player);
                 }
             }
         }   
@@ -522,19 +524,19 @@ public class Game implements Serializable {
      * Posune hrace doleva
      * @param player 
      */
-    private void move_left(Player player){
+    private void moveLeft(Player player){
         
-        int tmp_x;
-        int tmp_y;
+        int tmpX;
+        int tmpY;
         
-        tmp_x = player.get_x();
-        tmp_y = player.get_y();
+        tmpX = player.getX();
+        tmpY = player.getY();
         
-        if ((tmp_x - 1) >= 1){
-            if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.LEFT)){
-                if (this.board.get(tmp_y, tmp_x - 1).getCard().canGo(MazeCard.CANGO.RIGHT)){
-                    player.set_x(tmp_x - 1);
-                    this.check_position(player);
+        if ((tmpX - 1) >= 1){
+            if (this.board.getMazeField(tmpY, tmpX).getCard().canGo(MazeCard.CANGO.LEFT)){
+                if (this.board.getMazeField(tmpY, tmpX - 1).getCard().canGo(MazeCard.CANGO.RIGHT)){
+                    player.setX(tmpX - 1);
+                    this.checkPosition(player);
                 }
             }
         }
@@ -543,19 +545,19 @@ public class Game implements Serializable {
      * Posune hrace nahoru
      * @param player 
      */
-    private void move_up(Player player){
+    private void moveUp(Player player){
         
-        int tmp_x;
-        int tmp_y;
+        int tmpX;
+        int tmpY;
         
-        tmp_x = player.get_x();
-        tmp_y = player.get_y();
+        tmpX = player.getX();
+        tmpY = player.getY();
         
-        if ((tmp_y - 1) >= 1){
-            if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.UP)){
-                if (this.board.get(tmp_y - 1, tmp_x).getCard().canGo(MazeCard.CANGO.DOWN)){
-                    player.set_y(tmp_y - 1);
-                    this.check_position(player);
+        if ((tmpY - 1) >= 1){
+            if (this.board.getMazeField(tmpY, tmpX).getCard().canGo(MazeCard.CANGO.UP)){
+                if (this.board.getMazeField(tmpY - 1, tmpX).getCard().canGo(MazeCard.CANGO.DOWN)){
+                    player.setY(tmpY - 1);
+                    this.checkPosition(player);
                 }
             }
         }
@@ -564,19 +566,19 @@ public class Game implements Serializable {
      * Posune hrace dolu
      * @param player 
      */
-    private void move_down(Player player){
+    private void moveDown(Player player){
         
-        int tmp_x;
-        int tmp_y;
+        int tmpX;
+        int tmpY;
         
-        tmp_x = player.get_x();
-        tmp_y = player.get_y();
+        tmpX = player.getX();
+        tmpY = player.getY();
         
-        if ((tmp_y + 1) <= this.board.get_size()){
-            if (this.board.get(tmp_y, tmp_x).getCard().canGo(MazeCard.CANGO.DOWN)){
-                if (this.board.get(tmp_y + 1, tmp_x).getCard().canGo(MazeCard.CANGO.UP)){
-                    player.set_y(tmp_y + 1);
-                    this.check_position(player);
+        if ((tmpY + 1) <= this.board.getSize()){
+            if (this.board.getMazeField(tmpY, tmpX).getCard().canGo(MazeCard.CANGO.DOWN)){
+                if (this.board.getMazeField(tmpY + 1, tmpX).getCard().canGo(MazeCard.CANGO.UP)){
+                    player.setY(tmpY + 1);
+                    this.checkPosition(player);
                 }
             }
         }

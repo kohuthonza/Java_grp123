@@ -8,15 +8,25 @@ import javax.swing.*;
 import java.io.*;
 /**
  *
- * @author Jan
+ * Implementuje JFileChooser pro ulozeni hry
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class Save extends JFrame{
     
-    
-    public static File create_file(){
+    private static final File dir = new File(System.getProperty("user.home")+"/labyrint/saved_games");
+    /**
+     * Spusti okno, ktere umozni vytvoreni souboru na vybrane adrese
+     * 
+     * @return Vytvoreny soubor
+     */
+    public static File createFile(){
+        
+        Save.dir.mkdirs();
         
         JFileChooser chooser = new JFileChooser();
-        
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")+"/labyrint/saved_games"));
         
         
         int filename = chooser.showSaveDialog(null);
