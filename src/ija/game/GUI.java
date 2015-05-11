@@ -20,16 +20,17 @@ public class GUI extends JFrame implements KeyListener{
     static JButton button;
 
     
-    public GUI(int numPlayers, int gameSize, Game load_game) throws IOException{
+    public GUI(int numPlayers, int gameSize, int packSize, Game load_game) throws IOException{
        
         if (load_game != null){
             game = load_game;
             if (game.get_actual_player_n() == -1)
                 game.next_player();
+            
         }
         else{
             try{
-                game = new Game(numPlayers, gameSize);
+                game = new Game(numPlayers, gameSize, packSize);
                 game.next_player();
             } catch(IOException e){
                 System.out.printf("hra nebyla vytvorena v GUI");
@@ -50,8 +51,8 @@ public class GUI extends JFrame implements KeyListener{
         setFocusTraversalKeysEnabled(false);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize((game.getSizeOfGame() * 75 > 400)? game.getSizeOfGame() * 75 : 400, game.getSizeOfGame() * 75 + 146);
-        //pack();
+        setSize((gameSize * 75 > 400)? gameSize * 75 : 400, gameSize * 75 + 146);
+
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");
         setResizable(true);
@@ -80,6 +81,7 @@ public class GUI extends JFrame implements KeyListener{
                 setVisible(false);
             }
             topPanel.updatePanel();
+            gamePanel.update(game);
             System.out.println("Next player");          
                 
         }
@@ -87,24 +89,28 @@ public class GUI extends JFrame implements KeyListener{
             System.out.printf("figurka %s moves DOWN from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('D');
             gamePanel.update(game);
+            topPanel.updatePanel();
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP) {
             System.out.printf("figurka %s moves UP from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('U');
             gamePanel.update(game);
+            topPanel.updatePanel();
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
             System.out.printf("figurka %s moves LEFT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('L');
-            gamePanel.update(game);            
+            gamePanel.update(game);
+            topPanel.updatePanel();
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
             System.out.printf("figurka %s moves RIGHT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
             game.move_player('R');
-            gamePanel.update(game);            
+            gamePanel.update(game);
+            topPanel.updatePanel();
             System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
         }
     }
