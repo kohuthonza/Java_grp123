@@ -123,8 +123,10 @@ public class Game implements Serializable {
         for (Player tmp: this.players){
             this.stickTreasure(tmp.getCard().getTreasure());
         }
-        for (TreasureCard tmp: this.rCards){
-            this.stickTreasure(tmp.getTreasure());
+        if (this.rCards.size() > 0){
+            for (TreasureCard tmp: this.rCards){
+                this.stickTreasure(tmp.getTreasure());
+            }
         }
         
     }
@@ -327,14 +329,18 @@ public class Game implements Serializable {
      */
     private TreasureCard addRandomCard(){
         
-        while (true){
-            TreasureCard tmpCard = this.pack.randomCard();
+        if (this.pack.size() > 0){
+            while (true){
+                TreasureCard tmpCard = this.pack.randomCard();
             
-            if (!this.rCards.contains(tmpCard)){
-                this.rCards.add(tmpCard);
-                return tmpCard;
-                }
-            } 
+                if (!this.rCards.contains(tmpCard)){
+                    this.rCards.add(tmpCard);
+                    return tmpCard;
+                    }
+            }
+        }
+        else
+            return null;
     }
     
     /**
