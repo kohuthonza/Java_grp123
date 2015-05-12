@@ -140,7 +140,18 @@ public class Game implements Serializable {
     public boolean checkEndOfGame(){
         return this.endOfGame; 
     }
+
     /**
+     * Vraci pocet karet s poklady v aktualni hre
+     * 
+     * @return pocet karet
+     */
+    
+    public int getCardsNumber(){
+        return nCards;
+    }
+    
+     /**
      * Vraci hrace na tahu
      * 
      * @return Hrac na tahu

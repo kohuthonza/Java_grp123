@@ -56,7 +56,7 @@ public class TopPanel extends javax.swing.JPanel {
             jLayeredPane1.add(treasureCard, new Integer(2));
         }
         
-        jLabel5.setText("Pocet sebranych karet: " + Integer.toString(game.getActualPlayer().getPickedCards()));
+        jLabel5.setText("Pocet sebranych karet: " + Integer.toString(game.getActualPlayer().getPickedCards()) + "/" + Integer.toString(game.getCardsNumber()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
