@@ -349,7 +349,7 @@ public class Game implements Serializable {
      * @return Hraci deska
      */
     public MazeBoard getMazeBoard() {
-        return board;
+        return this.board;
     }
     
     /**
