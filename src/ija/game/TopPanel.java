@@ -41,6 +41,7 @@ public class TopPanel extends javax.swing.JPanel {
         
         icon = new ImageIcon(this.getClass().getResource("images/mazes/"+game.getMazeBoard().getFreeCard().getType()+"/"+game.getMazeBoard().getFreeCard().getRotation()+".png"));
         JLabel labelCard = new JLabel(); 
+        labelCard.setSize(icon.getIconHeight(),icon.getIconWidth());
         labelCard.setIcon(icon);
         
         jLayeredPane1.add(labelCard, new Integer(1));
@@ -48,7 +49,7 @@ public class TopPanel extends javax.swing.JPanel {
         if(game.getMazeBoard().getFreeCard().getTreasure() != null){
             JLabel treasureCard = new JLabel();
             icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.getMazeBoard().getFreeCard().getTreasure().get_type()+1)+".png"));
-            
+            treasureCard.setSize(icon.getIconHeight(),icon.getIconWidth());
             treasureCard.setIcon(icon);
             jLayeredPane1.add(treasureCard, new Integer(2));
         }
