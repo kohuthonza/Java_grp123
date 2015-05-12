@@ -102,7 +102,7 @@ public class Game implements Serializable {
         }
         
         //Vytvoreni a zamichani balicku
-        this.pack = new CardPack(this.nCards);
+        this.pack = new CardPack(this.nCards*nPlayers);
         this.pack.shuffle();
         
         //Kazdy hrac si vytahne jednu kartu s balicku
