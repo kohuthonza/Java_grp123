@@ -198,6 +198,7 @@ public class TopPanel extends javax.swing.JPanel {
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        GUI.updateGUI();
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jLayeredPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPane1MouseClicked

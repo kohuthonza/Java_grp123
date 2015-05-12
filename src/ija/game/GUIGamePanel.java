@@ -33,8 +33,8 @@ public class GUIGamePanel extends JPanel {
     }
     public void clear(){
         removeAll();
-        //revalidate();
-        //repaint();    
+        revalidate();
+        repaint();    
     }
     
     public void update(Game game){
@@ -92,6 +92,7 @@ public class GUIGamePanel extends JPanel {
                 add(policko);
             }            
         }
+        
         addMouseListener(new MouseAdapter() {
          @Override
          public void mousePressed(MouseEvent e) {
@@ -108,7 +109,7 @@ public class GUIGamePanel extends JPanel {
             game.getMazeBoard().shift(ptrField);
             game.shiftPlayer(ptrField);
             
-            update(game);
+            GUI.updateGUI();
          }
       });
     }
