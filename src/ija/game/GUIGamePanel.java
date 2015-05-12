@@ -33,16 +33,18 @@ public class GUIGamePanel extends JPanel {
     }
     public void clear(){
         removeAll();
-        revalidate();
-        repaint();    
+        //revalidate();
+        //repaint();    
     }
     
     public void update(Game game){
         clear();
-        initialize(game);        
+        initialize(game); 
+        revalidate();
+        repaint();
     }
     
-    public void initialize(final Game game){
+    public void initialize(Game game){
         int size = game.getMazeBoard().getSize();
         for(int i = 1; i <= size; i++){
             for(int j = 1; j <= size; j++){
@@ -51,7 +53,8 @@ public class GUIGamePanel extends JPanel {
                 JLayeredPaneEdited policko = new JLayeredPaneEdited();
                 policko.x = i;
                 policko.y = j;
-                              
+                
+                        
                 JLabel layerCard = new JLabel();
                 ImageIcon icon;
                 

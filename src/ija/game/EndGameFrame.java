@@ -18,6 +18,7 @@ public class EndGameFrame extends javax.swing.JFrame {
     public EndGameFrame(Game game) {
         initComponents();
         int size = game.getPlayers().size();
+        setLocationRelativeTo(null);
         
         jLabel5.setText("Hrac cislo "+ Integer.toString(game.getActualPlayerN()) +" zvitezil!");
         
