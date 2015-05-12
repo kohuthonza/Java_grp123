@@ -97,15 +97,17 @@ public class GUIGamePanel extends JPanel {
          @Override
          public void mousePressed(MouseEvent e) {
             if (!getComponentAt(e.getPoint()).getClass().equals( JLayeredPaneEdited.class)){
-               System.out.println(String.valueOf(getComponentAt(e.getPoint()).getClass()));
+               //System.out.println(String.valueOf(getComponentAt(e.getPoint()).getClass()));
                 return;
             }
             JLayeredPaneEdited ptr = (JLayeredPaneEdited) getComponentAt(e.getPoint());
             if (ptr == null) {
                return;
             }
-            System.out.printf("kliknuto na pole: %d %d\n", ptr.x, ptr.y);
+            System.out.printf("shift - kliknuto na pole: %d %d\n", ptr.x, ptr.y);
+            
             MazeField ptrField = game.getMazeBoard().getMazeField(ptr.x, ptr.y);
+            
             game.getMazeBoard().shift(ptrField);
             game.shiftPlayer(ptrField);
             

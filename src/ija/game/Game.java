@@ -216,7 +216,7 @@ public class Game implements Serializable {
      */
     
     public Game undoGame() throws IOException, ClassNotFoundException{
-        
+        System.out.print("volam undo\n");
         if (!(this.nMove < 1)){
             
             Game undo; 
@@ -391,11 +391,11 @@ public class Game implements Serializable {
      * @param mf Pole, na ktere se vklada volny kamen
      */
     public void shiftPlayer(MazeField mf){
-        
+        System.out.print("zavolana fce shiftPlayer(MazeField mf)\n");
         //Posun se provede pouze tehdy, byla-li posunuta hraci deska (pokud 
         //uz se posun hracu v danem tahu provedl, tak se podruhe neprovede)
         if (this.board.getIsShift() && !this.isShift){    
-        
+            System.out.print("dostal jsem se pres if\n");
             this.isShift = true;
             
             int n;
@@ -406,7 +406,7 @@ public class Game implements Serializable {
             c = mf.getCol();
         
             if (((c % 2) == 0) && (r == 1 || r == this.board.getSize())){
-            
+                System.out.print("shift je mozne provest\n");
                 for (n = 0; n < this.nPlayers; ++n){
                     if (this.players.get(n).getX() == c){
                         if (r == 1){
@@ -421,7 +421,7 @@ public class Game implements Serializable {
         
         
             if (((r % 2) == 0)&&(c == 1 || c == this.board.getSize())){
-            
+                System.out.print("shift je mozne provest\n");
                 for (n = 0; n < this.nPlayers; ++n){
                     if (this.players.get(n).getY() == r){
                         if (c == 1){
