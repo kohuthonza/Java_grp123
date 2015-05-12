@@ -153,13 +153,6 @@ public class GUImenu extends javax.swing.JFrame {
             }
         });
 
-        jSpinner1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSpinner1StateChanged(evt);
-            }
-        });
-
         jLabel4.setText("Počet karet:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -261,8 +254,10 @@ public class GUImenu extends javax.swing.JFrame {
         else if(jRadioButton3.isSelected()){
             numPlayers = 4;
             if(!(spinnerValue>=1 && spinnerValue<=6)){
+                //javax.swing.JOptionPane.showMessageDialog(null, "Thank you for using Java", "Yay, java", javax.swing.JOptionPane.PLAIN_MESSAGE);                
                 javax.swing.JOptionPane message = new javax.swing.JOptionPane();
-                message.showMessageDialog(null, "Počet karet vyberte v rozmezí 1 až 6");
+                
+                message.showMessageDialog(this, "Počet karet vyberte v rozmezí 1 až 6");
                 return;
             }   
         }

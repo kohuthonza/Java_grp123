@@ -19,7 +19,7 @@ public class GUI extends JFrame implements KeyListener{
        
         if (load_game != null){
             game = load_game;
-            if (!game.getInitialCondition())
+            if (game.getInitialCondition())
                 game.nextPlayer();
             
         }
