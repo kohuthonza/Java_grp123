@@ -324,7 +324,7 @@ public class GUImenu extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         try {
-            File file = Load.choose_file();
+            File file = Load.chooseFile();
             if (file != null){
                 GUI frame = new GUI(0,0,0,(Game)SaveLoad.deserialize(file));
             }

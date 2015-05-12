@@ -1,15 +1,10 @@
 
 package ija.game;
 
-import ija.game.board.*;
-import ija.game.treasure.CardPack;
+
 
 import javax.swing.*;
-import java.awt.*;
-import javax.swing.ImageIcon;
 import java.awt.event.*;
-import java.awt.event.KeyAdapter;
-
 import java.io.IOException;
 
 
@@ -24,14 +19,14 @@ public class GUI extends JFrame implements KeyListener{
        
         if (load_game != null){
             game = load_game;
-            if (!game.get_initial_condition())
-                game.next_player();
+            if (!game.getInitialCondition())
+                game.nextPlayer();
             
         }
         else{
             try{
                 game = new Game(numPlayers, gameSize, packSize);
-                game.next_player();
+                game.nextPlayer();
             } catch(IOException e){
                 System.out.printf("hra nebyla vytvorena v GUI");
                 System.exit(1);
@@ -69,14 +64,14 @@ public class GUI extends JFrame implements KeyListener{
 
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             
-            if(game.check_end_of_game()){
+            if(game.checkEndOfGame()){
                 EndGameFrame EGF = new EndGameFrame(game);
                 EGF.setVisible(true);
                 setVisible(false);
             }
             try{             
-                game.next_player();
-                System.out.printf("hrac: %d\n",game.get_actual_figurine());
+                game.nextPlayer();
+                System.out.printf("hrac: %d\n",game.getActualFigurine());
             } catch (IOException except){
                 System.out.printf("next player exception");
                 System.exit(1);
@@ -89,32 +84,32 @@ public class GUI extends JFrame implements KeyListener{
                 
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN) {   
-            System.out.printf("figurka %s moves DOWN from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("figurka %s moves DOWN from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
             game.move_player('D');
             gamePanel.update(game);
             topPanel.updatePanel();
-            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.printf("figurka %s moves UP from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("figurka %s moves UP from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
             game.move_player('U');
             gamePanel.update(game);
             topPanel.updatePanel();
-            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.printf("figurka %s moves LEFT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("figurka %s moves LEFT from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
             game.move_player('L');
             gamePanel.update(game);
             topPanel.updatePanel();
-            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.printf("figurka %s moves RIGHT from %d %d ",game.get_actual_figurine(), game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("figurka %s moves RIGHT from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
             game.move_player('R');
             gamePanel.update(game);
             topPanel.updatePanel();
-            System.out.printf("to %d %d\n", game.get_actual_player().get_x(), game.get_actual_player().get_y());
+            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
         }
     }
     

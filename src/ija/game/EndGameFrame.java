@@ -17,37 +17,37 @@ public class EndGameFrame extends javax.swing.JFrame {
      */
     public EndGameFrame(Game game) {
         initComponents();
-        int size = game.get_players().size();
+        int size = game.getPlayers().size();
         
-        jLabel5.setText("Hrac cislo "+ Integer.toString(game.get_actual_player_n()) +" zvitezil!");
+        jLabel5.setText("Hrac cislo "+ Integer.toString(game.getActualPlayerN()) +" zvitezil!");
         
         if (size>=1){
-            Player P1 = (Player) game.get_players().get(0);
-            jLabel1.setText("Skore hrace 1:  " + Integer.toString(P1.get_picked_cards()));
+            Player P1 = (Player) game.getPlayers().get(0);
+            jLabel1.setText("Skore hrace 1:  " + Integer.toString(P1.getPickedCards()));
         }
         else{
             jLabel1.setText("");
         }
         
         if (size>=2){
-            Player P2 = (Player) game.get_players().get(1);
-            jLabel2.setText("Skore hrace 2:  " + Integer.toString(P2.get_picked_cards()));
+            Player P2 = (Player) game.getPlayers().get(1);
+            jLabel2.setText("Skore hrace 2:  " + Integer.toString(P2.getPickedCards()));
         }
         else{
             jLabel2.setText("");
         }
 
         if (size>=3){
-            Player P3 = (Player) game.get_players().get(2);
-            jLabel3.setText("Skore hrace 3:  " + Integer.toString(P3.get_picked_cards()));
+            Player P3 = (Player) game.getPlayers().get(2);
+            jLabel3.setText("Skore hrace 3:  " + Integer.toString(P3.getPickedCards()));
         }
         else{
             jLabel3.setText("");
         }
         
         if (size>=4){
-            Player P4 = (Player) game.get_players().get(3);
-            jLabel4.setText("Skore hrace 4:  " + Integer.toString(P4.get_picked_cards()));
+            Player P4 = (Player) game.getPlayers().get(3);
+            jLabel4.setText("Skore hrace 4:  " + Integer.toString(P4.getPickedCards()));
         }
         else{
             jLabel4.setText("");
