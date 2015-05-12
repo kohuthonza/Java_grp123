@@ -427,8 +427,10 @@ public class Game implements Serializable {
      */
     private void shiftRight(Player player){
         
-        if ((player.getX() + 1) > this.board.getSize())
+        if ((player.getX() + 1) > this.board.getSize()){
             player.setX(1);
+            this.checkPosition(player);
+        }
         else
             player.setX(player.getX() + 1);
         
@@ -439,8 +441,10 @@ public class Game implements Serializable {
      */
     private void shiftLeft(Player player){
         
-        if ((player.getX() - 1) < 1)
+        if ((player.getX() - 1) < 1){
             player.setX(this.board.getSize());
+            this.checkPosition(player);
+        }
         else
             player.setX(player.getX() - 1);
         
@@ -451,8 +455,10 @@ public class Game implements Serializable {
      */
     private void shiftUp(Player player){
         
-        if ((player.getY() - 1) < 1)
+        if ((player.getY() - 1) < 1){
             player.setY(this.board.getSize());
+            this.checkPosition(player);
+        }
         else
             player.setY(player.getY() - 1);
         
@@ -463,8 +469,10 @@ public class Game implements Serializable {
      */
     private void shiftDown(Player player){
         
-        if ((player.getY() + 1) > this.board.getSize())
+        if ((player.getY() + 1) > this.board.getSize()){
             player.setY(1);
+            this.checkPosition(player);
+        }
         else
             player.setY(player.getY() + 1);
         
