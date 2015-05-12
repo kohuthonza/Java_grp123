@@ -47,7 +47,7 @@ public class GUI extends JFrame implements KeyListener{
         setFocusTraversalKeysEnabled(false);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize((gameSize * 75 > 400)? gameSize * 75 : 400, gameSize * 75 + 146);
+        setSize((game.getMazeBoard().getSize() * 75 > 400)? game.getMazeBoard().getSize() * 75 : 400, game.getMazeBoard().getSize() * 75 + 146);
 
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");
