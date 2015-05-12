@@ -33,7 +33,7 @@ public class TopPanel extends javax.swing.JPanel {
     }
 
     public void updatePanel(){
-        ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.getActualFigurine())+".png"));
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.getActualFigurine())+"Top.png"));
         jLabel2.setIcon(icon);
         
         icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.getActualPlayer().getCard().getTreasure().get_type()+1)+".png"));
