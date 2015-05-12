@@ -259,7 +259,7 @@ public class GUImenu extends javax.swing.JFrame {
         
         
         try {
-            GUI frame = new GUI(numPlayers, numFields, new Integer(1), null);
+            GUI frame = new GUI(numPlayers, numFields, new Integer(10), null);
         } catch (IOException ex) {
             Logger.getLogger(GUImenu.class.getName()).log(Level.SEVERE, null, ex);
         }

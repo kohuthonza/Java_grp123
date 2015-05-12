@@ -112,7 +112,11 @@ public class TopPanel extends javax.swing.JPanel {
 
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(75, 75));
         jLayeredPane1.setMinimumSize(new java.awt.Dimension(75, 75));
-        jLayeredPane1.setPreferredSize(new java.awt.Dimension(75, 75));
+        jLayeredPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLayeredPane1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -193,6 +197,11 @@ public class TopPanel extends javax.swing.JPanel {
             Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jLayeredPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPane1MouseClicked
+        game.getMazeBoard().getFreeCard().turnRight();
+        updatePanel();
+    }//GEN-LAST:event_jLayeredPane1MouseClicked
 
 	
         
