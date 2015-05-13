@@ -24,12 +24,8 @@ public class TopPanel extends javax.swing.JPanel {
     public TopPanel(Game game) {
         initComponents();
 
-        
-        ImageIcon icon;
         jButton1.setFocusable(false);
         jButton2.setFocusable(false);
-                
-        updatePanel();
     }
 
     

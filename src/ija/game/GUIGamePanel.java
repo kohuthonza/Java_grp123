@@ -28,8 +28,6 @@ public class GUIGamePanel extends JPanel {
         int size = game.getMazeBoard().getSize();
         setLayout(new GridLayout(size, size));
         setSize(size*75,size*75);
-        initialize(game); 
-
     }
     public void clear(){
         removeAll();
@@ -40,8 +38,6 @@ public class GUIGamePanel extends JPanel {
     public void update(Game game){
         clear();
         initialize(game); 
-        revalidate();
-        repaint();
     }
     
     public void initialize(Game game){

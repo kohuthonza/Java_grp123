@@ -48,11 +48,13 @@ public class GUI extends JFrame implements KeyListener{
         setTitle("Labyrinth - grp123");
         setResizable(true);
         setVisible(true);
+        
         topPanel = new TopPanel(game);
         add(topPanel);              
         gamePanel = new GUIGamePanel(game);
         add(gamePanel);
-                  
+        
+        updateGUI();
     }
 
     
