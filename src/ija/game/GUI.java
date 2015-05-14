@@ -8,13 +8,21 @@ import java.io.IOException;
 
 
 public class GUI extends JFrame implements KeyListener{
-    static Game game;
-    static TopPanel topPanel;
-    static GUIGamePanel gamePanel;
+    static private Game game;
+    static private TopPanel topPanel;
+    static private GUIGamePanel gamePanel;
 
     static public void updateGUI(){
         topPanel.updatePanel();
-        gamePanel.update(game);
+        gamePanel.update();
+    }
+    
+    static Game getGame(){
+        return GUI.game;
+    }
+    
+    static void setGame(Game game){
+        GUI.game = game;
     }
     /**
      * Konstruktor grafickeho rozhrani hry, vytvori hravni JFrame a spusti jadro hry.
@@ -29,15 +37,15 @@ public class GUI extends JFrame implements KeyListener{
     public GUI(int numPlayers, int gameSize, int packSize, Game load_game) throws IOException{
        
         if (load_game != null){
-            game = load_game;
-            if (game.getInitialCondition())
-                game.nextPlayer();
+            GUI.game = load_game;
+            if (GUI.game.getInitialCondition())
+                GUI.game.nextPlayer();
             
         }
         else{
             try{
-                game = new Game(numPlayers, gameSize, packSize);
-                game.nextPlayer();
+                GUI.game = new Game(numPlayers, gameSize, packSize);
+                GUI.game.nextPlayer();
             } catch(IOException e){
                 System.out.printf("hra nebyla vytvorena v GUI");
                 System.exit(1);
@@ -46,30 +54,28 @@ public class GUI extends JFrame implements KeyListener{
         
 
         getContentPane().setLayout(new BoxLayout(getContentPane(),BoxLayout.PAGE_AXIS));
-        addKeyListener(this);
+        addKeyListener(GUI.this);
         setFocusable(true);
         
         setFocusTraversalKeysEnabled(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize((game.getMazeBoard().getSize() * 75 > 400)? game.getMazeBoard().getSize() * 75 : 400, game.getMazeBoard().getSize() * 75 + 146);
+        setSize((GUI.game.getMazeBoard().getSize() * 75 > 400)? GUI.game.getMazeBoard().getSize() * 75 : 400, GUI.game.getMazeBoard().getSize() * 75 + 146);
         //setSize(game.getMazeBoard().getSize() * 75, game.getMazeBoard().getSize() * 75 + 146+500);   
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");
         setResizable(true);
         setVisible(true);
         
-        topPanel = new TopPanel(game);
+        topPanel = new TopPanel();
         add(topPanel);              
-        gamePanel = new GUIGamePanel(game);
+        gamePanel = new GUIGamePanel();
         add(gamePanel);
         
         updateGUI();
     }
 
     
-    public void keyTyped(KeyEvent e){
-        //not using
-    }
+   
     /**
      * reakce na stisknutou klavesu
      *      - ENTER: je zavolana metoda game.nextPlaer()
@@ -78,17 +84,18 @@ public class GUI extends JFrame implements KeyListener{
      * 
      * @param e - stisknuta hlavesa 
      */
+    @Override
     public void keyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             
-            if(game.checkEndOfGame()){
-                EndGameFrame EGF = new EndGameFrame(game);
+            if(GUI.game.checkEndOfGame()){
+                EndGameFrame EGF = new EndGameFrame(GUI.game);
                 EGF.setVisible(true);
                 setVisible(false);
             }
             try{             
-                game.nextPlayer();
-                System.out.printf("hrac: %d\n",game.getActualFigurine());
+                GUI.game.nextPlayer();
+                System.out.printf("hrac: %d\n",GUI.game.getActualFigurine());
             } catch (IOException except){
                 System.out.printf("next player exception");
                 System.exit(1);
@@ -99,33 +106,40 @@ public class GUI extends JFrame implements KeyListener{
         }
         
         else if(e.getKeyCode() == KeyEvent.VK_DOWN) {   
-            System.out.printf("figurka %s moves DOWN from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
-            game.move_player('D');
+            System.out.printf("figurka %s moves DOWN from %d %d ",GUI.game.getActualFigurine(), GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
+            GUI.game.move_player('D');
             GUI.updateGUI();
-            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
+            System.out.printf("to %d %d\n", GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
         }
         else if(e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.printf("figurka %s moves UP from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
-            game.move_player('U');
+            System.out.printf("figurka %s moves UP from %d %d ",GUI.game.getActualFigurine(), GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
+            GUI.game.move_player('U');
             GUI.updateGUI();
-            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
+            System.out.printf("to %d %d\n", GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.printf("figurka %s moves LEFT from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
-            game.move_player('L');
+            System.out.printf("figurka %s moves LEFT from %d %d ",GUI.game.getActualFigurine(), GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
+            GUI.game.move_player('L');
             GUI.updateGUI();
-            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
+            System.out.printf("to %d %d\n", GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
         }
         else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.printf("figurka %s moves RIGHT from %d %d ",game.getActualFigurine(), game.getActualPlayer().getX(), game.getActualPlayer().getY());
-            game.move_player('R');
+            System.out.printf("figurka %s moves RIGHT from %d %d ", GUI.game.getActualFigurine(), GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
+            GUI.game.move_player('R');
             GUI.updateGUI();
-            System.out.printf("to %d %d\n", game.getActualPlayer().getX(), game.getActualPlayer().getY());
+            System.out.printf("to %d %d\n", GUI.game.getActualPlayer().getX(), GUI.game.getActualPlayer().getY());
         }
     }
-    
+
+    @Override
     public void keyReleased(KeyEvent e){
         //not using
-    }    
+    }  
+    
+    @Override
+    public void keyTyped(KeyEvent e){
+        //not using
+    }
+    
     
 }

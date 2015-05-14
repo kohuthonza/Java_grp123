@@ -26,10 +26,10 @@ public class GUIGamePanel extends JPanel {
     /**
      * Konstruktor JPanelu se hrou
      * 
-     * @param game - dostane stav hry 
+     * 
      */
-    public GUIGamePanel(Game game) {
-        int size = game.getMazeBoard().getSize();
+    public GUIGamePanel() {
+        int size = GUI.getGame().getMazeBoard().getSize();
         setLayout(new GridLayout(size, size));
         setSize(size*75,size*75);
     }
@@ -44,11 +44,11 @@ public class GUIGamePanel extends JPanel {
     /**
      * obnovi panel se hrou
      * 
-     * @param game - stav hry 
+     * 
      */
-    public void update(Game game){
+    public void update(){
         clear();
-        initialize(game); 
+        initialize(GUI.getGame()); 
     }
     /**
      * Inicializace herniho panelu podle aktualniho stavu hry.
@@ -56,7 +56,7 @@ public class GUIGamePanel extends JPanel {
      * 
      * @param game - stav hry 
      */
-    public void initialize(Game game){
+    public void initialize(final Game game){
         int size = game.getMazeBoard().getSize();
         for(int i = 1; i <= size; i++){
             for(int j = 1; j <= size; j++){
@@ -120,10 +120,10 @@ public class GUIGamePanel extends JPanel {
             }
             System.out.printf("shift - kliknuto na pole: %d %d\n", ptr.x, ptr.y);
             
-            MazeField ptrField = game.getMazeBoard().getMazeField(ptr.x, ptr.y);
+            MazeField ptrField = GUI.getGame().getMazeBoard().getMazeField(ptr.x, ptr.y);
             
-            game.getMazeBoard().shift(ptrField);
-            game.shiftPlayer(ptrField);
+            GUI.getGame().getMazeBoard().shift(ptrField);
+            GUI.getGame().shiftPlayer(ptrField);
             
             GUI.updateGUI();
          }

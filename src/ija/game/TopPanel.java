@@ -5,7 +5,6 @@
  */
 package ija.game;
 
-import static ija.game.GUI.game;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +20,7 @@ public class TopPanel extends javax.swing.JPanel {
     /**
      * Creates new form TopPanel
      */
-public TopPanel(Game game) {
+public TopPanel() {
         initComponents();
 
         jButton1.setFocusable(false);
@@ -33,14 +32,14 @@ public TopPanel(Game game) {
      * 
      */
     public void updatePanel(){
-        ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.getActualFigurine())+"Top.png"));
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(GUI.getGame().getActualFigurine())+"Top.png"));
         jLabel2.setIcon(icon);
         
-        hiddenIcon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.getActualPlayer().getCard().getTreasure().get_type()+1)+".png"));
+        hiddenIcon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(GUI.getGame().getActualPlayer().getCard().getTreasure().get_type()+1)+".png"));
         icon = new ImageIcon(this.getClass().getResource("images/treasures/hidden.png"));
         jLabel1.setIcon(icon);
         
-        icon = new ImageIcon(this.getClass().getResource("images/mazes/"+game.getMazeBoard().getFreeCard().getType()+"/"+game.getMazeBoard().getFreeCard().getRotation()+".png"));
+        icon = new ImageIcon(this.getClass().getResource("images/mazes/"+GUI.getGame().getMazeBoard().getFreeCard().getType()+"/"+GUI.getGame().getMazeBoard().getFreeCard().getRotation()+".png"));
         JLabel labelCard = new JLabel(); 
         labelCard.setSize(icon.getIconHeight(),icon.getIconWidth());
         labelCard.setIcon(icon);
@@ -48,15 +47,15 @@ public TopPanel(Game game) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(labelCard, new Integer(1));
         
-        if(game.getMazeBoard().getFreeCard().getTreasure() != null){
+        if(GUI.getGame().getMazeBoard().getFreeCard().getTreasure() != null){
             JLabel treasureCard = new JLabel();
-            icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.getMazeBoard().getFreeCard().getTreasure().get_type()+1)+".png"));
+            icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(GUI.getGame().getMazeBoard().getFreeCard().getTreasure().get_type()+1)+".png"));
             treasureCard.setSize(icon.getIconHeight(),icon.getIconWidth());
             treasureCard.setIcon(icon);
             jLayeredPane1.add(treasureCard, new Integer(2));
         }
         
-        jLabel5.setText("Pocet sebranych karet: " + Integer.toString(game.getActualPlayer().getPickedCards()) + "/" + Integer.toString(game.getCardsNumber()));
+        jLabel5.setText("Pocet sebranych karet: " + Integer.toString(GUI.getGame().getActualPlayer().getPickedCards()) + "/" + Integer.toString(GUI.getGame().getCardsNumber()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -190,7 +189,7 @@ public TopPanel(Game game) {
         try {
             File file = Save.createFile();
             if (file != null){
-                SaveLoad.serialize(game, file);
+                SaveLoad.serialize(GUI.getGame(), file);
             }
         } catch (IOException ex) {
             Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,9 +198,9 @@ public TopPanel(Game game) {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         try {
-            Game undo_game = game.undoGame();
+            Game undo_game = GUI.getGame().undoGame();
             if (undo_game != null){
-                game = undo_game;
+                GUI.setGame(undo_game);
             }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(TopPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,7 +209,7 @@ public TopPanel(Game game) {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jLayeredPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPane1MouseClicked
-        game.getMazeBoard().getFreeCard().turnRight();
+        GUI.getGame().getMazeBoard().getFreeCard().turnRight();
         updatePanel();
     }//GEN-LAST:event_jLayeredPane1MouseClicked
 
