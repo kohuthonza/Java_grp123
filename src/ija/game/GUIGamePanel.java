@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ija.game;
 
 import ija.game.board.MazeField;
@@ -17,7 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
+ * Panel s herni plochou, podedeny JPanel
+ * obsahuje grid hernich policek
+ * 
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
@@ -27,7 +24,6 @@ public class GUIGamePanel extends JPanel {
     
     /**
      * Konstruktor JPanelu se hrou
-     * 
      * 
      */
     public GUIGamePanel() {

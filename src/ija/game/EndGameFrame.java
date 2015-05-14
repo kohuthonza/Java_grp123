@@ -8,6 +8,7 @@ import ija.game.player.Player;
 
 /**
  * JFrame, ktery se zobrazi pri konci hry
+ * Obsahuje vysledky hry
  * 
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22

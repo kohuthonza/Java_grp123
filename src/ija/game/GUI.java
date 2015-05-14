@@ -1,7 +1,5 @@
 package ija.game;
 
-
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -86,7 +84,7 @@ public class GUI extends JFrame implements KeyListener{
         updateGUI();
         
         
-        addWindowListener(new WindowAdapter()
+        addWindowListener(new WindowAdapter() //akce pri uzavreni okna
         {
             @Override
             public void windowClosing(WindowEvent e)
@@ -113,7 +111,7 @@ public class GUI extends JFrame implements KeyListener{
     public void keyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             
-            if(GUI.game.checkEndOfGame()){
+            if(GUI.game.checkEndOfGame()){ //pri kazdem enteru se kontroluje stav hry
                 EndGameFrame EGF = new EndGameFrame();
                 EGF.setVisible(true);
                 setVisible(false);

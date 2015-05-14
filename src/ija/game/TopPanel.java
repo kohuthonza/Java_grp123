@@ -37,13 +37,16 @@ public TopPanel() {
      * 
      */
     public void updatePanel(){
+        //ikonka hrace
         ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(GUI.getGame().getActualFigurine())+"Top.png"));
         jLabel2.setIcon(icon);
         
+        //ikonka hledaneho pokladu (defaultne skryta)
         hiddenIcon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(GUI.getGame().getActualPlayer().getCard().getTreasure().get_type()+1)+".png"));
         icon = new ImageIcon(this.getClass().getResource("images/treasures/hidden.png"));
         jLabel1.setIcon(icon);
         
+        //ikonka volneho kamene
         icon = new ImageIcon(this.getClass().getResource("images/mazes/"+GUI.getGame().getMazeBoard().getFreeCard().getType()+"/"+GUI.getGame().getMazeBoard().getFreeCard().getRotation()+".png"));
         JLabel labelCard = new JLabel(); 
         labelCard.setSize(icon.getIconHeight(),icon.getIconWidth());
@@ -52,6 +55,7 @@ public TopPanel() {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(labelCard, new Integer(1));
         
+        //vrstva s pokladem
         if(GUI.getGame().getMazeBoard().getFreeCard().getTreasure() != null){
             JLabel treasureCard = new JLabel();
             icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(GUI.getGame().getMazeBoard().getFreeCard().getTreasure().get_type()+1)+".png"));
@@ -60,6 +64,7 @@ public TopPanel() {
             jLayeredPane1.add(treasureCard, new Integer(2));
         }
         
+        //informace o poctu sebranych karet
         jLabel5.setText("Pocet sebranych karet: " + Integer.toString(GUI.getGame().getActualPlayer().getPickedCards()) + "/" + Integer.toString(GUI.getGame().getCardsNumber()));
     }
     /**
@@ -189,7 +194,10 @@ public TopPanel() {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    /**
+     *  Akce Save tlacitka
+     * @param evt 
+     */
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
             File file = Save.createFile();
@@ -201,6 +209,10 @@ public TopPanel() {
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
+    /**
+     * Akce Undo tlacitka 
+     * @param evt 
+     */
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         try {
             Game undo_game = GUI.getGame().undoGame();
@@ -217,11 +229,18 @@ public TopPanel() {
         GUI.getGame().getMazeBoard().getFreeCard().turnRight();
         updatePanel();
     }//GEN-LAST:event_jLayeredPane1MouseClicked
-
+    /**
+     * Karta s hledanym pokladem se otoci po najeti mysi
+     * @param evt 
+     */
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
         jLabel1.setIcon(hiddenIcon);
     }//GEN-LAST:event_jLabel1MouseEntered
 
+    /**
+     * Po opusteni mysi se karta s pokladem otoci zpet
+     * @param evt 
+     */
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         ImageIcon icon = new ImageIcon(this.getClass().getResource("images/treasures/hidden.png"));
         jLabel1.setIcon(icon);

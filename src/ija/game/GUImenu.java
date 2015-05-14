@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Pocatecni menu pro vyber poctu hracu, velikosti pole a poctu karet
+ * 
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
