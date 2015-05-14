@@ -49,6 +49,7 @@ public class GUI extends JFrame implements KeyListener{
             if (GUI.game.getInitialCondition())
                 GUI.game.nextPlayer();
             else{
+                GUI.game.setNMove(0);
                 GUI.game.undoSave();
             }
         }
