@@ -21,14 +21,17 @@ public class TopPanel extends javax.swing.JPanel {
     /**
      * Creates new form TopPanel
      */
-    public TopPanel(Game game) {
+    public void topPanel() {
         initComponents();
 
         jButton1.setFocusable(false);
         jButton2.setFocusable(false);
     }
 
-    
+    /**
+     * Metoda aktualizuje obsah TopPanelu
+     * 
+     */
     public void updatePanel(){
         ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.getActualFigurine())+"Top.png"));
         jLabel2.setIcon(icon);

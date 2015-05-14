@@ -5,9 +5,11 @@
  */
 package ija.game;
 
+
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -238,26 +240,24 @@ public class GUImenu extends javax.swing.JFrame {
         if(jRadioButton1.isSelected()){
             numPlayers = 2;
             if(!(spinnerValue>=1 && spinnerValue<=12)){
-                javax.swing.JOptionPane message = new javax.swing.JOptionPane();
-                message.showMessageDialog(null, "Počet karet vyberte v rozmezí 1 až 12");
+                JOptionPane.showMessageDialog(null, "Počet karet vyberte v rozmezí 1 až 12");
+                this.setVisible(true);
                 return;
             }
         }
         else if(jRadioButton2.isSelected()){
             numPlayers = 3;
             if(!(spinnerValue>=1 && spinnerValue<=8)){
-                javax.swing.JOptionPane message = new javax.swing.JOptionPane();
-                message.showMessageDialog(null, "Počet karet vyberte v rozmezí 1 až 8");
+                JOptionPane.showMessageDialog(null, "Počet karet vyberte v rozmezí 1 až 8");
+                this.setVisible(true);
                 return;
             }
         }
         else if(jRadioButton3.isSelected()){
             numPlayers = 4;
-            if(!(spinnerValue>=1 && spinnerValue<=6)){
-                //javax.swing.JOptionPane.showMessageDialog(null, "Thank you for using Java", "Yay, java", javax.swing.JOptionPane.PLAIN_MESSAGE);                
-                javax.swing.JOptionPane message = new javax.swing.JOptionPane();
-                
-                message.showMessageDialog(this, "Počet karet vyberte v rozmezí 1 až 6");
+            if(!(spinnerValue>=1 && spinnerValue<=6)){          
+                JOptionPane.showMessageDialog(this, "Počet karet vyberte v rozmezí 1 až 6");
+                this.setVisible(true);
                 return;
             }   
         }

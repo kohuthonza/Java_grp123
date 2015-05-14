@@ -5,6 +5,8 @@
  */
 package ija.game;
 
+import static ija.game.GUI.game;
+
 import ija.game.board.MazeField;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
@@ -24,7 +26,7 @@ public class GUIGamePanel extends JPanel {
     
     
     
-    public GUIGamePanel(Game game) {
+    public GUIGamePanel() {
         int size = game.getMazeBoard().getSize();
         setLayout(new GridLayout(size, size));
         setSize(size*75,size*75);

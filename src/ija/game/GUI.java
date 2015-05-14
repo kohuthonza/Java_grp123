@@ -49,9 +49,9 @@ public class GUI extends JFrame implements KeyListener{
         setResizable(true);
         setVisible(true);
         
-        topPanel = new TopPanel(game);
+        topPanel = new TopPanel();
         add(topPanel);              
-        gamePanel = new GUIGamePanel(game);
+        gamePanel = new GUIGamePanel();
         add(gamePanel);
         
         updateGUI();
