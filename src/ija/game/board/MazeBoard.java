@@ -13,6 +13,7 @@ import java.io.Serializable;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class MazeBoard implements Serializable {
     
     //List policek

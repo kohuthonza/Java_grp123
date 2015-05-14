@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class MazeCard implements Serializable{
     
     private CANGO direction1;

@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class Treasure implements Serializable{
     
     private static final int  n_treasure = 24;

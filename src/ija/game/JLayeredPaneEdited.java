@@ -13,6 +13,7 @@ import javax.swing.JLayeredPane;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class JLayeredPaneEdited extends JLayeredPane {
      public int x;
      public int y;

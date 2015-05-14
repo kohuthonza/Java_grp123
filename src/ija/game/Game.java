@@ -20,6 +20,7 @@ import java.util.Collections;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class Game implements Serializable {
     
     
@@ -35,6 +36,7 @@ public class Game implements Serializable {
     private int nMove;
     private boolean isShift;
     private final int nCards;
+
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 

@@ -13,6 +13,7 @@ import java.util.Collections;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class CardPack implements Serializable{
     
     private final int size;

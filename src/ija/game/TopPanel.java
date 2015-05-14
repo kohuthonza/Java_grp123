@@ -19,6 +19,7 @@ import javax.swing.JLabel;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class TopPanel extends javax.swing.JPanel {
     private ImageIcon hiddenIcon;
     /**

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
-import java.util.ArrayList;
+
 
 /**
  *
@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class SaveLoad {
     
     /**

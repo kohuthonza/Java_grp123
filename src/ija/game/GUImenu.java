@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class GUImenu extends javax.swing.JFrame {
 
     /**

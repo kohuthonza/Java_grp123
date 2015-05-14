@@ -12,6 +12,7 @@ import ija.game.player.Player;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class EndGameFrame extends javax.swing.JFrame {
 
     /**

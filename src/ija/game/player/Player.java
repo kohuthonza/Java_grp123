@@ -16,6 +16,7 @@ import java.io.Serializable;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class Player implements Serializable{
     
     //Souradnice hrace (osa x a prevracena osa y)

@@ -13,6 +13,7 @@ import java.io.*;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class Save extends JFrame{
     
     private static final File dir = new File(System.getProperty("user.home")+"/labyrint/saved_games");

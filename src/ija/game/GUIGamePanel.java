@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class GUIGamePanel extends JPanel {
     
     

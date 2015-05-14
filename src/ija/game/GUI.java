@@ -15,6 +15,7 @@ import java.io.IOException;
  * @author Jan Kohut, xkohut08
  * @author Tomas Jurica, xjuric22
  */
+@SuppressWarnings("serial")
 public class GUI extends JFrame implements KeyListener{
     static private Game game;
     static private TopPanel topPanel;
