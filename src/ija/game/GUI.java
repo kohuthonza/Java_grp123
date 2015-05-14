@@ -32,7 +32,7 @@ public class GUI extends JFrame implements KeyListener{
      * @param gameSize - počet policek = velikost herní plochy
      * @param packSize - počet karet s poklady pro jednoho hrace
      * @param load_game - pokud se jedna o nacteni hry, dostane celou hru, kterou si do sebe nahraje
-     * @throws IOException 
+     * @throws IOException Kontrola existence vstupnich souboru
      */
     public GUI(int numPlayers, int gameSize, int packSize, Game load_game) throws IOException{
        
@@ -89,7 +89,7 @@ public class GUI extends JFrame implements KeyListener{
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             
             if(GUI.game.checkEndOfGame()){
-                EndGameFrame EGF = new EndGameFrame(GUI.game);
+                EndGameFrame EGF = new EndGameFrame();
                 EGF.setVisible(true);
                 setVisible(false);
             }

@@ -30,7 +30,7 @@ public class MazeField implements Serializable{
     /**
      * Policko se porovnava na zaklade pozice
      * 
-     * @param obj
+     * @param obj Objekt
      * @return True, pokud se rovnaji, jinak false
      */
     @Override

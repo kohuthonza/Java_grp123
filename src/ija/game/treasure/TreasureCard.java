@@ -28,7 +28,7 @@ public class TreasureCard implements Serializable{
     /**
      * Karty se srovnavaji na zaklade hodnoty pokladu na karte
      * 
-     * @param obj
+     * @param obj Objekt
      * @return True, pokud jsou shodne, jinak false
      */
     @Override

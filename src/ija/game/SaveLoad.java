@@ -28,7 +28,7 @@ public class SaveLoad {
      * 
      * @param obj Objekt, ktery ma byt serializovan
      * @param file Objekt souboru do ktereho se ma serializace ulozit
-     * @throws IOException 
+     * @throws IOException Chyba vstupniho souboru
      */
     public static void serialize(Object obj, File file)
             throws IOException {
@@ -48,11 +48,10 @@ public class SaveLoad {
      * 
      * @param file Soubor, ktery se ma deserializovat
      * @return Deserializovany objekt
-     * @throws IOException
-     * @throws ClassNotFoundException 
+     * @throws IOException Chyba vstupniho souboru
+     * @throws ClassNotFoundException Kontrola existence nacitane tridy
      */
-    public static Object deserialize(File file) throws IOException,
-            ClassNotFoundException {
+    public static Object deserialize(File file) throws IOException, ClassNotFoundException {
  
         FileInputStream fis = new FileInputStream(file.getAbsolutePath());
         ObjectInputStream ois = new ObjectInputStream(fis);

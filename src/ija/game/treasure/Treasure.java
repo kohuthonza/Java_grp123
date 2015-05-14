@@ -40,7 +40,7 @@ public class Treasure implements Serializable{
     /**
      * Pro srovnavani se pouzije hodnota pokladu
      * 
-     * @param obj 
+     * @param obj Objekt
      * @return True, rovnaji se, jinak false
      */
     @Override

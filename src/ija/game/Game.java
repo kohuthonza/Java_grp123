@@ -44,10 +44,9 @@ public class Game implements Serializable {
      * @param nPlayers Pocet hracu (2 nebo 4)
      * @param sizeOfBoard Rozloha hraci desky (nejmene 3)
      * @param nCards Pocet karet v balicku
-     * @throws java.io.IOException
      * 
      */
-    public Game(int nPlayers, int sizeOfBoard, int nCards) throws IOException{
+    public Game(int nPlayers, int sizeOfBoard, int nCards) {
         
         //Vytvorime hraci desku
         this.board = MazeBoard.createMazeBoard(sizeOfBoard);
@@ -183,7 +182,7 @@ public class Game implements Serializable {
     /**
      * Ulozi aktualni stav hry do slozky: labyrint/undo v uzivatelske slozce
      * 
-     * @throws IOException 
+     * @throws IOException Kontrola vstupniho souboru
      */
     
     public void undoSave() throws IOException{
@@ -211,8 +210,8 @@ public class Game implements Serializable {
      * Vraci hru o jeden tah zpet
      * 
      * @return Hra o jeden tah zpet
-     * @throws IOException
-     * @throws ClassNotFoundException 
+     * @throws IOException Kontrola spravnosti vstupniho souboru
+     * @throws ClassNotFoundException Kontrola existence tridy
      */
     
     public Game undoGame() throws IOException, ClassNotFoundException{
@@ -366,8 +365,9 @@ public class Game implements Serializable {
     /**
      * Prepina na dalsiho hrace v poradi.
      * 
+     * @throws java.io.IOException Kontrola spravnosti vstupniho souboru
      */
-    public void nextPlayer() throws IOException{
+    public void nextPlayer() throws IOException {
         
         this.stopMove = false;
         this.isShift = false;
