@@ -23,23 +23,39 @@ import java.awt.event.MouseEvent;
 public class GUIGamePanel extends JPanel {
     
     
-    
+    /**
+     * Konstruktor JPanelu se hrou
+     * 
+     * @param game - dostane stav hry 
+     */
     public GUIGamePanel(Game game) {
         int size = game.getMazeBoard().getSize();
         setLayout(new GridLayout(size, size));
         setSize(size*75,size*75);
     }
+    /**
+     * Vycisti panel se hrou
+     */
     public void clear(){
         removeAll();
         revalidate();
         repaint();    
     }
-    
+    /**
+     * obnovi panel se hrou
+     * 
+     * @param game - stav hry 
+     */
     public void update(Game game){
         clear();
         initialize(game); 
     }
-    
+    /**
+     * Inicializace herniho panelu podle aktualniho stavu hry.
+     * Vysklada jednotlive policka po vrstvach (policko, treasure, hrac).
+     * 
+     * @param game - stav hry 
+     */
     public void initialize(Game game){
         int size = game.getMazeBoard().getSize();
         for(int i = 1; i <= size; i++){
@@ -47,9 +63,8 @@ public class GUIGamePanel extends JPanel {
                 MazeField field = game.getMazeBoard().getMazeField(i,j);
 
                 JLayeredPaneEdited policko = new JLayeredPaneEdited();
-                policko.x = i;
+                policko.x = i; //ulozime aktualni souradnice policka
                 policko.y = j;
-                
                         
                 JLabel layerCard = new JLabel();
                 ImageIcon icon;
@@ -70,7 +85,6 @@ public class GUIGamePanel extends JPanel {
                     
                     policko.add(treasureCard, new Integer(2));
                 }
-                
 
                 //vrstva 3 - hraci
                 ArrayList<Player> players = game.getPlayers();
@@ -89,12 +103,16 @@ public class GUIGamePanel extends JPanel {
             }            
         }
         
+        /**
+         * Reakce na klik na policko.
+         * Policko je typu JLayerPaneEdited = JLayerPane + souradnice X a Y.
+         * Po kliknuti dostaneme referenci, z te vytahneme souradnice X a Y a provedeme shift.
+         */
         addMouseListener(new MouseAdapter() {
          @Override
          public void mousePressed(MouseEvent e) {
             if (!getComponentAt(e.getPoint()).getClass().equals( JLayeredPaneEdited.class)){
-               //System.out.println(String.valueOf(getComponentAt(e.getPoint()).getClass()));
-                return;
+               return;
             }
             JLayeredPaneEdited ptr = (JLayeredPaneEdited) getComponentAt(e.getPoint());
             if (ptr == null) {

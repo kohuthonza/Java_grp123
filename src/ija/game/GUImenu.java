@@ -104,11 +104,6 @@ public class GUImenu extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("7x7");
@@ -229,6 +224,12 @@ public class GUImenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Reakce na stisk tlacitka New Game
+     * Zjisti se informace o zmacklych radio buttons a podle toho se
+     * voli parametrz, se kteryma se spousti hra.
+     * @param evt - nevyuziva se 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
         int numPlayers = 0;
@@ -287,7 +288,10 @@ public class GUImenu extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    /**
+     * Aktivace ostatnich RadioButtons
+     * @param evt 
+     */
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
         jRadioButton6.setEnabled(true);
         jRadioButton5.setEnabled(true);
@@ -295,7 +299,10 @@ public class GUImenu extends javax.swing.JFrame {
         jRadioButton7.setEnabled(true);
         jRadioButton8.setEnabled(true);
     }//GEN-LAST:event_jRadioButton1MouseClicked
-
+    /**
+     * Aktivace ostatnich RadioButtons
+     * @param evt 
+     */
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
         jRadioButton6.setEnabled(true);
         jRadioButton5.setEnabled(true);
@@ -303,7 +310,10 @@ public class GUImenu extends javax.swing.JFrame {
         jRadioButton7.setEnabled(true);
         jRadioButton8.setEnabled(true); 
     }//GEN-LAST:event_jRadioButton2MouseClicked
-
+    /**
+     * Aktivace ostatnich RadioButtons
+     * @param evt 
+     */
     private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
         jRadioButton5.setEnabled(true);
         jRadioButton4.setEnabled(true);
@@ -316,31 +326,45 @@ public class GUImenu extends javax.swing.JFrame {
         }
         jRadioButton6.setEnabled(false);
     }//GEN-LAST:event_jRadioButton3MouseClicked
-
+    /**
+     * Aktivace New Game tlacitka
+     * @param evt 
+     */
     private void jRadioButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton8MouseClicked
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton8MouseClicked
-
+    /**
+     * Aktivace New Game tlacitka
+     * @param evt 
+     */
     private void jRadioButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton7MouseClicked
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton7MouseClicked
-
+    /**
+     * Aktivace New Game tlacitka
+     * @param evt 
+     */
     private void jRadioButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton4MouseClicked
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton4MouseClicked
-
+    /**
+     * Aktivace New Game tlacitka
+     * @param evt 
+     */
     private void jRadioButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton5MouseClicked
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton5MouseClicked
-
+    /**
+     * Aktivace New Game tlacitka
+     * @param evt 
+     */
     private void jRadioButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton6MouseClicked
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jRadioButton6MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    /**
+     * Nahrani hry a spusteni jadra s load souborem
+     * @param evt 
+     */
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         try {
             File file = Load.chooseFile();
