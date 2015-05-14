@@ -34,7 +34,7 @@ public class Game implements Serializable {
     private boolean stopMove;
     private int nMove;
     private boolean isShift;
-    private int nCards;
+    private final int nCards;
     
     /**
      * Konstruktor vytvari hru tzn. pole hracu, hraci desku a balicek karet, 
@@ -255,7 +255,7 @@ public class Game implements Serializable {
      * @return List hracu
      */
     
-    public ArrayList getPlayers(){
+    public ArrayList<Player> getPlayers(){
         return this.players;
     }
     
@@ -266,7 +266,7 @@ public class Game implements Serializable {
      * @return List figurek
      */
     
-    public ArrayList getPlayersFigurine(){
+    public ArrayList<Integer> getPlayersFigurine(){
         return this.playersFigurine;
     }
     /**

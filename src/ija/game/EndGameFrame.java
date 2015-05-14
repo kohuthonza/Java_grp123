@@ -25,7 +25,7 @@ public class EndGameFrame extends javax.swing.JFrame {
         jLabel5.setText("Hrac cislo "+ Integer.toString(GUI.getGame().getActualPlayerN()) +" zvitezil!");
         
         if (size>=1){
-            Player P1 = (Player) GUI.getGame().getPlayers().get(0);
+            Player P1 = GUI.getGame().getPlayers().get(0);
             jLabel1.setText("Skore hrace 1:  " + Integer.toString(P1.getPickedCards()));
         }
         else{
@@ -33,7 +33,7 @@ public class EndGameFrame extends javax.swing.JFrame {
         }
         
         if (size>=2){
-            Player P2 = (Player) GUI.getGame().getPlayers().get(1);
+            Player P2 = GUI.getGame().getPlayers().get(1);
             jLabel2.setText("Skore hrace 2:  " + Integer.toString(P2.getPickedCards()));
         }
         else{
@@ -41,7 +41,7 @@ public class EndGameFrame extends javax.swing.JFrame {
         }
 
         if (size>=3){
-            Player P3 = (Player) GUI.getGame().getPlayers().get(2);
+            Player P3 = GUI.getGame().getPlayers().get(2);
             jLabel3.setText("Skore hrace 3:  " + Integer.toString(P3.getPickedCards()));
         }
         else{
@@ -49,7 +49,7 @@ public class EndGameFrame extends javax.swing.JFrame {
         }
         
         if (size>=4){
-            Player P4 = (Player) GUI.getGame().getPlayers().get(3);
+            Player P4 = GUI.getGame().getPlayers().get(3);
             jLabel4.setText("Skore hrace 4:  " + Integer.toString(P4.getPickedCards()));
         }
         else{
