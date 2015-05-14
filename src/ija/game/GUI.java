@@ -16,7 +16,16 @@ public class GUI extends JFrame implements KeyListener{
         topPanel.updatePanel();
         gamePanel.update(game);
     }
-    
+    /**
+     * Konstruktor grafickeho rozhrani hry, vytvori hravni JFrame a spusti jadro hry.
+     * Hodnoty argumentu dostane z predchoziho grafickeho menu.
+     * 
+     * @param numPlayers - počet hracu ve hre
+     * @param gameSize - počet policek = velikost herní plochy
+     * @param packSize - počet karet s poklady pro jednoho hrace
+     * @param load_game - pokud se jedna o nacteni hry, dostane celou hru, kterou si do sebe nahraje
+     * @throws IOException 
+     */
     public GUI(int numPlayers, int gameSize, int packSize, Game load_game) throws IOException{
        
         if (load_game != null){
@@ -42,7 +51,8 @@ public class GUI extends JFrame implements KeyListener{
         
         setFocusTraversalKeysEnabled(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize((game.getMazeBoard().getSize() * 75 > 400)? game.getMazeBoard().getSize() * 75 : 400, game.getMazeBoard().getSize() * 75 + 146);   
+        setSize((game.getMazeBoard().getSize() * 75 > 400)? game.getMazeBoard().getSize() * 75 : 400, game.getMazeBoard().getSize() * 75 + 146);
+        //setSize(game.getMazeBoard().getSize() * 75, game.getMazeBoard().getSize() * 75 + 146+500);   
         setLocationRelativeTo(null);
         setTitle("Labyrinth - grp123");
         setResizable(true);
@@ -60,7 +70,14 @@ public class GUI extends JFrame implements KeyListener{
     public void keyTyped(KeyEvent e){
         //not using
     }
-    
+    /**
+     * reakce na stisknutou klavesu
+     *      - ENTER: je zavolana metoda game.nextPlaer()
+     *              na radu se dostane dalsi hrac, je updatovano graficke rozhrani
+     *      - SIPKY: pohyb hrace, aktualni hrac se pohne podle zmacknute sipky, obnoveno graficke rozhrani
+     * 
+     * @param e - stisknuta hlavesa 
+     */
     public void keyPressed(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             
