@@ -7,8 +7,10 @@ package ija.game;
 import ija.game.player.Player;
 
 /**
- *
- * @author Tom
+ * JFrame, ktery se zobrazi pri konci hry
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class EndGameFrame extends javax.swing.JFrame {
 

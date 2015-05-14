@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Tomáš
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class GUImenu extends javax.swing.JFrame {
 

@@ -6,7 +6,15 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-
+/**
+ * Hlavni JFrame cele hry
+ * Obsahuje 2 framy:
+ *  topPanel - panel se stavem hry
+ *  gamePanel - panel s hracim polem
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
+ */
 public class GUI extends JFrame implements KeyListener{
     static private Game game;
     static private TopPanel topPanel;

@@ -18,7 +18,8 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author Tomáš
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class GUIGamePanel extends JPanel {
     

@@ -12,8 +12,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Tomáš
+ * Vrchní JPanel v hlavním JFramu.
+ * Obsahuje 2 tlačítka: Save a Undo
+ * a 3 labely (aktualni hrac, jeho poklad a volne policko)
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class TopPanel extends javax.swing.JPanel {
     private ImageIcon hiddenIcon;

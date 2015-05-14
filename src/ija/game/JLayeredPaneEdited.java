@@ -7,8 +7,11 @@ package ija.game;
 
 import javax.swing.JLayeredPane;
 /**
- *
- * @author Tomáš
+ * Podedene JLayeredPane
+ * pridany souradnice X a Y, na kterych policko lezi
+ * 
+ * @author Jan Kohut, xkohut08
+ * @author Tomas Jurica, xjuric22
  */
 public class JLayeredPaneEdited extends JLayeredPane {
      public int x;
