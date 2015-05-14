@@ -80,6 +80,17 @@ public class GUI extends JFrame implements KeyListener{
         add(gamePanel);
         
         updateGUI();
+        
+        
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                System.out.println("Closed");
+                e.getWindow().dispose();
+            }
+        });
     }
 
     
