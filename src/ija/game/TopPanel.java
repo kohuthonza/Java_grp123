@@ -21,7 +21,7 @@ public class TopPanel extends javax.swing.JPanel {
     /**
      * Creates new form TopPanel
      */
-    public void topPanel() {
+public TopPanel(Game game) {
         initComponents();
 
         jButton1.setFocusable(false);

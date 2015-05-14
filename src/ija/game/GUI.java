@@ -1,4 +1,3 @@
-
 package ija.game;
 
 
@@ -49,9 +48,9 @@ public class GUI extends JFrame implements KeyListener{
         setResizable(true);
         setVisible(true);
         
-        topPanel = new TopPanel();
+        topPanel = new TopPanel(game);
         add(topPanel);              
-        gamePanel = new GUIGamePanel();
+        gamePanel = new GUIGamePanel(game);
         add(gamePanel);
         
         updateGUI();
