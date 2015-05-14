@@ -233,6 +233,23 @@ public class Game implements Serializable {
     }
     
     /**
+     * Vymaze obsah slozky "labyrint/undo" v domovskem adresari a nasledne slozku 
+     * samotnou
+     */
+    public void deleteUndo(){
+        File undoFile = new File(System.getProperty("user.home")+"/labyrint/undo");
+        
+        if (undoFile.exists()){
+            String[]entries = undoFile.list();
+            for(String s: entries){
+                File currentFile = new File(undoFile.getPath(),s);
+                currentFile.delete();
+            }
+        undoFile.delete();
+        }
+    }
+    
+    /**
      * Vraci list hracu
      * 
      * @return List hracu
@@ -278,8 +295,10 @@ public class Game implements Serializable {
             //Pokud hrac vezme poklad, zastavi se mu pohyb
             this.stopMove = true;
             player.setPickedCards(player.getPickedCards() + 1);
-            if (player.getPickedCards() == this.nCards)
+            if (player.getPickedCards() == this.nCards){
                 this.endOfGame = true;
+                this.deleteUndo();
+            }
             else{
                 player.setCard(this.pack.popCard());
                 if (this.nPlayers == 2 && this.pack.size() < 2)
@@ -391,11 +410,10 @@ public class Game implements Serializable {
      * @param mf Pole, na ktere se vklada volny kamen
      */
     public void shiftPlayer(MazeField mf){
-        System.out.print("zavolana fce shiftPlayer(MazeField mf)\n");
         //Posun se provede pouze tehdy, byla-li posunuta hraci deska (pokud 
         //uz se posun hracu v danem tahu provedl, tak se podruhe neprovede)
         if (this.board.getIsShift() && !this.isShift){    
-            System.out.print("dostal jsem se pres if\n");
+
             this.isShift = true;
             
             int n;
@@ -406,7 +424,6 @@ public class Game implements Serializable {
             c = mf.getCol();
         
             if (((c % 2) == 0) && (r == 1 || r == this.board.getSize())){
-                System.out.print("shift je mozne provest\n");
                 for (n = 0; n < this.nPlayers; ++n){
                     if (this.players.get(n).getX() == c){
                         if (r == 1){
@@ -421,7 +438,6 @@ public class Game implements Serializable {
         
         
             if (((r % 2) == 0)&&(c == 1 || c == this.board.getSize())){
-                System.out.print("shift je mozne provest\n");
                 for (n = 0; n < this.nPlayers; ++n){
                     if (this.players.get(n).getY() == r){
                         if (c == 1){

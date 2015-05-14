@@ -48,7 +48,9 @@ public class GUI extends JFrame implements KeyListener{
             GUI.game = load_game;
             if (GUI.game.getInitialCondition())
                 GUI.game.nextPlayer();
-            
+            else{
+                GUI.game.undoSave();
+            }
         }
         else{
             try{
@@ -87,6 +89,8 @@ public class GUI extends JFrame implements KeyListener{
             @Override
             public void windowClosing(WindowEvent e)
             {
+                
+                GUI.game.deleteUndo();
                 System.out.println("Closed");
                 e.getWindow().dispose();
             }
@@ -112,14 +116,15 @@ public class GUI extends JFrame implements KeyListener{
                 EGF.setVisible(true);
                 setVisible(false);
             }
-            try{             
-                GUI.game.nextPlayer();
-                System.out.printf("hrac: %d\n",GUI.game.getActualFigurine());
-            } catch (IOException except){
-                System.out.printf("next player exception");
-                System.exit(1);
+            else{
+                try{             
+                    GUI.game.nextPlayer();
+                    System.out.printf("hrac: %d\n",GUI.game.getActualFigurine());
+                } catch (IOException except){
+                    System.out.printf("next player exception");
+                    System.exit(1);
+                }
             }
-           
             GUI.updateGUI();
             System.out.println("Next player");                   
         }

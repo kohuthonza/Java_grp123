@@ -16,21 +16,15 @@ import java.io.File;
 
 public class Main {
     
+    
     public static void main(String argv[]) throws IOException, ClassNotFoundException{
         
         
-        //GUImenu menu = new GUImenu();
-        //menu.setVisible(true);
-          
-        //Game new_game = new Game(4,7);
-        
-        //SaveLoad.serialize(new_game, Save.create_file());
         
         GUImenu menu = new GUImenu();
         menu.setVisible(true);
         
-        //TextUI textUI = new TextUI();
-        //textUI.start(undo.getMazeBoard());
+        
     }
             
    
