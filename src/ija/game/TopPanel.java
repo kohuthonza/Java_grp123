@@ -17,7 +17,7 @@ import javax.swing.JLabel;
  * @author Tomáš
  */
 public class TopPanel extends javax.swing.JPanel {
-
+    private ImageIcon hiddenIcon;
     /**
      * Creates new form TopPanel
      */
@@ -36,7 +36,8 @@ public TopPanel(Game game) {
         ImageIcon icon = new ImageIcon(this.getClass().getResource("images/players/"+Integer.toString(game.getActualFigurine())+"Top.png"));
         jLabel2.setIcon(icon);
         
-        icon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.getActualPlayer().getCard().getTreasure().get_type()+1)+".png"));
+        hiddenIcon = new ImageIcon(this.getClass().getResource("images/treasures/"+Integer.toString(game.getActualPlayer().getCard().getTreasure().get_type()+1)+".png"));
+        icon = new ImageIcon(this.getClass().getResource("images/treasures/hidden.png"));
         jLabel1.setIcon(icon);
         
         icon = new ImageIcon(this.getClass().getResource("images/mazes/"+game.getMazeBoard().getFreeCard().getType()+"/"+game.getMazeBoard().getFreeCard().getRotation()+".png"));
@@ -92,6 +93,14 @@ public TopPanel(Game game) {
         jLabel1.setText("treasure");
         jLabel1.setMinimumSize(new java.awt.Dimension(75, 75));
         jLabel1.setPreferredSize(new java.awt.Dimension(75, 75));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
 
         jLabel2.setText("hrac");
         jLabel2.setMinimumSize(new java.awt.Dimension(75, 75));
@@ -204,6 +213,15 @@ public TopPanel(Game game) {
         game.getMazeBoard().getFreeCard().turnRight();
         updatePanel();
     }//GEN-LAST:event_jLayeredPane1MouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        jLabel1.setIcon(hiddenIcon);
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("images/treasures/hidden.png"));
+        jLabel1.setIcon(icon);
+    }//GEN-LAST:event_jLabel1MouseExited
 
 	
         
