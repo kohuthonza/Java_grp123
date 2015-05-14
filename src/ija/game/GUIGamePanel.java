@@ -48,19 +48,19 @@ public class GUIGamePanel extends JPanel {
      */
     public void update(){
         clear();
-        initialize(GUI.getGame()); 
+        initialize(); 
     }
     /**
      * Inicializace herniho panelu podle aktualniho stavu hry.
      * Vysklada jednotlive policka po vrstvach (policko, treasure, hrac).
      * 
-     * @param game - stav hry 
+     * 
      */
-    public void initialize(final Game game){
-        int size = game.getMazeBoard().getSize();
+    public void initialize(){
+        int size = GUI.getGame().getMazeBoard().getSize();
         for(int i = 1; i <= size; i++){
             for(int j = 1; j <= size; j++){
-                MazeField field = game.getMazeBoard().getMazeField(i,j);
+                MazeField field = GUI.getGame().getMazeBoard().getMazeField(i,j);
 
                 JLayeredPaneEdited policko = new JLayeredPaneEdited();
                 policko.x = i; //ulozime aktualni souradnice policka
@@ -87,8 +87,8 @@ public class GUIGamePanel extends JPanel {
                 }
 
                 //vrstva 3 - hraci
-                ArrayList<Player> players = game.getPlayers();
-                ArrayList<Integer> figurine = game.getPlayersFigurine();
+                ArrayList<Player> players = GUI.getGame().getPlayers();
+                ArrayList<Integer> figurine = GUI.getGame().getPlayersFigurine();
                 
                 for (int s = 0; s < players.size(); s++) {
                     if(players.get(s).getY() == i && players.get(s).getX() == j){
